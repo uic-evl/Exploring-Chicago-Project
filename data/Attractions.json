@@ -1,0 +1,11 @@
+{
+	"attractions": [
+			{
+				"id": "1",
+                "name": "Bean",
+				"iconURL": "imgs/attractions/bean.png",
+                "iconSize": 0.25,
+                "coordinates":[-87.623304, 41.882657]
+			}
+		]
+}
