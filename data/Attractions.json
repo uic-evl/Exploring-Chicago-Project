@@ -3,9 +3,105 @@
 			{
 				"id": "1",
                 "name": "Bean",
-				"iconURL": "imgs/attractions/bean.png",
-                "iconSize": 0.25,
-                "coordinates":[-87.623304, 41.882657]
+				"iconUrl": "imgs/attractions/bean.png",
+                "iconSize": [50, 50],
+                "coordinates": [41.882657, -87.623304]
+			},
+			{
+				"id": "2",
+                "name": "John Hancock",
+				"iconUrl": "imgs/attractions/john_hancock.png",
+                "iconSize": [34, 100],
+                "coordinates":[41.898770, -87.622917],
+				"hours": [9, 22],
+				"price_catagories":["Adult - 12+ years", "Youth - 3–11 years", "Children"],
+				"price": ["$20.50", "$13.50", "free"] 
+			},
+			{
+				"id": "3",
+                "name": "Lincoln Park",
+				"iconUrl": "imgs/attractions/lincoln_park.png",
+                "iconSize": [50, 50],
+                "coordinates":[41.921092, -87.633991],
+				"hours": [10, 17]
+			},
+			{
+				"id": "4",
+                "name": "Art Institute",
+				"iconUrl": "imgs/attractions/art_institute.png",
+                "iconSize": [34.6, 50],
+                "coordinates":[41.878440, -87.623788],
+				"hours": [11, 17],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "5",
+                "name": "Adler Planetorium",
+				"iconUrl": "imgs/attractions/adler_planetorium.png",
+                "iconSize": [30, 36],
+                "coordinates":[41.867315, -87.606761],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "6",
+                "name": "Shedd Aquarium",
+				"iconUrl": "imgs/attractions/shedd_aquarium.png",
+                "iconSize": [50, 50],
+                "coordinates":[41.867573, -87.614038],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "7",
+                "name": "Sears Tower",
+				"iconUrl": "imgs/attractions/sears_tower.png",
+                "iconSize": [20, 95],
+                "coordinates":[41.878876, -87.635915],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "8",
+                "name": "Fireworks",
+				"iconUrl": "imgs/attractions/firework.png",
+                "iconSize": [50, 50],
+                "coordinates":[41.891614, -87.607899],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "9",
+                "name": "Fireworks",
+				"iconUrl": "imgs/attractions/firework.png",
+                "iconSize": [50, 50],
+                "coordinates":[41.885166, -87.613531],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
+			},
+			{
+				"id": "10",
+                "name": "Fireworks",
+				"iconUrl": "imgs/attractions/firework.png",
+                "iconSize": [50, 50],
+                "coordinates":[41.879351, -87.617308],
+				"hours": [0, 24],
+				"days": ["all"],
+				"date": ["all"],
+				"price": ["free"]
 			}
+	
 		]
 }
