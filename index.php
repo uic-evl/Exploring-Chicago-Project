@@ -1,3 +1,11 @@
+<?php 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 1000");
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
+?>
+
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -11,6 +19,8 @@
                 integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
                 crossorigin=""></script>
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
 
 
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
@@ -30,8 +40,13 @@
         <div id='sidebar'>Sidebar</div>
 
         <script src='src/js/map.js'></script>
+        <script src='src/js/attractions.js'></script>
+        <script src='src/js/kiosks.js'></script>
+        <script src='src/js/transit.js'></script>
         <script src='src/js/controller.js'></script>
         
     </body>
 
 </html>
+
+

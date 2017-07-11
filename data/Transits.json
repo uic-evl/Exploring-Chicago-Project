@@ -1,0 +1,12 @@
+{
+	"Transits": [
+			{
+				"kioskID": 1,
+                "name": "Bean",
+				"type": "static",
+				"iconUrl": "imgs/attractions/bean.png",
+                "iconSize": [50, 50],
+                "coordinates": [41.882657, -87.623304]
+			}
+    ]
+}
