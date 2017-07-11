@@ -37,7 +37,13 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
     <body>
 
         <div id='map'></div>
-        <div id='sidebar'>Sidebar</div>
+        <div id='sidebar'>
+            <div class='heading'>
+                <h1>Top Attractions</h1>
+            </div>
+
+            <div id='listings' class='listings'></div>
+        </div>
 
         <script src='src/js/map.js'></script>
         <script src='src/js/attractions.js'></script>

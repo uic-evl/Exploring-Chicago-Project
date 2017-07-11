@@ -7,13 +7,16 @@ let Attractions = (function() {
         d3.json(attractionDataPath, function(attractions){
             attractions = filterAttractions(attractions);
             
-            _.forEach(attractions, function(d,i){
+            
+
+            _.forEach(attractions, function(attraction,i){
                 let attractionIcon = L.icon({
-                    iconUrl: d.iconUrl,
-                    iconSize: d.iconSize,
+                    iconUrl: attraction.iconUrl,
+                    iconSize: attraction.iconSize,
                 });
 
-                L.marker(d.coordinates, {icon: attractionIcon}).addTo(map);
+                L.marker(attraction.coordinates, {icon: attractionIcon}).addTo(map);
+                populateSidebar(attraction, i)
 
             });
 
@@ -55,6 +58,31 @@ let Attractions = (function() {
     let isOpenYearRound = function(attraction) {
         return !attraction.hasOwnProperty('days');
     };
+
+    let populateSidebar = function(attraction, index){
+        const listings = document.getElementById('listings');
+        const listing = listings.appendChild(document.createElement('div'));
+        listing.className = 'item';
+        listing.id = 'listing-' + index;
+
+        const title = listing.appendChild(document.createElement('h2'));
+        title.className = 'title';
+        title.dataPosition = index;
+        title.innerHTML = attraction.name;
+
+        // const icon = listing.appendChild(document.createElement('img'));
+        // icon.className = 'icon';
+        // icon.dataPosition = index;
+        // icon.src = attraction.iconUrl;
+
+        const hours = listing.appendChild(document.createElement('span'));
+        hours.className = 'hours';
+        hours.dataPosition = index;
+        
+        if(attraction.hasOwnProperty('hours'))
+            hours.innerHTML = "Open Hours: " +
+                               moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + " - " + moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a');
+    }
 
     return {
         update: init

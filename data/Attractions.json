@@ -3,7 +3,7 @@
 			{
 				"id": "1",
                 "name": "Bean",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/bean.png",
                 "iconSize": [50, 50],
                 "coordinates": [41.882657, -87.623304]
@@ -11,7 +11,7 @@
 			{
 				"id": "2",
                 "name": "John Hancock",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/john_hancock.png",
                 "iconSize": [34, 100],
                 "coordinates":[41.898770, -87.622917],
@@ -22,7 +22,7 @@
 			{
 				"id": "3",
                 "name": "Lincoln Park",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/lincoln_park.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.921092, -87.633991],
@@ -31,7 +31,7 @@
 			{
 				"id": "4",
                 "name": "Art Institute",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/art_institute.png",
                 "iconSize": [34.6, 50],
                 "coordinates":[41.878440, -87.623788],
@@ -41,7 +41,7 @@
 			{
 				"id": "5",
                 "name": "Adler Planetorium",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/adler_planetorium.png",
                 "iconSize": [30, 36],
                 "coordinates":[41.867315, -87.606761],
@@ -51,17 +51,26 @@
 			{
 				"id": "6",
                 "name": "Shedd Aquarium",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/shedd_aquarium.png",
-                "iconSize": [50, 50],
+                "iconSize": [40, 40],
                 "coordinates":[41.867573, -87.614038],
 				"hours": {"start_time":9, "end_time": 18},
 				"price": ["free"]
 			},
 			{
 				"id": "7",
+                "name": "Field Museum",
+				"type": "poi",
+				"iconUrl": "imgs/attractions/field_museum.png",
+                "iconSize": [30, 30],
+                "coordinates":[41.866261, -87.616981],
+				"hours": {"start_time":9, "end_time":17}
+			},
+			{
+				"id": "8",
                 "name": "Sears Tower",
-				"type": "static",
+				"type": "poi",
 				"iconUrl": "imgs/attractions/sears_tower.png",
                 "iconSize": [20, 95],
                 "coordinates":[41.878876, -87.635915],
@@ -69,9 +78,9 @@
 				"price": ["free"]
 			},
 			{
-				"id": "8",
+				"id": "9",
                 "name": "Fireworks",
-				"type": "dynamic",
+				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.891614, -87.607899],
@@ -80,9 +89,9 @@
 				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"}
 			},
 			{
-				"id": "9",
+				"id": "10",
                 "name": "Fireworks",
-				"type": "dynamic",
+				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.885166, -87.613531],
@@ -91,9 +100,9 @@
 				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"}
 			},
 			{
-				"id": "10",
+				"id": "11",
                 "name": "Fireworks",
-				"type": "dynamic",
+				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.879351, -87.617308],

@@ -1,4 +1,4 @@
-let Transit = function() {
+let Transit = (function() {
     
     const ctaTransitToken = 'SrESNk3VtTZvrQgcU69fzZ6Uw';
 
@@ -18,15 +18,23 @@ let Transit = function() {
             success:function(data){
 
              _.forEach(data['bustime-response'].vehicle, function(d,i) {
-                 let pulsingIcon = L.icon.pulse({iconSize:[10, 10],color:"blue"});
-                 let marker = L.marker([d.lat,d.lon],{icon: busIcon}).addTo(map);
+                 if(arePointNear({"lat": d.lat, "lng": d.lon}, {"lat":41.884122, "lng": -87.623300}, 1))
+                    L.marker([d.lat,d.lon],{icon: busIcon}).addTo(map);
              });
            }
          });
       
     };
 
+    let arePointNear = function(checkPoint, centerPoint, km) {
+        var ky = 40000 / 360;
+        var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
+        var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
+        var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
+        return Math.sqrt(dx * dx + dy * dy) <= km;
+    }
+
     return {
         update: init
     }
-};
+})();
