@@ -4,12 +4,10 @@ let Attractions = (function() {
 
     let init = function(map) {
     
-        d3.json(attractionDataPath, function(attractions){
+        d3.json(attractionDataPath, function(attractions) {
             attractions = filterAttractions(attractions);
             
-            
-
-            _.forEach(attractions, function(attraction,i){
+            _.forEach(attractions, function(attraction,i) {
                 let attractionIcon = L.icon({
                     iconUrl: attraction.iconUrl,
                     iconSize: attraction.iconSize,
@@ -59,7 +57,7 @@ let Attractions = (function() {
         return !attraction.hasOwnProperty('days');
     };
 
-    let populateSidebar = function(attraction, index){
+    let populateSidebar = function(attraction, index) {
         const listings = document.getElementById('listings');
         const listing = listings.appendChild(document.createElement('div'));
         listing.className = 'item';
@@ -81,7 +79,9 @@ let Attractions = (function() {
         
         if(attraction.hasOwnProperty('hours'))
             hours.innerHTML = "Open Hours: " +
-                               moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + " - " + moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a');
+                               moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + 
+                               " - " +
+                                moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a');
     }
 
     return {

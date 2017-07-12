@@ -9,7 +9,7 @@ let Transit = (function() {
             iconUrl: busIconURL,
             iconSize: [60, 60], 
         });
-    
+
         $.ajax({
             url:"src/php/transit.php",
             type: "post",
@@ -18,7 +18,7 @@ let Transit = (function() {
             success:function(data){
 
              _.forEach(data['bustime-response'].vehicle, function(d,i) {
-                 if(arePointNear({"lat": d.lat, "lng": d.lon}, {"lat":41.884122, "lng": -87.623300}, 1))
+                //  if(arePointNear({"lat": d.lat, "lng": d.lon}, {"lat":41.884122, "lng": -87.623300}, 1))
                     L.marker([d.lat,d.lon],{icon: busIcon}).addTo(map);
              });
            }
