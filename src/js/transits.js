@@ -11,7 +11,6 @@ let Transit = (function() {
     let markers = [];
     
     let init = function(kioskID, map) {
-  
 
         _.forEach(markers, function(marker,index){
             if(marker)
@@ -38,6 +37,8 @@ let Transit = (function() {
              });
            }
         });
+
+
     }
 
     let arePointNear = function(checkPoint, centerPoint, km) {

@@ -18,6 +18,22 @@ let Stops = (function() {
 
 
     let init = function(kioskID, map) {
+
+
+
+                var data = [{"from":[-87.623636841381, 41.884289988942],"to":[-87.639575600624, 41.876974562066],"labels":[null,"ETA: 3 mins"],"color":"#ff3a31"},
+                            {"from":[-87.627909064031, 41.883487234033],"to":[-87.627725601196, 41.878320605984],"labels":[null,null],"color":"#31a354"},
+                            {"from":[-87.627725601196, 41.878320605984],"to":[-87.615827322006, 41.864782986081],"labels":[null,null],"color":"#31a354"},
+                            {"from":[-87.615827322006, 41.864782986081],"to":[-87.612978816032, 41.866085342666],"labels":[null,null],"color":"#31a354"}];
+
+        var migrationLayer = new L.migrationLayer({
+                             map: map,
+                             data: data,
+
+                    
+        });
+        migrationLayer.addTo(map);
+       
         d3.json(transitDataPath, function(data) {
             _.forEach(data.Transits, function(d, i) {
                 drawStops(d, map);
