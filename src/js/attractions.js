@@ -63,20 +63,21 @@ let Attractions = (function() {
         listing.className = 'item';
         listing.id = 'listing-' + index;
 
+        const icon = listing.appendChild(document.createElement('img'));
+        icon.className = 'icon';
+        icon.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
+                              attraction.iconSize[1] + 'px;float:left; margin-right:10px;';
+        icon.dataPosition = index;
+        icon.src = attraction.iconUrl;
+
         const title = listing.appendChild(document.createElement('h2'));
         title.className = 'title';
         title.dataPosition = index;
         title.innerHTML = attraction.name;
-
-        // const icon = listing.appendChild(document.createElement('img'));
-        // icon.className = 'icon';
-        // icon.dataPosition = index;
-        // icon.src = attraction.iconUrl;
-
+        
         const hours = listing.appendChild(document.createElement('span'));
         hours.className = 'hours';
         hours.dataPosition = index;
-        
         if(attraction.hasOwnProperty('hours'))
             hours.innerHTML = "Open Hours: " +
                                moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + 

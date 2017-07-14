@@ -1,12 +1,36 @@
 {
 	"Transits": [
 			{
-				"kioskID": 1,
-                "name": "Bean",
-				"type": "static",
-				"iconUrl": "imgs/attractions/bean.png",
-                "iconSize": [50, 50],
-                "coordinates": [41.882657, -87.623304]
+				"id": 1,
+                "name": "60",
+				"iconUrl": "imgs/transits/bus.png",
+                "iconSize": [60, 60],
+				"stops":[{"lat": 41.884289988942, "lon": -87.623636841381},
+						  {"lat": 41.876974562066, "lon": -87.639575600624}],
+				"dir": "Eastbound"
+			},
+			
+			{
+				"id": 2,
+                "name": "146",
+				"iconUrl": "imgs/transits/bus.png",
+                "iconSize": [60, 60],
+				"stops":[{"lat": 41.883487234033, "lon": -87.627909064031},
+						 {"lat": 41.878320605984, "lon": -87.627725601196},
+						 {"lat": 41.864782986081, "lon": -87.615827322006},
+						 {"lat": 41.866085342666, "lon": -87.612978816032},
+						 {"lat": 41.866161246066, "lon": -87.60786652565}],
+				"dir": "Southbound"
+			},
+
+			{
+				"id": 3,
+                "name": "146",
+				"iconUrl": "imgs/transits/bus.png",
+                "iconSize": [60, 60],
+				"stops":[{"lat": 41.883487234033, "lon":-87.627909064031},
+						{"lat": 41.894834296652, "lon": -87.624126076698}],
+				"dir": "Northbound"
 			}
     ]
 }

@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Ca
 header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
 $apiKEY = 'SrESNk3VtTZvrQgcU69fzZ6Uw';
-$transitURL = 'http://ctabustracker.com/bustime/api/v1/getvehicles?tmres=s&format=json&key='.$apiKEY.'&rt=';
+$transitURL = 'http://ctabustracker.com/bustime/api/v2/getvehicles?tmres=s&format=json&key='.$apiKEY.'&rt=';
 $busID = $_POST['busID'];
 
 $json_url = $transitURL.$busID;

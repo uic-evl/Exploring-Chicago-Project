@@ -7,11 +7,11 @@ let Map = (function() {
     let init = function() {
        let map = L.map('map').setView([41.882386, -87.636920], 13.5);
        
-       map.zoomControl.remove();
-       map.dragging.disable();
-       map.touchZoom.disable();
-       map.doubleClickZoom.disable();
-       map.scrollWheelZoom.disable(); 
+    //    map.zoomControl.remove();
+    //    map.dragging.disable();
+    //    map.touchZoom.disable();
+    //    map.doubleClickZoom.disable();
+    //    map.scrollWheelZoom.disable(); 
        
        L.tileLayer(tileURL, {
             id: mapID,

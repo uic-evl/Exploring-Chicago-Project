@@ -18,11 +18,13 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
                 integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
                 crossorigin=""></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.6.0/Tween.min.js"></script>
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
+         <script src="src/plugins/js/CanvasFlowmapLayer.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
-
-
+    
+       
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
@@ -47,8 +49,9 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
         <script src='src/js/map.js'></script>
         <script src='src/js/attractions.js'></script>
+        <script src='src/js/transits.js'></script>
         <script src='src/js/kiosks.js'></script>
-        <script src='src/js/transit.js'></script>
+        <script src='src/js/stops.js'></script>
         <script src='src/js/controller.js'></script>
         
     </body>
