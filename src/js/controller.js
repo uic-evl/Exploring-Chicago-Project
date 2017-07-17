@@ -4,6 +4,7 @@ let App = (function() {
         const map = Map.show();
         Kiosks.showPosition(map)
         Attractions.update(map);
+        console.log(Attractions.showTransitList());
         Transit.update(Kiosks.getKioskID, map);
         Stops.update(Kiosks.getKioskID, map);
         

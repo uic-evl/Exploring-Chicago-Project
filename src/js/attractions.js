@@ -1,12 +1,15 @@
 let Attractions = (function() {
     
     const attractionDataPath = 'data/Attractions.json';
+    let transitList = new Set();
+    let transitStopFilterList = new Set();
 
     let init = function(map) {
     
         d3.json(attractionDataPath, function(attractions) {
             attractions = filterAttractions(attractions);
-            
+            transitList = filterTransits(attractions);
+
             _.forEach(attractions, function(attraction,i) {
                 let attractionIcon = L.icon({
                     iconUrl: attraction.iconUrl,
@@ -21,11 +24,37 @@ let Attractions = (function() {
         });
     };
 
+
+    let getTransitList = function() {
+        return transitList;
+    }
+
+    let getTransitStopFilterList = function() { 
+        return transitStopFilterList;
+    }
+
+    let filterTransits = function(data) {
+
+        let transitSet = new Set();
+
+        _.forEach(data, function(attraction, i) {
+            _.forEach(attraction.cta, function(d,i){
+                transitSet.add(d);
+            })
+        });
+    };
+
     let filterAttractions = function(data) {
         const attractions = data.attractions.filter(function(d,i) {
             if(isOpenYearRound(d) || isOpenToday(d))
+            {
                 if(isOpenNow(d))
                     return d;
+                else if(d.hasOwnProperty('stops'))
+                    transitStopFilterList.add(d.stops);
+            }
+            else if(d.hasOwnProperty('stops'))
+               transitStopFilterList.add(d.stops);
         });
 
         return attractions;
@@ -86,7 +115,9 @@ let Attractions = (function() {
     }
 
     return {
-        update: init
+        update: init,
+        showTransitList: getTransitList,
+        showTransitStopFilterList: getTransitStopFilterList
     }
 
 })();

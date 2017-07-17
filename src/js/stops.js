@@ -33,7 +33,7 @@ let Stops = (function() {
                     
         });
         migrationLayer.addTo(map);
-       
+
         d3.json(transitDataPath, function(data) {
             _.forEach(data.Transits, function(d, i) {
                 drawStops(d, map);

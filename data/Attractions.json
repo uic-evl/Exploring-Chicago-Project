@@ -15,9 +15,11 @@
 				"iconUrl": "imgs/attractions/john_hancock.png",
                 "iconSize": [34, 100],
                 "coordinates":[41.898770, -87.622917],
-				"hours":{"start_time": 9, "end_time" : 22},
+				"hours":{"start_time": 19, "end_time" : 22},
 				"price_catagories":["Adult - 12+ years", "Youth - 3–11 years", "Children"],
-				"price": ["$20.50", "$13.50", "free"] 
+				"price": ["$20.50", "$13.50", "free"], 
+				"cta": ["146", "147"],
+				"stops": [{"lat": 41.894834296652, "lon": -87.624126076698}]
 			},
 			{
 				"id": "3",
@@ -26,7 +28,8 @@
 				"iconUrl": "imgs/attractions/lincoln_park.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.921092, -87.633991],
-				"hours": {"start_time": 10, "end_time": 17}
+				"hours": {"start_time": 10, "end_time": 17},
+				"cta": ["151"]
 			},
 			{
 				"id": "4",
@@ -36,7 +39,9 @@
                 "iconSize": [34.6, 50],
                 "coordinates":[41.878440, -87.623788],
 				"hours": {"start_time": 11, "end_time":17},
-				"price": ["free"]
+				"price": ["free"],
+				"cta": ["147"],
+				"stops": [{"lat": 41.878320605984, "lon": -87.627725601196}]
 			},
 			{
 				"id": "5",
@@ -46,7 +51,9 @@
                 "iconSize": [30, 36],
                 "coordinates":[41.867315, -87.606761],
 				"hours": {"start_time": 10, "end_time": 18},
-				"price": ["free"]
+				"price": ["free"],
+				"cta": ["146", "147"],
+				"stops": [{"lat": 41.866161246066, "lon": -87.60786652565}]
 			},
 			{
 				"id": "6",
@@ -56,7 +63,9 @@
                 "iconSize": [40, 40],
                 "coordinates":[41.867573, -87.614038],
 				"hours": {"start_time":9, "end_time": 18},
-				"price": ["free"]
+				"price": ["free"],
+				"cta": ["146", "147"],
+				"stops": [{"lat": 41.866085342666, "lon": -87.612978816032}]
 			},
 			{
 				"id": "7",
@@ -65,7 +74,9 @@
 				"iconUrl": "imgs/attractions/field_museum.png",
                 "iconSize": [30, 30],
                 "coordinates":[41.866261, -87.616981],
-				"hours": {"start_time":9, "end_time":17}
+				"hours": {"start_time":9, "end_time":17},
+				"cta": ["146", "147"],
+				"stops": [{"lat": 41.864782986081, "lon": -87.615827322006}]
 			},
 			{
 				"id": "8",
@@ -75,7 +86,9 @@
                 "iconSize": [20, 95],
                 "coordinates":[41.878876, -87.635915],
 				"hours": {"start_time":10, "end_time":20},
-				"price": ["free"]
+				"price": ["free"],
+				"cta": ["60"],
+				"stops": [{"lat": 41.876974562066, "lon": -87.639575600624}]
 			},
 			{
 				"id": "9",
@@ -86,7 +99,8 @@
                 "coordinates":[41.891614, -87.607899],
 				"hours": {"start_time":22, "end_time":23},
 				"days": ["wednesday", "saturday"],
-				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"}
+				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"},
+				"cta": ["124"]
 			},
 			{
 				"id": "10",
