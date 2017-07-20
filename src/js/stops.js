@@ -1,6 +1,7 @@
 let Stops = (function() {
 
-    let run = 'production' //let run = 'developement/production'
+    let run = 'production' //let run = 'developement/production';
+    let transits = [];
 
     const transitDataPath = 'data/Transits.json';
     const stopIconURL = 'imgs/transits/busStop3.png'
@@ -17,62 +18,82 @@ let Stops = (function() {
     });
 
 
-    let init = function(kioskID, map) {
+    let init = function(kioskID, map, transitList, transitStopFilterList) {
+        
+        transitList = Array.from(transitList);
+        transitStopFilterList = [].concat.apply([],Array.from(transitStopFilterList));
 
-
-
-                var data = [{"from":[-87.623636841381, 41.884289988942],"to":[-87.639575600624, 41.876974562066],"labels":[null,"ETA: 3 mins"],"color":"#ff3a31"},
-                            {"from":[-87.627909064031, 41.883487234033],"to":[-87.627725601196, 41.878320605984],"labels":[null,null],"color":"#31a354"},
-                            {"from":[-87.627725601196, 41.878320605984],"to":[-87.615827322006, 41.864782986081],"labels":[null,null],"color":"#31a354"},
-                            {"from":[-87.615827322006, 41.864782986081],"to":[-87.612978816032, 41.866085342666],"labels":[null,null],"color":"#31a354"}];
-
-        var migrationLayer = new L.migrationLayer({
-                             map: map,
-                             data: data,
-
-                    
-        });
-        migrationLayer.addTo(map);
-
-        d3.json(transitDataPath, function(data) {
-            _.forEach(data.Transits, function(d, i) {
-                drawStops(d, map);
-            });
-        });
-
+        filterStops(map, transitList, transitStopFilterList);
+       
     };
 
-    let drawStops = function(transit, map) {
+    let getTransit = function() {
+        return transits;
+    };
 
+    let filterStops = function(map, transitList, transitStopFilterList) {
+         $.ajax({
+            type: "GET",
+            url: transitDataPath,
+            dataType: "json",
+            async: false,
+            success: function(transitCollection) {
+                transits = [];
+                _.forEach(transitCollection.Transits, function(data, i) {
+                   
+                    if(_.includes(transitList, data.name)) {
+                        _.forEach(data.stops, function(stop, j) {
+                            _.forEach(transitStopFilterList, function(d, k) {
+                                if((stop!=undefined && stop.lat === d.lat && stop.lon === d.lon))
+                                     data.stops.splice(j, 1);
+                            })
+                        });
+
+                        if(data.stops.length > 1)
+                            transits.push(data);
+                    }
+                });
+                
+                drawStops(transits, map);
+            }
+        });
+    };
+
+    let drawStops = function(transits, map) {
         if(run == 'production') {
-            _.forEach(transit.stops, function(stop, i) {
-                let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:"blue"});
-                L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stop.lat + "," + stop.lon);             
+            _.forEach(transits, function(transit, i) {
+                _.forEach(transit.stops, function(stop, i) {
+                    let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:"blue"});
+                    L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stop.lat + "," + stop.lon); 
+                });       
             });
         }
         else {
-
-            $.ajax({
-                url:"src/php/stops.php",
-                type: "post",
-                dataType: 'json',
-                data: {
-                    'busID': transit.name, 
-                    'busDir': transit.dir
-                    },
-                success:function(data){
-                    _.forEach(data['bustime-response'].stops, function(stops,i) {
-                        let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:d3.scale.category20()});
-                        L.marker([stops.lat,stops.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stops.lat + "," + stops.lon);  
-                    });
-                }
+            _.forEach(transits, function(transit, i) {
+                $.ajax({
+                    url:"src/php/stops.php",
+                    type: "post",
+                    dataType: 'json',
+                    data: {
+                        'busID': transit.name, 
+                        'busDir': transit.dir
+                        },
+                    success:function(data){
+                        console.log(data);
+                        _.forEach(data['bustime-response'].stops, function(stops,i) {
+                            let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:d3.scale.category20()});
+                            L.marker([stops.lat,stops.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stops.lat + "," + stops.lon);  
+                        });
+                    }
+                });
             });
         }
       
     };
 
     return {
-        update: init
+        update: init,
+        transits: getTransit
     }
 
 })();

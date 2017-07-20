@@ -15,7 +15,7 @@
 				"iconUrl": "imgs/attractions/john_hancock.png",
                 "iconSize": [34, 100],
                 "coordinates":[41.898770, -87.622917],
-				"hours":{"start_time": 19, "end_time" : 22},
+				"hours":{"start_time": 11, "end_time" : 22},
 				"price_catagories":["Adult - 12+ years", "Youth - 3–11 years", "Children"],
 				"price": ["$20.50", "$13.50", "free"], 
 				"cta": ["146", "147"],
@@ -29,7 +29,7 @@
                 "iconSize": [50, 50],
                 "coordinates":[41.921092, -87.633991],
 				"hours": {"start_time": 10, "end_time": 17},
-				"cta": ["151"]
+				"cta": ["22"]
 			},
 			{
 				"id": "4",
@@ -40,12 +40,11 @@
                 "coordinates":[41.878440, -87.623788],
 				"hours": {"start_time": 11, "end_time":17},
 				"price": ["free"],
-				"cta": ["147"],
-				"stops": [{"lat": 41.878320605984, "lon": -87.627725601196}]
+				"cta": ["147"]
 			},
 			{
 				"id": "5",
-                "name": "Adler Planetorium",
+                "name": "Adler Planetarium",
 				"type": "poi",
 				"iconUrl": "imgs/attractions/adler_planetorium.png",
                 "iconSize": [30, 36],
@@ -85,7 +84,7 @@
 				"iconUrl": "imgs/attractions/sears_tower.png",
                 "iconSize": [20, 95],
                 "coordinates":[41.878876, -87.635915],
-				"hours": {"start_time":10, "end_time":20},
+				"hours": {"start_time":7, "end_time":20},
 				"price": ["free"],
 				"cta": ["60"],
 				"stops": [{"lat": 41.876974562066, "lon": -87.639575600624}]
@@ -97,7 +96,7 @@
 				"iconUrl": "imgs/attractions/firework.png",
                 "iconSize": [50, 50],
                 "coordinates":[41.891614, -87.607899],
-				"hours": {"start_time":22, "end_time":23},
+				"hours": {"start_time":21, "end_time":23},
 				"days": ["wednesday", "saturday"],
 				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"},
 				"cta": ["124"]

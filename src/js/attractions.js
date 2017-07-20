@@ -5,25 +5,30 @@ let Attractions = (function() {
     let transitStopFilterList = new Set();
 
     let init = function(map) {
-    
-        d3.json(attractionDataPath, function(attractions) {
-            attractions = filterAttractions(attractions);
-            transitList = filterTransits(attractions);
 
-            _.forEach(attractions, function(attraction,i) {
-                let attractionIcon = L.icon({
-                    iconUrl: attraction.iconUrl,
-                    iconSize: attraction.iconSize,
+        $.ajax({
+            type: "GET",
+            url: attractionDataPath,
+            dataType: "json",
+            async: false,
+            success: function(attractions) {
+                attractions = filterAttractions(attractions);
+                transitList = filterTransits(attractions);
+
+                 _.forEach(attractions, function(attraction,i) {
+                    let attractionIcon = L.icon({
+                        iconUrl: attraction.iconUrl,
+                        iconSize: attraction.iconSize,
+                    });
+
+                    L.marker(attraction.coordinates, {icon: attractionIcon}).addTo(map);
+                    populateSidebar(attraction, i);
+
                 });
-
-                L.marker(attraction.coordinates, {icon: attractionIcon}).addTo(map);
-                populateSidebar(attraction, i)
-
-            });
-
+            }
+           
         });
     };
-
 
     let getTransitList = function() {
         return transitList;
@@ -34,14 +39,14 @@ let Attractions = (function() {
     }
 
     let filterTransits = function(data) {
-
+        
         let transitSet = new Set();
-
         _.forEach(data, function(attraction, i) {
             _.forEach(attraction.cta, function(d,i){
                 transitSet.add(d);
             })
         });
+        return transitSet;
     };
 
     let filterAttractions = function(data) {
@@ -66,7 +71,7 @@ let Attractions = (function() {
     };
 
     let isOpenAtThisHour = function(attraction) {
-        return attraction.hours.start_time < moment().format('H') && attraction.hours.end_time > moment().format('H');
+        return attraction.hours.start_time <= moment().format('H') && attraction.hours.end_time > moment().format('H');
     };
 
     let isOpenAllHours = function(attraction) {
@@ -116,8 +121,8 @@ let Attractions = (function() {
 
     return {
         update: init,
-        showTransitList: getTransitList,
-        showTransitStopFilterList: getTransitStopFilterList
+        transitList: getTransitList,
+        transitStopFilterList: getTransitStopFilterList
     }
 
 })();
