@@ -18,8 +18,8 @@ let Transit = (function() {
             if(marker)
                 map.removeLayer(marker);
         });
+
         
-       
         _.forEach(transit, function(d, i) {
                 // drawTransit(d, map);
                 drawMigration(d, migrationColors[i], map);  

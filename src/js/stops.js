@@ -1,6 +1,6 @@
 let Stops = (function() {
 
-    let run = 'production' //let run = 'developement/production';
+    let run = 'production'; //let run = 'developement/production';
     let transits = [];
 
     const transitDataPath = 'data/Transits.json';
@@ -21,8 +21,8 @@ let Stops = (function() {
     let init = function(kioskID, map, transitList, transitStopFilterList) {
         
         transitList = Array.from(transitList);
-        transitStopFilterList = [].concat.apply([],Array.from(transitStopFilterList));
 
+        
         filterStops(map, transitList, transitStopFilterList);
        
     };
@@ -75,11 +75,10 @@ let Stops = (function() {
                     type: "post",
                     dataType: 'json',
                     data: {
-                        'busID': transit.name, 
-                        'busDir': transit.dir
+                        'busID': '124', 
+                        'busDir': 'Eastbound'
                         },
                     success:function(data){
-                        console.log(data);
                         _.forEach(data['bustime-response'].stops, function(stops,i) {
                             let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:d3.scale.category20()});
                             L.marker([stops.lat,stops.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stops.lat + "," + stops.lon);  

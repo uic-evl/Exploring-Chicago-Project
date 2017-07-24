@@ -5,7 +5,7 @@ let Map = (function() {
     const mapID = 'mapbox.light';
 
     let init = function() {
-       let map = L.map('map').setView([41.882386, -87.636920], 13.5);
+       let map = L.map('map').setView([41.882657, -87.623304], 13.5);
        
        map.zoomControl.remove();
        map.dragging.disable();

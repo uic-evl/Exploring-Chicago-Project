@@ -76,9 +76,11 @@
                 if(this.name.length == 1)
                     context.fillText(this.name, -4 , -5);
                 else if(this.name.length == 2)
-                    context.fillText(this.name, -7 , -5);
+                    context.fillText(this.name, -6 , -5);
                 else if(this.name.length == 3)
                     context.fillText(this.name, -10 , -5);
+
+                // context.fillText("travel time", -15 , -20)
                 context.fillStyle = this.color || '#000';
             } else if (this.style === 'arrow') {
                 context.moveTo(-this.size, -this.size);

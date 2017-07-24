@@ -4,8 +4,8 @@ let Attractions = (function() {
     let transitList = new Set();
     let transitStopFilterList = new Set();
 
-    let init = function(map) {
 
+    let init = function(map) {
         $.ajax({
             type: "GET",
             url: attractionDataPath,
@@ -14,6 +14,7 @@ let Attractions = (function() {
             success: function(attractions) {
                 attractions = filterAttractions(attractions);
                 transitList = filterTransits(attractions);
+                
 
                  _.forEach(attractions, function(attraction,i) {
                     let attractionIcon = L.icon({
@@ -51,10 +52,12 @@ let Attractions = (function() {
 
     let filterAttractions = function(data) {
         const attractions = data.attractions.filter(function(d,i) {
+            
             if(isOpenYearRound(d) || isOpenToday(d))
             {
                 if(isOpenNow(d))
-                    return d;
+                   return d;
+                   
                 else if(d.hasOwnProperty('stops'))
                     transitStopFilterList.add(d.stops);
             }
@@ -62,7 +65,29 @@ let Attractions = (function() {
                transitStopFilterList.add(d.stops);
         });
 
+        cleanFilterStopList(attractions);
+
         return attractions;
+    };
+
+    let cleanFilterStopList = function(attractions) {
+        
+        let stops = attractions.map( function(d, i) {
+            if(d.hasOwnProperty('stops'))
+                return d.stops;
+            
+            return false;
+        });
+
+        stops =_.pull(_.flattenDeep(stops), false);
+        transitStopFilterList =  _.flattenDeep(Array.from(transitStopFilterList));
+
+        const intersection = _.intersectionWith(stops, transitStopFilterList, _.isEqual);
+       
+       _.forEach(intersection, function(d, i) {
+           _.remove(transitStopFilterList, d);
+       });
+
     };
 
     let isOpenNow = function(attraction) {
@@ -71,7 +96,8 @@ let Attractions = (function() {
     };
 
     let isOpenAtThisHour = function(attraction) {
-        return attraction.hours.start_time <= moment().format('H') && attraction.hours.end_time > moment().format('H');
+
+        return attraction.hours.start_time <= moment().format('H:mm') && attraction.hours.end_time > moment().format('H:mm');
     };
 
     let isOpenAllHours = function(attraction) {
