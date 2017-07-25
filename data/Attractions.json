@@ -16,8 +16,7 @@
                 "iconSize": [34, 100],
                 "coordinates":[41.898770, -87.622917],
 				"hours":{"start_time": "09:00", "end_time" : "22:00"},
-				"price_catagories":["Adult - 12+ years", "Youth - 3–11 years", "Children"],
-				"price": ["$20.50", "$13.50", "free"], 
+				"description":["Adult - 12+ years: $20.50, Youth - 3–11 years : $13.50, Children - free "],
 				"cta": ["146", "147"],
 				"stops": [{"lat": 41.894834296652, "lon": -87.624126076698}]
 			},

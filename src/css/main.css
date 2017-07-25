@@ -50,6 +50,12 @@ body {
   font-weight: 700;
 }
 
+.listings .description {
+  display: block;
+  color:#eee;
+  font-size: 15px;
+}
+
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,

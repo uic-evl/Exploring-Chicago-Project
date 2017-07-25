@@ -142,7 +142,13 @@ let Attractions = (function() {
             hours.innerHTML = "Open Hours: " +
                                moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + 
                                " - " +
-                                moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a');
+                                moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a') +'<br>';
+
+        const description = listing.appendChild(document.createElement('span'));
+        description.className = 'description';
+        description.dataPosition = index;
+        if(attraction.hasOwnProperty('description'))
+            description.innerHTML = attraction.description;
     }
 
     return {
