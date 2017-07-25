@@ -124,11 +124,10 @@ let Attractions = (function() {
         listing.id = 'listing-' + index;
 
         if(attraction.hasOwnProperty('sidebarUrl')) {
-            console.log(attraction);
+            listing.className = 'item_img';
+
             const sidebarImg = listing.appendChild(document.createElement('img'));
             sidebarImg.className = 'sidebarImg';
-            // sidebarImg.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
-            //                     attraction.iconSize[1] ;
             sidebarImg.dataPosition = index;
             sidebarImg.src = attraction.sidebarUrl;
         }

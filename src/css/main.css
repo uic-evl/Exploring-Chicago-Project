@@ -42,6 +42,13 @@ body {
   text-decoration: none;
 }
 
+.listings .item_img {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0px;
+  text-decoration: none;
+}
+
 .listings .item:last-child { border-bottom: none; }
 
 .listings .item .title {

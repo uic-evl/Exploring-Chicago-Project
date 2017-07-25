@@ -64,7 +64,8 @@
 				"hours": {"start_time":"09:00", "end_time": "18:00"},
 				"price": ["free"],
 				"cta": ["146", "147"],
-				"stops": [{"lat": 41.866085342666, "lon": -87.612978816032}]
+				"stops": [{"lat": 41.866085342666, "lon": -87.612978816032}],
+				"sidebarUrl":"imgs/sidebar/shedd_aquarium.gif"
 			},
 			{
 				"id": "7",
