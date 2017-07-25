@@ -14,7 +14,7 @@ let Stops = (function() {
 
     let stopIcon = new stopIconWithOptions({
         iconUrl: stopIconURL,
-        iconSize: [12.6, 15.3], 
+        iconSize: [15.12, 18.36], 
     });
 
 

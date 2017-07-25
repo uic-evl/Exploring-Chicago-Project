@@ -123,32 +123,43 @@ let Attractions = (function() {
         listing.className = 'item';
         listing.id = 'listing-' + index;
 
-        const icon = listing.appendChild(document.createElement('img'));
-        icon.className = 'icon';
-        icon.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
-                              attraction.iconSize[1] + 'px;float:left; margin-right:10px;';
-        icon.dataPosition = index;
-        icon.src = attraction.iconUrl;
+        if(attraction.hasOwnProperty('sidebarUrl')) {
+            console.log(attraction);
+            const sidebarImg = listing.appendChild(document.createElement('img'));
+            sidebarImg.className = 'sidebarImg';
+            // sidebarImg.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
+            //                     attraction.iconSize[1] ;
+            sidebarImg.dataPosition = index;
+            sidebarImg.src = attraction.sidebarUrl;
+        }
+        else {
+            const icon = listing.appendChild(document.createElement('img'));
+            icon.className = 'icon';
+            icon.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
+                                attraction.iconSize[1] + 'px;float:left; margin-right:10px;';
+            icon.dataPosition = index;
+            icon.src = attraction.iconUrl;
 
-        const title = listing.appendChild(document.createElement('h2'));
-        title.className = 'title';
-        title.dataPosition = index;
-        title.innerHTML = attraction.name;
-        
-        const hours = listing.appendChild(document.createElement('span'));
-        hours.className = 'hours';
-        hours.dataPosition = index;
-        if(attraction.hasOwnProperty('hours'))
-            hours.innerHTML = "Open Hours: " +
-                               moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + 
-                               " - " +
-                                moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a') +'<br>';
+            const title = listing.appendChild(document.createElement('h2'));
+            title.className = 'title';
+            title.dataPosition = index;
+            title.innerHTML = attraction.name;
+            
+            const hours = listing.appendChild(document.createElement('span'));
+            hours.className = 'hours';
+            hours.dataPosition = index;
+            if(attraction.hasOwnProperty('hours'))
+                hours.innerHTML = "Open Hours: " +
+                                moment(attraction.hours.start_time, 'HH:mm').format('hh:mm a') + 
+                                " - " +
+                                    moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a') +'<br>';
 
-        const description = listing.appendChild(document.createElement('span'));
-        description.className = 'description';
-        description.dataPosition = index;
-        if(attraction.hasOwnProperty('description'))
-            description.innerHTML = attraction.description;
+            const description = listing.appendChild(document.createElement('span'));
+            description.className = 'description';
+            description.dataPosition = index;
+            if(attraction.hasOwnProperty('description'))
+                description.innerHTML = attraction.description;
+        }
     }
 
     return {
