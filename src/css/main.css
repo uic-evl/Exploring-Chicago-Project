@@ -29,6 +29,10 @@ body {
 #listing .icon{
   float:left;
 }
+
+.sidebarImg {
+  width: 100%;
+}
 .listings {
   height: 100%;
   overflow: auto;

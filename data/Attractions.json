@@ -37,7 +37,7 @@
 				"iconUrl": "imgs/attractions/art_institute.png",
                 "iconSize": [34.6, 50],
                 "coordinates":[41.878440, -87.623788],
-				"hours": {"start_time": "08:30", "end_time":"17:00"},
+				"hours": {"start_time": "10:30", "end_time":"17:00"},
 				"price": ["free"],
 				"cta": ["147"],
 				"sidebarUrl":"imgs/sidebar/art_institute.png"
