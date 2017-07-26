@@ -67,6 +67,7 @@ let Attractions = (function() {
 
         cleanFilterStopList(attractions);
 
+        console.log(attractions);
         return attractions;
     };
 
@@ -90,6 +91,16 @@ let Attractions = (function() {
 
     };
 
+    const timeToSeconds = s => {
+        const m = s.match(/(\d{1,2})\:(\d{2})\s*(AM|PM)*/)
+        return (
+            (parseInt(m[1]) * 60) + 
+            (parseInt(m[2])) + 
+            (m[3] === 'PM' ? 12 * 60 : 0)
+        )
+    }
+
+
     let isOpenNow = function(attraction) {
        if(isOpenAllHours(attraction) || isOpenAtThisHour(attraction))
             return attraction;
@@ -97,7 +108,7 @@ let Attractions = (function() {
 
     let isOpenAtThisHour = function(attraction) {
 
-        return attraction.hours.start_time <= moment().format('H:mm') && attraction.hours.end_time > moment().format('H:mm');
+        return timeToSeconds(attraction.hours.start_time)<= timeToSeconds(moment().format('H:mm')) && timeToSeconds(attraction.hours.end_time) > timeToSeconds(moment().format('H:mm'));
     };
 
     let isOpenAllHours = function(attraction) {
