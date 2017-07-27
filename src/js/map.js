@@ -4,8 +4,12 @@ let Map = (function() {
     const tileURL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+accessToken;
     const mapID = 'mapbox.light';
 
-    let init = function() {
-       let map = L.map('map').setView([41.882657, -87.623304], 13.5);
+    let init = function(attributes) {
+       let map = L.map(attributes.id).setView(attributes.latlng, attributes.zoom);
+       let rectangle = L.rectangle(map.getBounds());
+       
+       if(attributes.isDetailedView)
+        rectangle.addTo(map);
        
        map.zoomControl.remove();
        map.dragging.disable();

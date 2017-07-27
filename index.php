@@ -40,6 +40,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
     <body>
 
         <div id='map'></div>
+        <div id='detailedMap'></div>
         <div id='sidebar'>
             <div class='heading'>
                 <h1>Top Attractions</h1>

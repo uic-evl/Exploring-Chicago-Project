@@ -67,7 +67,6 @@ let Attractions = (function() {
 
         cleanFilterStopList(attractions);
 
-        console.log(attractions);
         return attractions;
     };
 
