@@ -9,7 +9,7 @@ let App = (function() {
 
     const detailedMapAttribute = {
         "id": "detailedMap",
-        "latlng":[41.882657, -87.623304],
+        "latlng":[41.882822, -87.627926],
         "zoom": 14.5,
         "isDetailedView": true
     };
