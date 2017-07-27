@@ -20,7 +20,6 @@ let App = (function() {
         Kiosks.showPosition(map, detailedMap);
         Attractions.update(map);
         Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap);
-        Stops.update(Kiosks.getKioskID, detailedMap, Attractions.transitList(), Attractions.transitStopFilterList());
         Transit.update(Kiosks.getKioskID, map, Stops.transits());
 
         

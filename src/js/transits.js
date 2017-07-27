@@ -61,14 +61,6 @@ let Transit = (function() {
         migrationLayer.addTo(map);
     };
 
-    let arePointNear = function(checkPoint, centerPoint, km) {
-        var ky = 40000 / 180;
-        var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
-        var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
-        var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
-        return Math.sqrt(dx * dx + dy * dy) <= km;
-    };
-
     return {
         update: init
     }

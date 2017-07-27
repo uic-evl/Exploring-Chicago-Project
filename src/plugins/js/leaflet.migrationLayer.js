@@ -58,7 +58,7 @@
         M.prototype.draw = function (context) {
             context.save();
             context.translate(this.x, this.y);
-            context.rotate(this.rotation);
+            // context.rotate(this.rotation);
             context.lineWidth = this.borderWidth || 0;
             context.strokeStyle = this.borderColor || '#000';
         
@@ -248,7 +248,7 @@
             this.radius = radius;
             this.lineWidth = options.width || 1;
             this.strokeStyle = options.color || '#fff';
-            this.factor = 0.7 / this.radius;
+            this.factor = 0.5 / this.radius;
             this.deltaAngle = (80 / Math.min(this.radius, 400)) / this.tailPointsCount;
             this.trailAngle = this.startAngle;
             this.arcAngle = this.startAngle;
@@ -262,7 +262,7 @@
                 rotation: 50 * Math.PI / 180,
                 style: 'circle',
                 color: 'rgb(255, 255, 255)',
-                size: 12,
+                size: 20,
                 borderWidth: 0,
                 borderColor: this.strokeStyle,
                 name: this.name
