@@ -9,7 +9,7 @@ let App = (function() {
 
     const detailedMapAttribute = {
         "id": "detailedMap",
-        "latlng":[41.882822, -87.627926],
+        "latlng":[41.882950, -87.626252],
         "zoom": 14.5,
         "isDetailedView": true
     };
@@ -17,9 +17,10 @@ let App = (function() {
     let init = function() {
         const map = Map.show(mainMapAttribute);
         const detailedMap = Map.show(detailedMapAttribute);
-        Kiosks.showPosition(map);
+        Kiosks.showPosition(map, detailedMap);
         Attractions.update(map);
-        Stops.update(Kiosks.getKioskID, map, Attractions.transitList(), Attractions.transitStopFilterList());
+        Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap);
+        Stops.update(Kiosks.getKioskID, detailedMap, Attractions.transitList(), Attractions.transitStopFilterList());
         Transit.update(Kiosks.getKioskID, map, Stops.transits());
 
         

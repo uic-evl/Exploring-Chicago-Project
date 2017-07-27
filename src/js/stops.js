@@ -18,12 +18,12 @@ let Stops = (function() {
     });
 
 
-    let init = function(kioskID, map, transitList, transitStopFilterList) {
+    let init = function(kioskID, transitList, transitStopFilterList, map, detailedMap=undefined) {
         
         transitList = Array.from(transitList);
 
         
-        filterStops(map, transitList, transitStopFilterList);
+        filterStops(transitList, transitStopFilterList, map, detailedMap);
        
     };
 
@@ -31,7 +31,7 @@ let Stops = (function() {
         return transits;
     };
 
-    let filterStops = function(map, transitList, transitStopFilterList) {
+    let filterStops = function(transitList, transitStopFilterList, map, detailedMap) {
          $.ajax({
             type: "GET",
             url: transitDataPath,
@@ -54,17 +54,19 @@ let Stops = (function() {
                     }
                 });
                 
-                drawStops(transits, map);
+                drawStops(transits, map, detailedMap);
             }
         });
     };
 
-    let drawStops = function(transits, map) {
+    let drawStops = function(transits, map, detailedMap) {
         if(run == 'production') {
             _.forEach(transits, function(transit, i) {
                 _.forEach(transit.stops, function(stop, i) {
                     let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:"blue"});
                     L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stop.lat + "," + stop.lon); 
+                    if(detailedMap)
+                        L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(detailedMap).bindPopup('lat:'+stop.lat + "," + stop.lon); 
                 });       
             });
         }
