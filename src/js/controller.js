@@ -2,7 +2,7 @@ let App = (function() {
 
     const mainMapAttribute = {
         "id": "overviewMap",
-        "latlng":[41.882657, -87.623304],
+        "latlng":[41.883435, -87.623354],
         "zoom": 13.5,
         "isDetailedView": false,
         "walkingDistance": 650,
@@ -11,7 +11,7 @@ let App = (function() {
 
     const detailedMapAttribute = {
         "id": "detailedMap",
-        "latlng":[41.882657, -87.623304],
+        "latlng":[41.883435, -87.623354],
         "zoom": 14.5,
         "isDetailedView": true,
         "walkingDistance": 650,

@@ -75,7 +75,7 @@ let Map = (function() {
         lat2 = toDegrees(lat2)
         lon2 = toDegrees(lon2)
 
-        let line = L.polyline([[41.882657, -87.623304], [lat2, lon2]], {
+        let line = L.polyline([startPoint, [lat2, lon2]], {
                         color: '#de2d26',
                         weight: 3,
                         opacity: .7,
@@ -83,7 +83,6 @@ let Map = (function() {
                         lineJoin: 'round'
                     });
 
-        line.setOffset(walkingDistanceLineOffset);
         line.addTo(map);
 
     };
