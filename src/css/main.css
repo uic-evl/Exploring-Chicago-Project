@@ -13,7 +13,8 @@ body {
   width: 33.3333%;
 }
 
-#map {
+#overviewMap {
+  z-index: 0;
   border-right: 1px solid #fff;
   position: absolute;
   right: 33.3333%;
@@ -23,17 +24,38 @@ body {
 }
 
 #detailedMap {
+  z-index: 0;
   position: absolute;
   height: 20%;
-  width: 30%;
-  top: 1%;
-  right: 38%;
+  width: 65%;
+  bottom: 1%;
+  left: 1%;
 }
 
 #detailedMap .leaflet-interactive {
   fill: none;
   stroke-width:5px;
   stroke: #756bb1;
+}
+
+#detailedMapContainer p {
+  z-index: 2;
+  position: absolute;
+  bottom: 17.3%;
+  left: 1%;
+  float: right;
+  padding: 15px;
+  border: 1px solid black;
+  background: #2c3e50;
+}
+
+#overviewMapContainer p {
+  z-index: 2;
+  position: absolute;
+  float: right;
+  padding: 15px;
+  border: 1px solid black;
+  background: #2c3e50;
 }
 
 .heading h1 {

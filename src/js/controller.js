@@ -1,7 +1,7 @@
 let App = (function() {
 
     const mainMapAttribute = {
-        "id": "map",
+        "id": "overviewMap",
         "latlng":[41.882657, -87.623304],
         "zoom": 13.5,
         "isDetailedView": false

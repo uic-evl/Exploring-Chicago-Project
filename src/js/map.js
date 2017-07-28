@@ -6,15 +6,20 @@ let Map = (function() {
     let tileURL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+accessToken;
 
     let init = function(attributes) {
-       let map = L.map(attributes.id).setView(attributes.latlng, attributes.zoom);
+       let map = L.map(attributes.id,{ closePopupOnClick: false}).setView(attributes.latlng, attributes.zoom);
        let rectangle = L.rectangle(map.getBounds());
-       
+
+       let title = 'Overview'; 
+
        if(attributes.isDetailedView)
         {
+            title = 'Local View'
             rectangle.addTo(map);
+            
             tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5mrnmkp3p292rmthozjux8g/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
+
         }
-       
+
        map.zoomControl.remove();
        map.dragging.disable();
        map.touchZoom.disable();
@@ -25,9 +30,8 @@ let Map = (function() {
             id: mapID,
        }).addTo(map);
 
-
        return map;
-    }
+    };
 
     return {
         show: init
