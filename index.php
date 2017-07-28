@@ -46,7 +46,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         </div>
         
         <div id ="detailedMapContainer">
-            <!--<p>Local View</p>-->
+            <p>Local View</p>
             <div id='detailedMap'></div>
         </div>
 

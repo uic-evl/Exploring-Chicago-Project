@@ -48,7 +48,7 @@ let Transit = (function() {
         let migrationData = [];
         _.forEach(transit.stops, function(d, i) {
             if(transit.stops[i+1]!=undefined)
-                migrationData.push({"from":[transit.stops[i].lon, transit.stops[i].lat],"to":[transit.stops[i+1].lon, transit.stops[i+1].lat],"labels":[null,"ETA: 3 mins"], "color": migrationColor, "name": transit.name});
+                migrationData.push({"from":[transit.stops[i].lon, transit.stops[i].lat],"to":[transit.stops[i+1].lon, transit.stops[i+1].lat],"labels":[null, null], "color": migrationColor, "name": transit.name});
         });
        
         var migrationLayer = new L.migrationLayer({

@@ -11,7 +11,7 @@ let Map = (function() {
 
 
 
-       let map = L.map(attributes.id,{ closePopupOnClick: false}).setView(attributes.latlng, attributes.zoom);
+       let map = L.map(attributes.id,{ closePopupOnClick: false, attributionControl: false}).setView(attributes.latlng, attributes.zoom);
        
        let walkingDistanceLine = L.circle(attributes.latlng, attributes.walkingDistance).setStyle({
                                 fill:true,
