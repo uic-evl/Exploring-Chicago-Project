@@ -22,6 +22,8 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
         <script src="src/plugins/js/leaflet.migrationLayer.js"></script>
+        <script src="src/plugins/js/leaflet.polylineoffset.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
     
@@ -45,7 +47,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         </div>
         
         <div id ="detailedMapContainer">
-            <p>Local View</p>
+            <!--<p>Local View</p>-->
             <div id='detailedMap'></div>
         </div>
 

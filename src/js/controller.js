@@ -4,14 +4,18 @@ let App = (function() {
         "id": "overviewMap",
         "latlng":[41.882657, -87.623304],
         "zoom": 13.5,
-        "isDetailedView": false
+        "isDetailedView": false,
+        "walkingDistance": 650,
+        "walkingDistanceLineOffset": -10
     };
 
     const detailedMapAttribute = {
         "id": "detailedMap",
-        "latlng":[41.882950, -87.626252],
+        "latlng":[41.882657, -87.623304],
         "zoom": 14.5,
-        "isDetailedView": true
+        "isDetailedView": true,
+        "walkingDistance": 650,
+        "walkingDistanceLineOffset": -23
     };
 
     let init = function() {

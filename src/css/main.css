@@ -32,12 +32,6 @@ body {
   left: 1%;
 }
 
-#detailedMap .leaflet-interactive {
-  fill: none;
-  stroke-width:5px;
-  stroke: #756bb1;
-}
-
 #detailedMapContainer p {
   z-index: 2;
   position: absolute;
