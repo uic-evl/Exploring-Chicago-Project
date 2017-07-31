@@ -34,11 +34,9 @@ let Map = (function() {
             title = 'Local View';
             border.addTo(map);
             
-            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5mrnmkp3p292rmthozjux8g/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
+            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5sirgeq3o3m2slbrv2amcyc/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
 
         }
-
-       
 
        map.zoomControl.remove();
        map.dragging.disable();
