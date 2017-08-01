@@ -20,7 +20,7 @@ let App = (function() {
 
     let init = function() {
         const map = Map.show(mainMapAttribute);
-        const detailedMap = Map.show(detailedMapAttribute);
+        const detailedMap = Map.show(detailedMapAttribute, map);
         Kiosks.showPosition(map, detailedMap);
         Attractions.update(map);
         Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap);

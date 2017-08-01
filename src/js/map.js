@@ -5,13 +5,14 @@ let Map = (function() {
     
     let tileURL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+accessToken;
 
-    let init = function(attributes) {
+    let init = function(attributes, mainMap=undefined) {
 
        let title = 'Overview'; 
 
 
-
        let map = L.map(attributes.id,{ closePopupOnClick: false, attributionControl: false}).setView(attributes.latlng, attributes.zoom);
+
+       let bounds = [[map.getBounds()._southWest.lat, map.getBounds()._southWest.lng], [map.getBounds()._northEast.lat, map.getBounds()._northEast.lng]];
        
        let walkingDistanceLine = L.circle(attributes.latlng, attributes.walkingDistance).setStyle({
                                 fill:true,
@@ -34,8 +35,14 @@ let Map = (function() {
             title = 'Local View';
             border.addTo(map);
             
-            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5sirgeq3o3m2slbrv2amcyc/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
+            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5sjk54g3ohb2rpog6h4e9lp/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
+            
+            L.rectangle(bounds, {fill:false, stroke: true, color: "#756bb1", weight: 2}).addTo(mainMap);
 
+        }
+        else
+        {
+            
         }
 
        map.zoomControl.remove();
