@@ -18,7 +18,7 @@ let Transit = (function() {
 
     let markers = [];
     
-    let init = function(kioskID, map, transit) {
+    let init = function(kioskID, map, transit, isDetailedView=undefined) {
         _.forEach(markers, function(marker,index){
             if(marker)
                 map.removeLayer(marker);
@@ -27,7 +27,7 @@ let Transit = (function() {
         
         _.forEach(transit, function(d, i) {
                 // drawTransit(d, map);
-                drawMigration(d, map);  
+                drawMigration(d, map, isDetailedView);  
         });
             
     };
@@ -48,7 +48,7 @@ let Transit = (function() {
         });
     };
 
-    let drawMigration = function(transit, map) {
+    let drawMigration = function(transit, map, isDetailedView) {
         
         let migrationData = [];
         
@@ -71,6 +71,14 @@ let Transit = (function() {
         });
 
         migrationLayer.addTo(map);
+
+        if(isDetailedView) {
+            setInterval(function() {
+                migrationLayer.setData(migrationData);
+            }, 7000);
+        }
+       
+       
     };
 
     return {

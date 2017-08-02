@@ -35,9 +35,9 @@ let Map = (function() {
             title = 'Local View';
             border.addTo(map);
             
-            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5vhxjh31klv2ro21zdz27fo/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
+            tileURL = 'https://api.mapbox.com/styles/v1/mthoma52/cj5vig5oa08tl2rk54pmlxjbs/tiles/256/{z}/{x}/{y}?access_token='+accessToken;
             
-            L.rectangle(bounds, {fill:false, stroke: true, color: "#756bb1", weight: 2}).addTo(mainMap);
+            L.rectangle(bounds, {fill:false, stroke: true, color: "#756bb1", weight: 1}).addTo(mainMap);
 
         }
         else
