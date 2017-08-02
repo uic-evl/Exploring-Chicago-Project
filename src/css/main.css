@@ -32,7 +32,8 @@ body {
   left: 1%;
 }
 
-#detailedMapContainer p {
+
+#detailedMapContainer #localview {
   z-index: 2;
   position: absolute;
   bottom: 17.3%;
@@ -105,5 +106,9 @@ body {
 
 .listings .item.active {
   background-color: #f8f8f8;
+}
+
+.leaflet-routing-container {
+  display: none;
 }
 

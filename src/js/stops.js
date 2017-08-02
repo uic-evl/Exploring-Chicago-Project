@@ -22,7 +22,6 @@ let Stops = (function() {
         
         transitList = Array.from(transitList);
 
-        
         filterStops(transitList, transitStopFilterList, map, detailedMap);
        
     };

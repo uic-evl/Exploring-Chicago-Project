@@ -3,6 +3,7 @@
 			{
 				"id": 1,
                 "name": "60",
+				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat": 41.884289988942, "lon": -87.623636841381},
@@ -12,6 +13,7 @@
 			{
 				"id": 2,
                 "name": "146",
+				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat": 41.883487234033, "lon": -87.627909064031},
@@ -23,6 +25,7 @@
 			{
 				"id": 3,
                 "name": "146",
+				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat": 41.883487234033, "lon":-87.627909064031},
@@ -32,6 +35,7 @@
 			{
 				"id": 3,
                 "name": "22",
+				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat": 41.883173318274, "lon": -87.628530263901},
@@ -41,11 +45,22 @@
 			{
 				"id": 4,
                 "name": "124",
+				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat":41.884686969581, "lon": -87.624351382256},
 						{"lat": 41.892677974773, "lon": -87.610130310059}],
 				"dir": "Eastbound"
+			},
+			{ 
+				"id": 5,
+                "name": "blue",
+				"type": "Train",
+				"iconUrl": "imgs/transits/bus.png",
+                "iconSize": [60, 60],
+				"stops":[{"lat":41.883374, "lon": -87.629757},
+						{"lat": 41.927761, "lon": -87.646959}]
 			}
+
     ]
 }

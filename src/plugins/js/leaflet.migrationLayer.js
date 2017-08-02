@@ -69,6 +69,7 @@
                 context.closePath();
 
                 context.fillStyle = "white";
+                context.globalAlpha = 0.8;
                 context.fill();
                 context.textBaseline = "top";
                 context.fillStyle =  this.borderColor;
@@ -79,6 +80,8 @@
                     context.fillText(this.name, -6 , -5);
                 else if(this.name.length == 3)
                     context.fillText(this.name, -10 , -5);
+                else 
+                    context.fillText(this.name, -12, -5);
 
                 // context.fillText("travel time", -15 , -20)
                 context.fillStyle = this.color || '#000';

@@ -4,7 +4,7 @@ let Transit = (function() {
     const transitDataPath = 'data/Transits.json';
     const busIconURL = 'imgs/transits/bus.png';
 
-    const migrationColors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'];
+    const migrationColors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#f0027f', '#a65628'];
     
     let busIcon = L.icon({
             iconUrl: busIconURL,
@@ -50,8 +50,8 @@ let Transit = (function() {
             if(transit.stops[i+1]!=undefined)
                 migrationData.push({"from":[transit.stops[i].lon, transit.stops[i].lat],"to":[transit.stops[i+1].lon, transit.stops[i+1].lat],"labels":[null, null], "color": migrationColor, "name": transit.name});
         });
-       
-        var migrationLayer = new L.migrationLayer({
+      
+        let migrationLayer = new L.migrationLayer({
                              map: map,
                              data: migrationData,
                              pulseRadius:0,

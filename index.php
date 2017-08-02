@@ -22,9 +22,11 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
         <script src="src/plugins/js/leaflet.migrationLayer.js"></script>
+        <script src="src/plugins/js/leaflet-routing-machine.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+        
     
        
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
@@ -33,7 +35,8 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
                integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
                crossorigin=""/>
 
-        <link rel="stylesheet" href="src/plugins/css/L.Icon.Pulse.css" />        
+        <link rel="stylesheet" href="src/plugins/css/L.Icon.Pulse.css" />  
+        <link rel="stylesheet" href="src/plugins/css/leaflet-routing-machine.css" />      
         <link href='src/css/main.css' rel='stylesheet' />
 
     </head>
@@ -46,7 +49,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         </div>
         
         <div id ="detailedMapContainer">
-            <p>Local View</p>
+            <p id="localview">Local View</p>
             <div id='detailedMap'></div>
         </div>
 
@@ -62,6 +65,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         <script src='src/js/transits.js'></script>
         <script src='src/js/kiosks.js'></script>
         <script src='src/js/stops.js'></script>
+        <script src='src/js/hopon.js'></script>
         <script src='src/js/controller.js'></script>
         
     </body>
