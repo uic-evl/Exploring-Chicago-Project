@@ -22,7 +22,7 @@ let App = (function() {
         const map = Map.show(mainMapAttribute);
         const detailedMap = Map.show(detailedMapAttribute, map);
         Kiosks.showPosition(map, detailedMap);
-         Hopon.show(map);
+        Hopon.show(map);
         Attractions.update(map);
         Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap);
         Transit.update(Kiosks.getKioskID, map, Stops.transits());

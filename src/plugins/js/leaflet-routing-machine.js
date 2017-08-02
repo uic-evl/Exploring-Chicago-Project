@@ -3679,7 +3679,7 @@ module.exports = L.Routing = {
 			styles: [
 				{color: 'black', opacity: 0.15, weight: 0},
 				{color: 'white', opacity: 0.1, weight: 0},
-				{color: '#2c7fb8', opacity: 0.5, weight: 4}
+				{color: '#2c7fb8', opacity: 0.3, weight: 4}
 			],
 			missingRouteStyles: [
 				{color: 'black', opacity: 0.15, weight: 7},
