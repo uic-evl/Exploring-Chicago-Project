@@ -4,7 +4,12 @@ let Transit = (function() {
     const transitDataPath = 'data/Transits.json';
     const busIconURL = 'imgs/transits/bus.png';
 
-    const migrationColors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#f0027f', '#a65628'];
+    const migrationColors = {
+                                "bus": '#636363',
+                                "blue":'#3182bd',
+                                "red": '#de2d26',
+                                'orange':'#feb24c',
+    };
     
     let busIcon = L.icon({
             iconUrl: busIconURL,
@@ -22,7 +27,7 @@ let Transit = (function() {
         
         _.forEach(transit, function(d, i) {
                 // drawTransit(d, map);
-                drawMigration(d, migrationColors[i], map);  
+                drawMigration(d, map);  
         });
             
     };
@@ -43,12 +48,19 @@ let Transit = (function() {
         });
     };
 
-    let drawMigration = function(transit, migrationColor, map) {
+    let drawMigration = function(transit, map) {
         
         let migrationData = [];
+        
+        let color = migrationColors.bus;
+
+        if(transit.type == "Train") {
+            color = migrationColors[transit.name];
+        }
+
         _.forEach(transit.stops, function(d, i) {
             if(transit.stops[i+1]!=undefined)
-                migrationData.push({"from":[transit.stops[i].lon, transit.stops[i].lat],"to":[transit.stops[i+1].lon, transit.stops[i+1].lat],"labels":[null, null], "color": migrationColor, "name": transit.name});
+                migrationData.push({"from":[transit.stops[i].lon, transit.stops[i].lat],"to":[transit.stops[i+1].lon, transit.stops[i+1].lat],"labels":[null, null], "color": color, "name": transit.name});
         });
       
         let migrationLayer = new L.migrationLayer({
