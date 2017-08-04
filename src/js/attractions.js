@@ -142,19 +142,26 @@ let Attractions = (function() {
             sidebarImg.src = attraction.sidebarUrl;
         }
         else {
-            const icon = listing.appendChild(document.createElement('img'));
+
+            const listing1 = listing.appendChild(document.createElement('div'));
+            listing1.className = 'sub-item-image';
+
+            const icon = listing1.appendChild(document.createElement('img'));
             icon.className = 'icon';
             icon.style = 'width:'+attraction.iconSize[0] + 'px;height:' +
-                                attraction.iconSize[1] + 'px;float:left; margin-right:10px;';
+                                attraction.iconSize[1] + 'px;';
             icon.dataPosition = index;
             icon.src = attraction.iconUrl;
+            
+            const listing2 = listing.appendChild(document.createElement('div'));
+            listing2.className = 'sub-item';
 
-            const title = listing.appendChild(document.createElement('h2'));
+            const title = listing2.appendChild(document.createElement('h2'));
             title.className = 'title';
             title.dataPosition = index;
             title.innerHTML = attraction.name;
             
-            const hours = listing.appendChild(document.createElement('span'));
+            const hours = listing2.appendChild(document.createElement('span'));
             hours.className = 'hours';
             hours.dataPosition = index;
             if(attraction.hasOwnProperty('hours'))
@@ -163,7 +170,7 @@ let Attractions = (function() {
                                 " - " +
                                     moment(attraction.hours.end_time, 'HH:mm').format('hh:mm a') +'<br>';
 
-            const description = listing.appendChild(document.createElement('span'));
+            const description = listing2.appendChild(document.createElement('span'));
             description.className = 'description';
             description.dataPosition = index;
             if(attraction.hasOwnProperty('description'))
