@@ -27,7 +27,7 @@ let Map = (function() {
                             stroke: true,
                             color: '#756bb1',
                             weight: 8
-                        });
+                    });
 
 
        if(attributes.isDetailedView)
@@ -39,10 +39,6 @@ let Map = (function() {
             
             L.rectangle(bounds, {fill:false, stroke: true, color: "#756bb1", weight: 1}).addTo(mainMap);
 
-        }
-        else
-        {
-            
         }
 
        map.zoomControl.remove();
@@ -66,7 +62,7 @@ let Map = (function() {
         const R = 6378.1;
         const brng = 1.57;
 
-        let length = walkingDistance/ 1000;
+        let length = walkingDistance / 1000;
 
         lat1 = toRadian(startPoint[0]);
         lon1 = toRadian(startPoint[1]);

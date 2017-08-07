@@ -22,7 +22,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
         <script src="src/plugins/js/leaflet.migrationLayer.js"></script>
-        <script src="src/plugins/js/leaflet-routing-machine.js"></script>
+        <!--<script src="src/plugins/js/leaflet-routing-machine.js"></script>-->
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
@@ -36,7 +36,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
                crossorigin=""/>
 
         <link rel="stylesheet" href="src/plugins/css/L.Icon.Pulse.css" />  
-        <link rel="stylesheet" href="src/plugins/css/leaflet-routing-machine.css" />      
+        <!--<link rel="stylesheet" href="src/plugins/css/leaflet-routing-machine.css" />      -->
         <link href='src/css/main.css' rel='stylesheet' />
 
     </head>
@@ -65,7 +65,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         <script src='src/js/transits.js'></script>
         <script src='src/js/kiosks.js'></script>
         <script src='src/js/stops.js'></script>
-        <script src='src/js/hopon.js'></script>
+        <!--<script src='src/js/hopon.js'></script>-->
         <script src='src/js/controller.js'></script>
         
     </body>

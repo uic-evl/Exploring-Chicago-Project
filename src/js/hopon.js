@@ -1,6 +1,7 @@
 let Hopon = (function() {
 
     const hoponDataPath = 'data/Hopon.json';
+    const thingsPath = 'data/test.json';
 
     let init = function(map) {
 
@@ -23,7 +24,7 @@ let Hopon = (function() {
             waypoints: waypoints,
             fitSelectedRoutes: false
         }).addTo(map);
-
+   
 
     };
 

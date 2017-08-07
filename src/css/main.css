@@ -63,7 +63,7 @@ body {
 
 .sub-item {
   margin-left: 10%;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   max-width:10px;
   display:  inline-block;
 }

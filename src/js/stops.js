@@ -39,7 +39,7 @@ let Stops = (function() {
             success: function(transitCollection) {
                 transits = [];
                 _.forEach(transitCollection.Transits, function(data, i) {
-                   
+                    
                     if(_.includes(transitList, data.name)) {
                         _.forEach(data.stops, function(stop, j) {
                             _.forEach(transitStopFilterList, function(d, k) {

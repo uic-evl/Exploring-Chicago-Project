@@ -27,9 +27,8 @@ let App = (function() {
         Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap);
         Transit.update(Kiosks.getKioskID, map, Stops.transits());
         Transit.update(Kiosks.getKioskID, detailedMap, Stops.transits(), true);
-       
 
-        
+
         // let updateTransit = setInterval( function() 
         // {
         //     Transit.update(Kiosks.getKioskID, map);
