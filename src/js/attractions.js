@@ -22,7 +22,7 @@ let Attractions = (function() {
                         iconSize: attraction.iconSize,
                     });
 
-                    L.marker(attraction.coordinates, {icon: attractionIcon}).addTo(map);
+                    L.marker(attraction.coordinates, {icon: attractionIcon, zIndexOffset: 10}).addTo(map);
                     populateSidebar(attraction, i);
 
                 });
