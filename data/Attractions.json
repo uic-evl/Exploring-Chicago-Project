@@ -140,7 +140,7 @@
 				"name": "O'Hare International Airport",
 				"type": "offmap",
 				"iconUrl": "imgs/attractions/ohare.png",
-				"iconSize": [108.6, 26],
+				"iconSize": [32, 32],
 				"coordinates": [41.927761, -87.646959],
 				"cta":["blue"],
 				"stops": [{"lat": 41.927761, "lon": -87.646959}]

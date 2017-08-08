@@ -24,8 +24,8 @@ let Hopon = (function() {
             waypoints: waypoints,
             fitSelectedRoutes: false
         }).addTo(map);
-   
 
+        
     };
 
     return {

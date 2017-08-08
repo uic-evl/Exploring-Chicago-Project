@@ -4,7 +4,8 @@ let Stops = (function() {
     let transits = [];
 
     const transitDataPath = 'data/Transits.json';
-    const stopIconURL = 'imgs/transits/busStop3.png'
+    const busStopIconURL = 'imgs/transits/busStop3.png'
+    const trainStopIconURL = 'imgs/transits/trainStop.png'
     
     let stopIconWithOptions = L.Icon.extend({
         options: {
@@ -12,25 +13,29 @@ let Stops = (function() {
         }
     });
 
-    let stopIcon = new stopIconWithOptions({
-        iconUrl: stopIconURL,
-        iconSize: [15.12, 18.36], 
-    });
-
+    let getStopIcon = function(transitType) {
+        let iconUrl;
+        if(transitType == 'Bus') 
+            iconUrl = busStopIconURL;
+        else if(transitType == 'Train')
+            iconUrl = trainStopIconURL;
+        
+        return new stopIconWithOptions({ iconUrl: iconUrl, iconSize: [15.12, 18.36]});
+    }
 
     let init = function(kioskID, transitList, transitStopFilterList, map, detailedMap=undefined) {
         
         transitList = Array.from(transitList);
 
-        filterStops(transitList, transitStopFilterList, map, detailedMap);
-       
+        filterStops(transitList, transitStopFilterList);
+        drawStops(transits, map, detailedMap);
     };
 
     let getTransit = function() {
         return transits;
     };
 
-    let filterStops = function(transitList, transitStopFilterList, map, detailedMap) {
+    let filterStops = function(transitList, transitStopFilterList) {
          $.ajax({
             type: "GET",
             url: transitDataPath,
@@ -52,8 +57,6 @@ let Stops = (function() {
                             transits.push(data);
                     }
                 });
-                
-                drawStops(transits, map, detailedMap);
             }
         });
     };
@@ -63,9 +66,9 @@ let Stops = (function() {
             _.forEach(transits, function(transit, i) {
                 _.forEach(transit.stops, function(stop, i) {
                     let pulsingIcon = L.icon.pulse({iconSize:[10,10], color:"blue"});
-                    L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(map).bindPopup('lat:'+stop.lat + "," + stop.lon); 
+                    L.marker([stop.lat,stop.lon],{icon: getStopIcon(transit.type)}).addTo(map).bindPopup('lat:'+stop.lat + "," + stop.lon); 
                     if(detailedMap)
-                        L.marker([stop.lat,stop.lon],{icon: stopIcon}).addTo(detailedMap).bindPopup('lat:'+stop.lat + "," + stop.lon); 
+                        L.marker([stop.lat,stop.lon],{icon: getStopIcon(transit.type)}).addTo(detailedMap).bindPopup('lat:'+stop.lat + "," + stop.lon); 
                 });       
             });
         }
