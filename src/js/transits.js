@@ -61,20 +61,24 @@ let Transit = (function() {
 
     const transitName = transit.name;
 
+    let eta = undefined;
+
     if (transit.type == "Train") {
       color = migrationColors[transitName];
     }
 
     _.forEach(transit.stops, function(d, i) {
       if (transit.stops[i + 1] != undefined) {
-          if(!isDetailedView)
-            getETA(transit.stops[i], transit.stops[i + 1], transitName);
+        //   if(!isDetailedView)
+            eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
+
         migrationData.push({
           from: [transit.stops[i].lon, transit.stops[i].lat],
           to: [transit.stops[i + 1].lon, transit.stops[i + 1].lat],
           labels: [null, null],
           color: color,
-          name: transit.name
+          name: transit.name,
+          eta: eta
         });
       }
     });
@@ -96,10 +100,12 @@ let Transit = (function() {
   };
 
   let getETA = function(origin, destintaion, transitName) {
+    let eta = undefined;
     $.ajax({
       url: "src/php/eta.php",
       type: "post",
       dataType: "json",
+      async: false,
       data: {
         orginLat: origin.lat,
         orginLng: origin.lon,
@@ -113,17 +119,14 @@ let Transit = (function() {
               _.forEach(d.legs[0].steps, function(d, i) {
                 if (d.transit_details != undefined)
                   if (d.transit_details.line.short_name == transitName)
-                  {
-                      console.log(moment(d.transit_details.arrival_time.text)) ;
-                      var diff = moment.duration(moment(d.transit_details.arrival_time.text).diff(moment(d.transit_details.departure_time.text)));
-                      console.log(diff.humanize());
-                  }
-                   
+                      eta = moment.unix(d.transit_details.arrival_time.value - d.transit_details.departure_time.value).format('mm');
               });
           });
         });
       }
     });
+
+    return eta;
   };
 
   return {

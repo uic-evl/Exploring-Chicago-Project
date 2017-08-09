@@ -53,6 +53,7 @@
             this.borderWidth = options.borderWidth;
             this.borderColor = options.borderColor;
             this.name = options.name;
+            this.eta = options.eta;
         };
 
         M.prototype.draw = function (context) {
@@ -77,11 +78,17 @@
                 if(this.name.length == 1)
                     context.fillText(this.name, -4 , -5);
                 else if(this.name.length == 2)
-                    context.fillText(this.name, -6 , -5);
+                    context.fillText(this.name, -6 , -10);
                 else if(this.name.length == 3)
-                    context.fillText(this.name, -10 , -5);
+                    context.fillText(this.name, -10 , -10);
                 else 
                     context.fillText(this.name, -12, -5);
+                
+                if (this.eta) {
+                    context.font = "bold 8px verdana, sans-serif ";
+                    context.fillText(this.eta + ' min', -15, 2);
+                }
+                    
 
                 // context.fillText("travel time", -15 , -20)
                 context.fillStyle = this.color || '#000';
@@ -219,6 +226,7 @@
                 endX = options.endX,
                 endY = options.endY;
                 name = options.name;
+                eta = options.eta;
 
             //两点之间的圆有多个，通过两点及半径便可以定出两个圆，根据需要选取其中一个圆
             var L = Math.sqrt(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2));
@@ -256,6 +264,7 @@
             this.trailAngle = this.startAngle;
             this.arcAngle = this.startAngle;
             this.name = name;
+            this.eta = eta;
 
             this.animateBlur = true;
             
@@ -268,7 +277,8 @@
                 size: 20,
                 borderWidth: 0,
                 borderColor: this.strokeStyle,
-                name: this.name
+                name: this.name,
+                eta: this.eta
             });
         };
 
@@ -403,7 +413,8 @@
                         size: 4,
                         borderWidth: 0,
                         borderColor: element.color,
-                        name: element.name
+                        name: element.name,
+                        eta: element.eta
                     });
                     var pulse = new Pulse({
                         x: element.to[0],
@@ -419,7 +430,8 @@
                         endY: element.to[1],
                         width: 15,
                         color: element.color,
-                        name: element.name
+                        name: element.name,
+                        eta: element.eta
                     });
 
                     this.store.arcs.push(arc);
@@ -560,7 +572,8 @@
                         labels: d.labels,
                         value: d.value,
                         color: d.color,
-                        name: d.name
+                        name: d.name,
+                        eta: d.eta
                     }
                 }, this);
           
