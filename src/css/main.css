@@ -64,7 +64,7 @@ body {
 .sub-item {
   margin-left: 10%;
   overflow-wrap: break-word;
-  max-width:10px;
+  max-width:200px;
   display:  inline-block;
 }
 
@@ -85,7 +85,7 @@ body {
   height: 100%;
   overflow: auto;
   padding-bottom: 60px;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
 }
 
 .listings .item {
