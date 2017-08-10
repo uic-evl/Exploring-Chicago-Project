@@ -4,7 +4,7 @@ let Transit = (function() {
   const busIconURL = "imgs/transits/bus.png";
 
   const migrationColors = {
-    bus: "#636363",
+    bus: "#dd3497",
     blue: "#3182bd",
     red: "#de2d26",
     orange: "#feb24c"
@@ -56,6 +56,8 @@ let Transit = (function() {
 
   let drawMigration = function(transit, map, isDetailedView) {
     let migrationData = [];
+    
+    let migrationLayer;
 
     let color = migrationColors.bus;
 
@@ -70,7 +72,7 @@ let Transit = (function() {
     _.forEach(transit.stops, function(d, i) {
       if (transit.stops[i + 1] != undefined) {
         //   if(!isDetailedView)
-            eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
+            // eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
 
         migrationData.push({
           from: [transit.stops[i].lon, transit.stops[i].lat],
@@ -83,7 +85,8 @@ let Transit = (function() {
       }
     });
 
-    let migrationLayer = new L.migrationLayer({
+
+    migrationLayer = new L.migrationLayer({
       map: map,
       data: migrationData,
       pulseRadius: 0,
@@ -91,6 +94,11 @@ let Transit = (function() {
     });
 
     migrationLayer.addTo(map);
+    // migrationLayer.hide();
+    // setTimeout(function() {
+    //     migrationLayer.pause();
+    //     migrationLayer.show();
+    //   }, 7000);
 
     if (isDetailedView) {
       setInterval(function() {
@@ -119,7 +127,7 @@ let Transit = (function() {
               _.forEach(d.legs[0].steps, function(d, i) {
                 if (d.transit_details != undefined)
                   if (d.transit_details.line.short_name == transitName)
-                      eta = moment.unix(d.transit_details.arrival_time.value - d.transit_details.departure_time.value).format('mm');
+                      eta = moment.unix(d.transit_details.arrival_time.value - d.transit_details.departure_time.value).format('m');
               });
           });
         });

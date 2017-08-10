@@ -62,14 +62,13 @@ body {
 }
 
 .sub-item {
-  margin-left: 10%;
+  margin-left: 12%;
   overflow-wrap: break-word;
-  max-width:200px;
+  max-width:210px;
   display:  inline-block;
 }
 
 .sub-item-image {
-  padding-left: 5%;
   white-space: normal;
   width: 70px;
   height: 100%;
@@ -113,7 +112,7 @@ body {
 .listings .description {
   display: block;
   color:#eee;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .listings .item .title small { font-weight: 400; }
