@@ -89,7 +89,6 @@
                     context.fillText(this.eta + ' min', -15, 2);
                 }
                     
-
                 // context.fillText("travel time", -15 , -20)
                 context.fillStyle = this.color || '#000';
             } else if (this.style === 'arrow') {

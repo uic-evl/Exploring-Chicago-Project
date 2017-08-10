@@ -16,7 +16,7 @@ let Attractions = (function() {
         _.forEach(attractions, function(attraction, i) {
           let attractionIcon = L.icon({
             iconUrl: attraction.iconUrl,
-            iconSize: attraction.iconSize
+            iconSize: [attraction.iconSize[0]/2, attraction.iconSize[1]/2]
           });
 
           L.marker(attraction.coordinates, {
@@ -147,7 +147,7 @@ let Attractions = (function() {
       const listing2 = listing.appendChild(document.createElement("div"));
       listing2.className = "sub-item";
 
-      const title = listing2.appendChild(document.createElement("h2"));
+      const title = listing2.appendChild(document.createElement("h3"));
       title.className = "title";
       title.dataPosition = index;
       title.innerHTML = attraction.name;
@@ -157,11 +157,13 @@ let Attractions = (function() {
       hours.dataPosition = index;
       if (attraction.hasOwnProperty("hours"))
         hours.innerHTML =
-          "Open Hours: " +
-          moment(attraction.hours.start_time, "HH:mm").format("hh:mm a") +
+          "Hours: " +
+          moment(attraction.hours.start_time, "HH:mm").format("h a") +
           " - " +
-          moment(attraction.hours.end_time, "HH:mm").format("hh:mm a") +
+          moment(attraction.hours.end_time, "HH:mm").format("h a") +
           "<br>";
+      else
+        hours.innerHTML = "Open All Hours";
 
       const description = listing2.appendChild(document.createElement("span"));
       description.className = "description";

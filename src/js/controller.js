@@ -35,9 +35,9 @@ let App = (function() {
 
     // let updateTransit = setInterval( function()
     // {
-    //     Transit.update(Kiosks.getKioskID, map);
+    //     Transit.update(Kiosks.getKioskID, map, Stops.transits());
 
-    // }, 10 * 1000);
+    // }, 1 * 1000);
   };
 
   return {
