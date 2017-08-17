@@ -17,12 +17,29 @@ let App = (function() {
     walkingDistanceLineOffset: -23
   };
 
+  let map;
+  let detailedMap;
+
   let init = function() {
-    const map = Map.show(mainMapAttribute);
-    const detailedMap = Map.show(detailedMapAttribute, map);
-    Kiosks.showPosition(map, detailedMap);
-    // Hopon.show(map);
-    Attractions.update(map);
+     map = Map.show(mainMapAttribute);
+     detailedMap = Map.show(detailedMapAttribute, map);
+     Kiosks.showPosition(map, detailedMap);
+  };
+
+  let getMap = function() {
+    return map;
+  }
+
+  let getDetailedMap = function() {
+    return detailedMap;
+  }
+
+  let update = function(time=undefined) {
+    let map = getMap();
+    let detailedMap = getDetailedMap();
+    
+    // Hoposn.show(map);
+    Attractions.update(map, time);
     Stops.update(
       Kiosks.getKioskID,
       Attractions.transitList(),
@@ -30,8 +47,9 @@ let App = (function() {
       map,
       detailedMap
     );
+
     Transit.update(Kiosks.getKioskID, map, Stops.transits());
-    Transit.update(Kiosks.getKioskID, detailedMap, Stops.transits(), true);
+    // Transit.update(Kiosks.getKioskID, detailedMap, Stops.transits(), true);
 
     // let updateTransit = setInterval( function()
     // {
@@ -39,10 +57,17 @@ let App = (function() {
 
     // }, 1 * 1000);
   };
+  
 
   return {
-    start: init
+    start: init,
+    update: update
   };
+
 })();
 
 App.start();
+App.update();
+
+
+TimeControl.show(App);

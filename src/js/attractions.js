@@ -1,9 +1,23 @@
 let Attractions = (function() {
   const attractionDataPath = "data/Attractions.json";
-  let transitList = new Set();
-  let transitStopFilterList = new Set();
+  let transitList;
+  let transitStopFilterList;
+  let currentTime;
+  let markers = new Array();
 
-  let init = function(map) {
+  let init = function(map, time=undefined) {
+
+    cleanUpAttractions(map);
+
+    transitList = new Set();
+    transitStopFilterList = new Set();
+    if(!time)
+      currentTime = moment().format('H:mm');
+    else
+      currentTime = moment(time, "h:mm A").format('HH:mm');
+
+    console.log(currentTime);
+    
     $.ajax({
       type: "GET",
       url: attractionDataPath,
@@ -19,15 +33,24 @@ let Attractions = (function() {
             iconSize: [attraction.iconSize[0]/2, attraction.iconSize[1]/2]
           });
 
-          L.marker(attraction.coordinates, {
+          let marker = L.marker(attraction.coordinates, {
             icon: attractionIcon,
             zIndexOffset: 10
-          }).addTo(map);
+          });
+          markers.push(marker);
+          marker.addTo(map);
           populateSidebar(attraction, i);
         });
       }
     });
   };
+
+  let cleanUpAttractions = function(map) {
+    _.forEach(markers, function(d,i) {
+      map.removeLayer(d);
+    });
+    $('#listings').empty();
+  }
 
   let getTransitList = function() {
     return transitList;
@@ -94,9 +117,9 @@ let Attractions = (function() {
   let isOpenAtThisHour = function(attraction) {
     return (
       timeToSeconds(attraction.hours.start_time) <=
-        timeToSeconds(moment().format("H:mm")) &&
+        timeToSeconds(currentTime) &&
       timeToSeconds(attraction.hours.end_time) >
-        timeToSeconds(moment().format("H:mm"))
+        timeToSeconds(currentTime)
     );
   };
 

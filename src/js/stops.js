@@ -6,6 +6,9 @@ let Stops = (function() {
   const busStopIconURL = "imgs/transits/busStop3.png";
   const trainStopIconURL = "imgs/transits/trainStop.png";
 
+  let stopMarkers = [];
+  let stopMarkersForDetailedMap = [];
+
   let stopIconWithOptions = L.Icon.extend({
     options: {
       iconAnchor: [7, 5]
@@ -30,6 +33,10 @@ let Stops = (function() {
     map,
     detailedMap = undefined
   ) {
+
+    cleanStopsOnMap(map,stopMarkers);
+    cleanStopsOnMap(detailedMap, stopMarkersForDetailedMap);
+    
     transitList = Array.from(transitList);
 
     filterStops(transitList, transitStopFilterList);
@@ -68,18 +75,30 @@ let Stops = (function() {
     });
   };
 
+  let cleanStopsOnMap = function(map, stops) {
+    _.forEach(stops, function(d,i) {
+      map.removeLayer(d);
+    });
+
+  }
+
   let drawStops = function(transits, map, detailedMap) {
     if (run == "production") {
+      let marker;
       _.forEach(transits, function(transit, i) {
         _.forEach(transit.stops, function(stop, i) {
           let pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: "blue" });
-          L.marker([stop.lat, stop.lon], { icon: getStopIcon(transit.type) })
-            .addTo(map)
+          marker = L.marker([stop.lat, stop.lon], { icon: getStopIcon(transit.type) })
+          stopMarkers.push(marker)
+          marker.addTo(map)
             .bindPopup("lat:" + stop.lat + "," + stop.lon);
           if (detailedMap)
-            L.marker([stop.lat, stop.lon], { icon: getStopIcon(transit.type) })
-              .addTo(detailedMap)
-              .bindPopup("lat:" + stop.lat + "," + stop.lon);
+            {
+              marker =  L.marker([stop.lat, stop.lon], { icon: getStopIcon(transit.type) })
+              stopMarkersForDetailedMap.push(marker)
+              marker.addTo(detailedMap).bindPopup("lat:" + stop.lat + "," + stop.lon);
+            }
+          
         });
       });
     } else {

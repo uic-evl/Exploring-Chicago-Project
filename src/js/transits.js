@@ -2,6 +2,10 @@ let Transit = (function() {
   const ctaTransitToken = "SrESNk3VtTZvrQgcU69fzZ6Uw";
   const transitDataPath = "data/Transits.json";
   const busIconURL = "imgs/transits/bus.png";
+  
+  let migrationLayer;
+  let migrationLayers= [];
+  let isMigrationLayerSet = false;
 
   const migrationColors = {
     bus: "#dd3497",
@@ -18,9 +22,12 @@ let Transit = (function() {
   let markers = [];
 
   let init = function(kioskID, map, transit, isDetailedView = undefined) {
-    _.forEach(markers, function(marker, index) {
-      if (marker) map.removeLayer(marker);
-    });
+
+    if(migrationLayers)
+      _.forEach(migrationLayers, function(d,i) {
+        if(d.container.parentNode != null)
+          d.destroy();
+      })
 
     _.forEach(transit, function(d, i) {
       // drawTransit(d, map);
@@ -30,6 +37,7 @@ let Transit = (function() {
 
   let drawTransit = function(transit, map) {
     let migrationData = [];
+    let marker
     $.ajax({
       url: "src/php/transits.php",
       type: "post",
@@ -37,18 +45,12 @@ let Transit = (function() {
       data: { busID: transit.name },
       success: function(data) {
         _.forEach(data["bustime-response"].vehicle, function(d, i) {
-          if (
-            arePointNear(
-              { lat: d.lat, lng: d.lon },
-              { lat: 41.884122, lng: -87.6233 },
-              1
-            )
-          )
-            markers.push(
-              L.marker([d.lat, d.lon], { icon: busIcon })
-                .addTo(map)
-                .bindPopup(d.rt + " " + d.des + " " + d.hdg)
-            );
+          if (arePointNear({ lat: d.lat, lng: d.lon }, { lat: 41.884122, lng: -87.6233 }, 1))
+          {
+            marker = L.marker([d.lat, d.lon], { icon: busIcon });
+            markers.push(marker);
+            marker.addTo(map).bindPopup(d.rt + " " + d.des + " " + d.hdg)
+          }  
         });
       }
     });
@@ -56,9 +58,7 @@ let Transit = (function() {
 
   let drawMigration = function(transit, map, isDetailedView) {
     let migrationData = [];
-    
-    let migrationLayer;
-
+  
     let color = migrationColors.bus;
 
     const transitName = transit.name;
@@ -71,8 +71,8 @@ let Transit = (function() {
 
     _.forEach(transit.stops, function(d, i) {
       if (transit.stops[i + 1] != undefined) {
-        //   if(!isDetailedView)
-            // eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
+          // if(!isDetailedView)
+          //   eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
 
         migrationData.push({
           from: [transit.stops[i].lon, transit.stops[i].lat],
@@ -85,26 +85,26 @@ let Transit = (function() {
       }
     });
 
-
-    migrationLayer = new L.migrationLayer({
-      map: map,
-      data: migrationData,
-      pulseRadius: 0,
-      text: transit.name
-    });
-
-    migrationLayer.addTo(map);
-    // migrationLayer.hide();
-    // setTimeout(function() {
-    //     migrationLayer.pause();
-    //     migrationLayer.show();
-    //   }, 7000);
+    setMigrationLayer(migrationData,map,transit);
 
     if (isDetailedView) {
       setInterval(function() {
         migrationLayer.setData(migrationData);
       }, 7000);
     }
+  };
+
+  let setMigrationLayer = function(migrationData, map, transit) {
+     
+      migrationLayer = new L.migrationLayer({
+        map: map,
+        data: migrationData,
+        pulseRadius: 0,
+        text: transit.name
+      });
+      
+      migrationLayers.push(migrationLayer);
+      migrationLayer.addTo(map);
   };
 
   let getETA = function(origin, destintaion, transitName) {
