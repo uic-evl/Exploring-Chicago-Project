@@ -15,8 +15,6 @@ let Attractions = (function() {
       currentTime = moment().format('H:mm');
     else
       currentTime = moment(time, "h:mm A").format('HH:mm');
-
-    console.log(currentTime);
     
     $.ajax({
       type: "GET",
@@ -92,7 +90,6 @@ let Attractions = (function() {
 
     stops = _.pull(_.flattenDeep(stops), false);
     transitStopFilterList = _.flattenDeep(Array.from(transitStopFilterList));
-
     const intersection = _.intersectionWith(
       stops,
       transitStopFilterList,

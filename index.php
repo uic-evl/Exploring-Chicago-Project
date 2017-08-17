@@ -26,6 +26,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         <script src="src/plugins/js/L.Icon.Pulse.js"></script>
         <script src="src/plugins/js/leaflet.migrationLayer.js"></script>
         <script src="src/plugins/js/nouislider.js"></script>
+        <script src="src/plugins/js/wNumb.js"></script>
         <!--<script src="src/plugins/js/leaflet-routing-machine.js"></script>-->
 
       

@@ -33,10 +33,9 @@ let Stops = (function() {
     map,
     detailedMap = undefined
   ) {
-
     cleanStopsOnMap(map,stopMarkers);
     cleanStopsOnMap(detailedMap, stopMarkersForDetailedMap);
-    
+
     transitList = Array.from(transitList);
 
     filterStops(transitList, transitStopFilterList);
@@ -59,11 +58,9 @@ let Stops = (function() {
           if (_.includes(transitList, data.name)) {
             _.forEach(data.stops, function(stop, j) {
               _.forEach(transitStopFilterList, function(d, k) {
-                if (
-                  stop != undefined &&
-                  stop.lat === d.lat &&
-                  stop.lon === d.lon
-                )
+                if(stop)
+                  console.log(stop.lat,stop.lon);
+                if (stop != undefined && stop.lat === d.lat && stop.lon === d.lon)
                   data.stops.splice(j, 1);
               });
             });

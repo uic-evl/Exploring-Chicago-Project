@@ -4,6 +4,8 @@ let TimeControl = (function() {
         
 
         let slider = document.getElementById('timecontrol');
+
+        
         noUiSlider.create(slider, {
             start: getTimeInMinutes(),
             connect: [true, false],
@@ -13,7 +15,13 @@ let TimeControl = (function() {
              pips: {
                 mode: 'values',
                 values: [0, 360, 720, 1080, 1440],
-                density: 10
+                density: 4,
+                format: wNumb({
+                    decimals: 0,
+                    encoder: function(value) {
+                        return value/60;
+                    }
+                })
             },
             range: {
                 min: 0,
