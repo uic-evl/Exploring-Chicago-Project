@@ -34,12 +34,12 @@ let App = (function() {
     return detailedMap;
   }
 
-  let update = function(time=undefined) {
+  let update = function(time=undefined, day=undefined) {
     let map = getMap();
     let detailedMap = getDetailedMap();
     
     // Hoposn.show(map);
-    Attractions.update(map, time);
+    Attractions.update(map, time, day);
     Stops.update(
       Kiosks.getKioskID,
       Attractions.transitList(),

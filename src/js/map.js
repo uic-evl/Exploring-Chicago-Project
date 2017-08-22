@@ -38,7 +38,7 @@ let Map = (function() {
     });
 
     if (attributes.isDetailedView) {
-      title = "Local View";
+      title = "Detailed View";
       border.addTo(map);
 
       tileURL =

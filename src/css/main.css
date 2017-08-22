@@ -82,6 +82,13 @@ body {
   bottom: 50px;
 }
 
+#daycontrol {
+  width: 7%;
+  margin-left: 2%;
+  position:fixed;
+  bottom: 75px;
+}
+
 .sidebarImg {
   width: 100%;
 }

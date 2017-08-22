@@ -55,7 +55,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         </div>
         
         <div id ="detailedMapContainer">
-            <p id="localview">Local View</p>
+            <p id="localview">Detailed View</p>
             <div id='detailedMap'></div>
         </div>
 
@@ -64,6 +64,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
                 <h1>Top Attractions</h1>
             </div>
             <div id='listings' class='listings'></div>
+            <div class="sliders" id="daycontrol"></div>
             <div class="sliders" id="timecontrol"></div>
         </div>
 

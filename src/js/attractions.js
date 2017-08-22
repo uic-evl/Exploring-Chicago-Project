@@ -3,9 +3,10 @@ let Attractions = (function() {
   let transitList;
   let transitStopFilterList;
   let currentTime;
+  let currentDay;
   let markers = new Array();
 
-  let init = function(map, time=undefined) {
+  let init = function(map, time=undefined, day=undefined) {
 
     cleanUpAttractions(map);
 
@@ -15,6 +16,11 @@ let Attractions = (function() {
       currentTime = moment().format('H:mm');
     else
       currentTime = moment(time, "h:mm A").format('HH:mm');
+
+    if(!day)
+      currentDay = moment().format("dddd").toLowerCase();
+    else
+      currentDay = day;
     
     $.ajax({
       type: "GET",
@@ -128,7 +134,7 @@ let Attractions = (function() {
   let isOpenToday = function(attraction) {
     let open = false;
     _.forEach(attraction.days, function(d, i) {
-      if (d.toLowerCase() == moment().format("dddd").toLowerCase()) open = true;
+      if (d.toLowerCase() == currentDay) open = true;
     });
     return open;
   };
