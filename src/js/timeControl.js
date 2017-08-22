@@ -4,8 +4,6 @@ let TimeControl = (function() {
         
 
         let slider = document.getElementById('timecontrol');
-
-        
         noUiSlider.create(slider, {
             start: getTimeInMinutes(),
             connect: [true, false],

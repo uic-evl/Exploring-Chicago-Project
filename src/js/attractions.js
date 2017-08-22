@@ -37,6 +37,7 @@ let Attractions = (function() {
           });
           markers.push(marker);
           marker.addTo(map);
+          marker.valueOf()._icon.style.border = 'green'
           populateSidebar(attraction, i);
         });
       }

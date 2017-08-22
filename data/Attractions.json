@@ -2,7 +2,7 @@
 	"attractions": [
 			{
 				"id": "1",
-                "name": "Bean",
+                "name": "Cloud Gate",
 				"type": "poi",
 				"iconUrl": "imgs/attractions/bean.png",
                 "iconSize": [100, 103],
@@ -12,7 +12,7 @@
 			},
 			{
 				"id": "2",
-                "name": "John Hancock",
+                "name": "360 Now",
 				"type": "poi",
 				"iconUrl": "imgs/attractions/john_hancock.png",
                 "iconSize": [100, 103],
@@ -24,7 +24,7 @@
 			},
 			{
 				"id": "3",
-                "name": "Lincoln Park",
+                "name": "Lincoln Park Zoo",
 				"type": "poi",
 				"iconUrl": "imgs/attractions/lincoln_park.png",
                 "iconSize": [100, 103],
@@ -85,7 +85,7 @@
 			},
 			{
 				"id": "8",
-                "name": "Sears Tower",
+                "name": "Willis Tower",
 				"type": "poi",
 				"iconUrl": "imgs/attractions/sears_tower.png",
                 "iconSize": [100, 103],
