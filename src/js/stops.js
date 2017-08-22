@@ -4,7 +4,7 @@ let Stops = (function() {
 
   const transitDataPath = "data/Transits.json";
   const busStopIconURL = "imgs/transits/busStop3.png";
-  const busStop_22_IconURL = "imgs/transits/busStop_22.png";
+
   const trainStopIconURL = "imgs/transits/trainStop.png";
 
   let stopMarkers = [];
@@ -27,10 +27,12 @@ let Stops = (function() {
     });
   };
 
-  let getDetailedStopIcon = function(transitType) {
+  let getDetailedStopIcon = function(transitType, transitName) {
     let iconUrl;
-    if (transitType == "Bus") iconUrl = busStop_22_IconURL;
-    else if (transitType == "Train") iconUrl = trainStopIconURL;
+    const busDetailedStopIconURL = "imgs/transits/busStop_"+transitName+".png";
+    const trainDetailedStopIconURL = "imgs/transits/trainStop_"+transitName+".png";
+    if (transitType == "Bus") iconUrl = busDetailedStopIconURL;
+    else if (transitType == "Train") iconUrl = trainDetailedStopIconURL;
 
     return new stopIconWithOptions({
       iconUrl: iconUrl,
@@ -103,8 +105,7 @@ let Stops = (function() {
             .bindPopup("lat:" + stop.lat + "," + stop.lon);
           if (detailedMap)
             {
-              console.log(transit.name);
-              marker =  L.marker([stop.lat, stop.lon], { icon: getDetailedStopIcon(transit.type) })
+              marker =  L.marker([stop.lat, stop.lon], { icon: getDetailedStopIcon(transit.type, transit.name) })
               stopMarkersForDetailedMap.push(marker)
               marker.addTo(detailedMap).bindPopup("lat:" + stop.lat + "," + stop.lon);
             }
