@@ -5,6 +5,13 @@ let TimeControl = (function() {
 
     let init = function(App) {
         
+       initDayPicker();
+       initTimeSlider();
+    };
+
+
+    let initDayPicker = function() {
+        
         let radio_home = document.getElementById("daycontrol");
         let monday_button = makeRadioButton("daycontrol", "monday", "Mon");
         let tuesday_button = makeRadioButton("daycontrol", "tuesday", "Tue");
@@ -29,8 +36,9 @@ let TimeControl = (function() {
             App.update(timeInHours, currentDay); 
           
         });
-        
+    };
 
+    let initTimeSlider = function() {
         let slider = document.getElementById('timecontrol');
         noUiSlider.create(slider, {
             start: getTimeInMinutes(),

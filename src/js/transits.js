@@ -3,12 +3,8 @@ let Transit = (function() {
   const transitDataPath = "data/Transits.json";
   const busIconURL = "imgs/transits/bus.png";
   
-  let migrationLayer;
-  let migrationLayers= [];
-  let isMigrationLayerSet = false;
-
-  const migrationColors = {
-    bus: "#dd3497",
+  const transitColors = {
+    bus: "#676a6b",
     blue: "#3182bd",
     red: "#de2d26",
     orange: "#feb24c"
@@ -23,88 +19,27 @@ let Transit = (function() {
 
   let init = function(kioskID, map, transit, isDetailedView = undefined) {
 
-    if(migrationLayers)
-      _.forEach(migrationLayers, function(d,i) {
-        if(d.container.parentNode != null)
-          d.destroy();
-      })
-
     _.forEach(transit, function(d, i) {
-      // drawTransit(d, map);
-      drawMigration(d, map, isDetailedView);
+      drawCurvePath(d, map);
     });
   };
 
-  let drawTransit = function(transit, map) {
-    let migrationData = [];
-    let marker
-    $.ajax({
-      url: "src/php/transits.php",
-      type: "post",
-      dataType: "json",
-      data: { busID: transit.name },
-      success: function(data) {
-        _.forEach(data["bustime-response"].vehicle, function(d, i) {
-          if (arePointNear({ lat: d.lat, lng: d.lon }, { lat: 41.884122, lng: -87.6233 }, 1))
-          {
-            marker = L.marker([d.lat, d.lon], { icon: busIcon });
-            markers.push(marker);
-            marker.addTo(map).bindPopup(d.rt + " " + d.des + " " + d.hdg)
-          }  
-        });
+  let drawCurvePath = function(transit, map) {
+    let from = [];
+    let to = [];
+    let color;
+
+    if(transit.type =="Bus")
+      color = transitColors.bus;
+    else if(transit.type == "Train")
+      color = transitColors[transit.name];
+    _.forEach(transit.stops, function(d,i) {
+      if(transit.stops[i+1] != undefined) {
+        from = {lat: transit.stops[i].lat, lon: transit.stops[i].lon};
+        to = {lat: transit.stops[i + 1].lat, lon:  transit.stops[i + 1].lon};
+        Animation.drawCurvePath(map, from, to, color);
       }
     });
-  };
-
-  let drawMigration = function(transit, map, isDetailedView) {
-    let migrationData = [];
-  
-    let color = migrationColors.bus;
-
-    const transitName = transit.name;
-
-    let eta = undefined;
-
-    if (transit.type == "Train") {
-      color = migrationColors[transitName];
-    }
-
-    _.forEach(transit.stops, function(d, i) {
-      if (transit.stops[i + 1] != undefined) {
-          // if(!isDetailedView)
-          //   eta = getETA(transit.stops[i], transit.stops[i + 1], transitName);
-
-        migrationData.push({
-          from: [transit.stops[i].lon, transit.stops[i].lat],
-          to: [transit.stops[i + 1].lon, transit.stops[i + 1].lat],
-          labels: [null, null],
-          color: color,
-          name: transit.name,
-          eta: eta
-        });
-      }
-    });
-
-    setMigrationLayer(migrationData,map,transit);
-
-    if (isDetailedView) {
-      setInterval(function() {
-        migrationLayer.setData(migrationData);
-      }, 7000);
-    }
-  };
-
-  let setMigrationLayer = function(migrationData, map, transit) {
-     
-      migrationLayer = new L.migrationLayer({
-        map: map,
-        data: migrationData,
-        pulseRadius: 0,
-        text: transit.name
-      });
-      
-      migrationLayers.push(migrationLayer);
-      migrationLayer.addTo(map);
   };
 
   let getETA = function(origin, destintaion, transitName) {

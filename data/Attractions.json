@@ -1,15 +1,6 @@
 {
 	"attractions": [
-			{
-				"id": "1",
-                "name": "Cloud Gate",
-				"type": "poi",
-				"iconUrl": "imgs/attractions/bean.png",
-                "iconSize": [100, 103],
-                "coordinates": [41.882290, -87.623316],
-				"description":["Adult/ Youth/ Children - free "]
-				
-			},
+	
 			{
 				"id": "2",
                 "name": "360 Now",

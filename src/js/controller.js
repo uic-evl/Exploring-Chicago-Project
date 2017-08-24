@@ -49,7 +49,6 @@ let App = (function() {
     );
 
     Transit.update(Kiosks.getKioskID, map, Stops.transits());
-    // Transit.update(Kiosks.getKioskID, detailedMap, Stops.transits(), true);
 
     // let updateTransit = setInterval( function()
     // {
@@ -70,4 +69,4 @@ App.start();
 App.update();
 
 
-TimeControl.show(App);
+// TimeControl.show(App);
