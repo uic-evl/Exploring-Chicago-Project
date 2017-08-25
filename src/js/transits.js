@@ -37,7 +37,7 @@ let Transit = (function() {
       if(transit.stops[i+1] != undefined) {
         from = {lat: transit.stops[i].lat, lon: transit.stops[i].lon};
         to = {lat: transit.stops[i + 1].lat, lon:  transit.stops[i + 1].lon};
-        Animation.drawCurvePath(map, from, to, color);
+        Animation.drawCurvePath(map, from, to, color, transit);
       }
     });
   };
