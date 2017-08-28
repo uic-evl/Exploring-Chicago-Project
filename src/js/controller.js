@@ -66,7 +66,7 @@ let App = (function() {
 })();
 
 App.start();
-App.update();
+// App.update();
 
 
 TimeControl.show(App);

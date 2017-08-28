@@ -13,17 +13,20 @@ let Animation = (function() {
 
         let curvedPath = L.d3SvgOverlay(function(sel,proj){ 
 
+            let transitCircle;
+
             let pathPoints = getPath(proj, latlngs1, latlngs2, midpointLatLng);
 
             let path = drawPath(sel, pathPoints, color);
 
             let badge = drawBadge(sel, pathPoints, color);
 
-            let transitCircle = drawTransitCircle(sel, pathPoints, color, transit);
-
-            transitionAnim(transitCircle, path, transit.frequency);
-
-
+            _.times(transit.frequency, function(index) {
+                transitCircle = drawTransitCircle(sel, pathPoints, color, transit);
+                transitionAnim(transitCircle, path, transit.travelTime, index);
+              
+            });
+           
         });
 
         curvedPath.addTo(map);
@@ -89,14 +92,16 @@ let Animation = (function() {
                 .attr("fill", color);
     };
 
-    let transitionAnim = function(transitCircle, path, frequency) {
-        let delayBase = 2000;
-        let duration = delayBase * frequency;
+    let transitionAnim = function(transitCircle, path, travelTime, delayFactor) {
+        let delayBaseForTravel = 1000;
+        let delayBaseForTransit = 10000;
+        let duration = delayBaseForTravel * travelTime;
         transitCircle.transition()
                 .duration(duration)
+                .delay(delayBaseForTransit * delayFactor)
                 .attrTween("transform", translateAlong(path.node()))
                 .each("end", function(){
-                    transitionAnim(transitCircle, path, frequency);
+                    transitionAnim(transitCircle, path, travelTime, delayFactor);
                 });
     }
 
