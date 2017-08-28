@@ -69,4 +69,4 @@ App.start();
 App.update();
 
 
-// TimeControl.show(App);
+TimeControl.show(App);

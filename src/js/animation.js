@@ -23,6 +23,7 @@ let Animation = (function() {
 
             transitionAnim(transitCircle, path, transit.frequency);
 
+
         });
 
         curvedPath.addTo(map);
@@ -69,17 +70,21 @@ let Animation = (function() {
     let drawBadge = function(sel, pathPoints, color) {
         
         let midpointXY = pathPoints[1];
-        return sel.selectAll(".point")
+
+        let badge =  sel.selectAll(".point")
                 .data([midpointXY])
                 .enter().append("circle")
                 .attr("r", 15)
+                .attr("class", "transitBadge")
                 .attr("fill", color)
                 .attr("transform", function(d) { return "translate(" + d + ")"; });
+
     }
 
     let drawTransitCircle = function(sel, pathPoints, color, transit) {
             return sel.append("circle")
                 .attr("r", 6)
+                .attr("class", "transitCircle")
                 .attr("transform", "translate(" + pathPoints[0] + ")")
                 .attr("fill", color);
     };
@@ -105,10 +110,17 @@ let Animation = (function() {
         };
     }
 
+    let cleanUpAnim = function() {
+        $('.transitPath').remove();
+        $('.transitBadge').remove();
+        $('.transitCircle').remove();
+    };
+
 
     return {
         init: init,
-        drawCurvePath: drawCurveLine
+        drawCurvePath: drawCurveLine,
+        clear: cleanUpAnim
     }
 
 })();

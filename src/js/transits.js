@@ -18,7 +18,7 @@ let Transit = (function() {
   let markers = [];
 
   let init = function(kioskID, map, transit, isDetailedView = undefined) {
-
+    Animation.clear();
     _.forEach(transit, function(d, i) {
       drawCurvePath(d, map);
     });
@@ -28,7 +28,6 @@ let Transit = (function() {
     let from = [];
     let to = [];
     let color;
-
     if(transit.type =="Bus")
       color = transitColors.bus;
     else if(transit.type == "Train")
