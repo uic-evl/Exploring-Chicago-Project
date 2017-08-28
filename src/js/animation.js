@@ -23,7 +23,7 @@ let Animation = (function() {
 
             _.times(transit.frequency, function(index) {
                 transitCircle = drawTransitCircle(sel, pathPoints, color, transit);
-                transitionAnim(transitCircle, path, transit.travelTime, index);
+                transitionAnim(transitCircle, path, transit, index);
               
             });
            
@@ -92,16 +92,16 @@ let Animation = (function() {
                 .attr("fill", color);
     };
 
-    let transitionAnim = function(transitCircle, path, travelTime, delayFactor) {
+    let transitionAnim = function(transitCircle, path, transit, delayFactor) {
         let delayBaseForTravel = 1000;
-        let delayBaseForTransit = 10000;
-        let duration = delayBaseForTravel * travelTime;
+        let delayBaseForTransit = 5000;
+        let duration = delayBaseForTravel * transit.travelTime;
         transitCircle.transition()
                 .duration(duration)
-                .delay(delayBaseForTransit * delayFactor)
+                .delay(delayBaseForTransit *  delayFactor)
                 .attrTween("transform", translateAlong(path.node()))
                 .each("end", function(){
-                    transitionAnim(transitCircle, path, travelTime, delayFactor);
+                    transitionAnim(transitCircle, path, transit, delayFactor);
                 });
     }
 
