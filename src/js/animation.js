@@ -1,11 +1,13 @@
 let Animation = (function() {
   
+    let timers = [];
     let init = function() {
 
     };
 
     let drawCurveLine = function(map, startCoordinates, endCoordinates, color, transit) {
 
+       
         let latlngs1 = [startCoordinates.lat, startCoordinates.lon];
         let latlngs2 = [endCoordinates.lat, endCoordinates.lon];
         let midpointLatLng = getMidPointLatLng(latlngs1, latlngs2);
@@ -13,25 +15,37 @@ let Animation = (function() {
 
         let curvedPath = L.d3SvgOverlay(function(sel,proj){ 
 
-            let transitCircle;
+            let animList = [];
 
             let pathPoints = getPath(proj, latlngs1, latlngs2, midpointLatLng);
 
             let path = drawPath(sel, pathPoints, color);
 
-            let badge = drawBadge(sel, pathPoints, color);
+            let badge = drawBadge(sel, pathPoints, transit, color);
+            
+            let pathOptions = {sel: sel, path: path, pathPoints: pathPoints, color: color}    
 
-            _.times(transit.frequency, function(index) {
-                transitCircle = drawTransitCircle(sel, pathPoints, color, transit);
-                transitionAnim(transitCircle, path, transit, index);
-              
-            });
-           
+            drawTransits(transit, pathOptions);       
         });
 
         curvedPath.addTo(map);
 
     };
+
+
+    let drawTransits = function(transit, pathOptions) {
+        let transitCircle;
+        _.times(transit.frequency, function(index) {
+            timers.push(setTimeout(function(){
+                transitCircle = drawTransitCircle(pathOptions.sel, pathOptions.pathPoints, pathOptions.color, transit);
+                transitionAnim(transitCircle, pathOptions, transit, index);
+                if(index == transit.frequency-1)
+                    drawTransits(transit, pathOptions)
+            }, index * 1000 * transit.frequency));
+        });
+            
+    }
+    
 
     let getMidPointLatLng = function(latlngs1, latlngs2) {
 
@@ -70,7 +84,7 @@ let Animation = (function() {
                 .interpolate("cardinal"));
     }
 
-    let drawBadge = function(sel, pathPoints, color) {
+    let drawBadge = function(sel, pathPoints, transit, color) {
         
         let midpointXY = pathPoints[1];
 
@@ -82,6 +96,30 @@ let Animation = (function() {
                 .attr("fill", color)
                 .attr("transform", function(d) { return "translate(" + d + ")"; });
 
+                sel.selectAll(".point")
+                .data([midpointXY])
+                .enter()
+                .append("text")
+                .text(transit.name)
+                .attr("font-size", "12px")
+                .attr("font-weight", "bold")
+                .attr("fill", "white")
+                .attr("transform", function(d) {
+                    if(transit.name.length == 2) 
+                        d[0] -= 6;
+            
+                    else if(transit.name.length == 3) 
+                        d[0] -= 9;
+
+                    else if(transit.name.length == 4)
+                        d[0] -= 12;
+                    else
+                        d[0] -= 3
+
+                    d[1] +=4;
+
+                    return "translate(" + d + ")";
+                 });
     }
 
     let drawTransitCircle = function(sel, pathPoints, color, transit) {
@@ -92,16 +130,15 @@ let Animation = (function() {
                 .attr("fill", color);
     };
 
-    let transitionAnim = function(transitCircle, path, transit, delayFactor) {
+    let transitionAnim = function(transitCircle, pathOptions, transit, index) {
         let delayBaseForTravel = 1000;
-        let delayBaseForTransit = 5000;
         let duration = delayBaseForTravel * transit.travelTime;
         transitCircle.transition()
                 .duration(duration)
-                .delay(delayBaseForTransit *  delayFactor)
-                .attrTween("transform", translateAlong(path.node()))
+                .attrTween("transform", translateAlong(pathOptions.path.node()))
+                .ease("easeLinear")
                 .each("end", function(){
-                    transitionAnim(transitCircle, path, transit, delayFactor);
+                    transitCircle.remove();
                 });
     }
 
@@ -119,6 +156,10 @@ let Animation = (function() {
         $('.transitPath').remove();
         $('.transitBadge').remove();
         $('.transitCircle').remove();
+        _.forEach(timers, function(d,i) {
+            clearTimeout(d);
+        });
+        
     };
 
 
@@ -128,4 +169,4 @@ let Animation = (function() {
         clear: cleanUpAnim
     }
 
-})();
+})(); 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 63 

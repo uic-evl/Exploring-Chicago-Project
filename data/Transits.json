@@ -9,7 +9,7 @@
 				"stops":[{"lat": 41.884289988942, "lon": -87.623636841381},
 						  {"lat": 41.876974562066, "lon": -87.639575600624}],
 				"dir": "Eastbound",
-				"frequency": 3,
+				"frequency": 10,
 				"travelTime": 15
 			},
 			{
@@ -23,7 +23,7 @@
 						 {"lat": 41.866085342666, "lon": -87.612978816032},
 						 {"lat": 41.866161246066, "lon": -87.60786652565}],
 				"dir": "Southbound",
-				"frequency": 4,
+				"frequency": 7,
 				"travelTime": 20
 				
 			},
@@ -36,7 +36,7 @@
 				"stops":[{"lat": 41.883487234033, "lon":-87.627909064031},
 						{"lat": 41.894834296652, "lon": -87.624126076698}],
 				"dir": "Northbound",
-				"frequency": 4,
+				"frequency": 12,
 				"travelTime": 25
 			},
 			{
@@ -48,7 +48,7 @@
 				"stops":[{"lat": 41.883173318274, "lon": -87.628530263901},
 						{"lat": 41.921814109027, "lon": -87.63814330101}],
 				"dir": "Northbound",
-				"frequency": 3,
+				"frequency": 15,
 				"travelTime": 30
 			},
 			{
@@ -60,7 +60,7 @@
 				"stops":[{"lat":41.884686969581, "lon": -87.624351382256},
 						{"lat": 41.892677974773, "lon": -87.610130310059}],
 				"dir": "Eastbound",
-				"frequency": 5,
+				"frequency": 10,
 				"travelTime": 18 
 			},
 			{ 
@@ -71,7 +71,7 @@
                 "iconSize": [60, 60],
 				"stops":[{"lat":41.883374, "lon": -87.629757},
 						{"lat": 41.927761, "lon": -87.646959}],
-				"frequency": 15,
+				"frequency": 5,
 				"travelTime": 60
 			}
 

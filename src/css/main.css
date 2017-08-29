@@ -145,7 +145,11 @@ body {
 .transitPath {
   fill: none;
   stroke-width: 2px;
+  z-index: 99;
 }
 
+.transitBadge {
+  z-index:100;
+}
 
 
