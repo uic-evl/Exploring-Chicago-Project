@@ -1,14 +1,62 @@
 let TimeControl = (function() {
 
     let timeInHours;
+    let timeInMinutes;
     let currentDay;
 
     let init = function(App) {
         
        initDayPicker();
        initTimeSlider();
+       initHourButton();
     };
 
+    let initHourButton = function() {
+        
+        let nextHourControl = document.getElementById("nexthourcontrol");
+
+        let prevHourButton = document.createElement("input");
+        prevHourButton.type = "button";
+        prevHourButton.value = "Prev Hour";
+        prevHourButton.id = "prevHourButton";
+        nextHourControl.appendChild(prevHourButton);
+
+        let nextHourButton = document.createElement("input");
+        nextHourButton.type = "button";
+        nextHourButton.value = "Next Hour";
+        nextHourButton.id = "nextHourButton";
+        nextHourControl.appendChild(nextHourButton);
+
+       
+        
+
+        
+        $('input[type=button][id=nextHourButton]').on('click', function() {
+         timeInMinutes = parseFloat(timeInMinutes[0]);
+        
+            if(timeInMinutes + 60 > 1440) 
+                timeInMinutes = 1380;
+
+            timeInMinutes += 60;
+
+            updateSlider();
+        });
+
+        $('input[type=button][id=prevHourButton]').on('click', function() {
+            timeInMinutes = parseFloat(timeInMinutes[0]);
+        
+            if(timeInMinutes - 60 < 0) 
+                timeInMinutes = 60;
+
+            timeInMinutes -= 60;
+            
+            updateSlider();
+        });
+
+        
+
+       
+    };
 
     let initDayPicker = function() {
         
@@ -65,7 +113,8 @@ let TimeControl = (function() {
 
         slider.noUiSlider.on('update', function( values, handle ){
        
-            timeInHours = convertValuesToTime(values, handle);
+            timeInMinutes = values;
+            timeInHours = convertValuesToTime(values);
             timeInHours = timeInHours[0];
             App.update(timeInHours, currentDay);
         });
@@ -89,8 +138,7 @@ let TimeControl = (function() {
         return label;
     };
 
-    let convertValuesToTime = function(values, handle) {
-
+    let convertValuesToTime = function(values) {
         values = values
         .map(value => Number(value) % 1440)
         .map(value => convertMinutesToHoursAndMinutes(value));
@@ -114,6 +162,14 @@ let TimeControl = (function() {
         let a = time.split(':');
         let minutes = (+a[0]) * 60 + (+a[1]);
         return parseInt(minutes);
+    }
+
+    let updateSlider = function() {
+         let slider = document.getElementById('timecontrol');
+        slider.noUiSlider.set(timeInMinutes)
+        timeInHours = convertValuesToTime(timeInMinutes);
+        timeInHours = timeInHours[0];
+        App.update(timeInHours, currentDay); 
     }
 
     return {

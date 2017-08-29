@@ -89,6 +89,14 @@ body {
   bottom: 75px;
 }
 
+#nexthourcontrol {
+  width: 20%;
+  margin-left: 10%;
+  position:fixed;
+  bottom: 75px;
+  color: black;
+}
+
 .sidebarImg {
   width: 100%;
 }

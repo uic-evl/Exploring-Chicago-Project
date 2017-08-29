@@ -72,8 +72,6 @@ let Stops = (function() {
           if (_.includes(transitList, data.name)) {
             _.forEach(data.stops, function(stop, j) {
               _.forEach(transitStopFilterList, function(d, k) {
-                if(stop)
-                  console.log(stop.lat,stop.lon);
                 if (stop != undefined && stop.lat === d.lat && stop.lon === d.lon)
                   data.stops.splice(j, 1);
               });

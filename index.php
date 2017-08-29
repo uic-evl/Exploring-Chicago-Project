@@ -66,6 +66,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
             <div id='listings' class='listings'></div>
             <div class="sliders" id="daycontrol"></div>
             <div class="sliders" id="timecontrol"></div>
+            <div class="sliders" id="nexthourcontrol"></div>
         </div>
 
         <div id="scripts">
