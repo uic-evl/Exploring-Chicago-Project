@@ -5,11 +5,10 @@ let Attractions = (function() {
   let currentTime;
   let currentDay;
   let markers = new Array();
+  let sidebarAttractions = new Set();
 
   let init = function(map, time=undefined, day=undefined) {
-
     cleanUpAttractions(map);
-
     transitList = new Set();
     transitStopFilterList = new Set();
     if(!time)
@@ -50,10 +49,12 @@ let Attractions = (function() {
     });
   };
 
+
   let cleanUpAttractions = function(map) {
     _.forEach(markers, function(d,i) {
       map.removeLayer(d);
     });
+    sidebarAttractions.clear();
     $('#listings').empty();
   }
 
@@ -144,60 +145,65 @@ let Attractions = (function() {
   };
 
   let populateSidebar = function(attraction, index) {
-    const listings = document.getElementById("listings");
-    const listing = listings.appendChild(document.createElement("div"));
-    listing.className = "item";
-    listing.id = "listing-" + index;
+    if(!(_.includes(Array.from(sidebarAttractions),attraction.id)))
+    {
+      sidebarAttractions.add(attraction.id);
+      const listings = document.getElementById("listings");
+      const listing = listings.appendChild(document.createElement("div"));
+      listing.className = "item";
+      listing.id = "listing-" + index;
 
-    if (attraction.hasOwnProperty("sidebarUrl")) {
-      listing.className = "item_img";
+      if (attraction.hasOwnProperty("sidebarUrl")) {
+        listing.className = "item_img";
 
-      const sidebarImg = listing.appendChild(document.createElement("img"));
-      sidebarImg.className = "sidebarImg";
-      sidebarImg.dataPosition = index;
-      sidebarImg.src = attraction.sidebarUrl;
-    } else {
-      const listing1 = listing.appendChild(document.createElement("div"));
-      listing1.className = "sub-item-image";
+        const sidebarImg = listing.appendChild(document.createElement("img"));
+        sidebarImg.className = "sidebarImg";
+        sidebarImg.dataPosition = index;
+        sidebarImg.src = attraction.sidebarUrl;
+      } else {
+        const listing1 = listing.appendChild(document.createElement("div"));
+        listing1.className = "sub-item-image";
 
-      const icon = listing1.appendChild(document.createElement("img"));
-      icon.className = "icon";
-      icon.style =
-        "width:" +
-        attraction.iconSize[0] +
-        "px;height:" +
-        attraction.iconSize[1] +
-        "px;";
-      icon.dataPosition = index;
-      icon.src = attraction.iconUrl;
+        const icon = listing1.appendChild(document.createElement("img"));
+        icon.className = "icon";
+        icon.style =
+          "width:" +
+          attraction.iconSize[0] +
+          "px;height:" +
+          attraction.iconSize[1] +
+          "px;";
+        icon.dataPosition = index;
+        icon.src = attraction.iconUrl;
 
-      const listing2 = listing.appendChild(document.createElement("div"));
-      listing2.className = "sub-item";
+        const listing2 = listing.appendChild(document.createElement("div"));
+        listing2.className = "sub-item";
 
-      const title = listing2.appendChild(document.createElement("h3"));
-      title.className = "title";
-      title.dataPosition = index;
-      title.innerHTML = attraction.name;
+        const title = listing2.appendChild(document.createElement("h3"));
+        title.className = "title";
+        title.dataPosition = index;
+        title.innerHTML = attraction.name;
 
-      const hours = listing2.appendChild(document.createElement("span"));
-      hours.className = "hours";
-      hours.dataPosition = index;
-      if (attraction.hasOwnProperty("hours"))
-        hours.innerHTML =
-          "Hours: " +
-          moment(attraction.hours.start_time, "HH:mm").format("h a") +
-          " - " +
-          moment(attraction.hours.end_time, "HH:mm").format("h a") +
-          "<br>";
-      else
-        hours.innerHTML = "Open All Hours";
+        const hours = listing2.appendChild(document.createElement("span"));
+        hours.className = "hours";
+        hours.dataPosition = index;
+        if (attraction.hasOwnProperty("hours"))
+          hours.innerHTML =
+            "Hours: " +
+            moment(attraction.hours.start_time, "HH:mm").format("h a") +
+            " - " +
+            moment(attraction.hours.end_time, "HH:mm").format("h a") +
+            "<br>";
+        else
+          hours.innerHTML = "Open All Hours";
 
-      const description = listing2.appendChild(document.createElement("span"));
-      description.className = "description";
-      description.dataPosition = index;
-      if (attraction.hasOwnProperty("description"))
-        description.innerHTML = attraction.description;
-    }
+        const description = listing2.appendChild(document.createElement("span"));
+        description.className = "description";
+        description.dataPosition = index;
+        if (attraction.hasOwnProperty("description"))
+          description.innerHTML = attraction.description;
+      }
+    }  
+
   };
 
   return {

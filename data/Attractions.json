@@ -105,7 +105,7 @@
                 "name": "Fireworks",
 				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
-                "iconSize": [50, 50],
+                "iconSize": [100, 103],
                 "coordinates":[41.891884, -87.598823],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"22:00", "end_time":"23:00"},
@@ -115,11 +115,11 @@
 				"stops": [{"lat": 41.892677974773, "lon": -87.610130310059}]
 			},
 			{
-				"id": "11",
+				"id": "10",
                 "name": "Fireworks",
 				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
-                "iconSize": [50, 50],
+                "iconSize": [100, 103],
                 "coordinates":[41.885166, -87.613531],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"22:00", "end_time":"23:00"},
@@ -127,11 +127,11 @@
 				"date": {"start_date":"05/27/2017", "end_date": "09/02/2017"}
 			},
 			{
-				"id": "12",
+				"id": "10",
                 "name": "Fireworks",
 				"type": "event",
 				"iconUrl": "imgs/attractions/firework.png",
-                "iconSize": [50, 50],
+                "iconSize": [100, 103],
                 "coordinates":[41.879351, -87.617308],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"22:00", "end_time":"23:00"},

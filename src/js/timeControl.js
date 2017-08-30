@@ -26,10 +26,6 @@ let TimeControl = (function() {
         nextHourButton.value = "Next Hour";
         nextHourButton.id = "nextHourButton";
         nextHourControl.appendChild(nextHourButton);
-
-       
-        
-
         
         $('input[type=button][id=nextHourButton]').on('click', function() {
          timeInMinutes = parseFloat(timeInMinutes[0]);
@@ -52,9 +48,6 @@ let TimeControl = (function() {
             
             updateSlider();
         });
-
-        
-
        
     };
 
@@ -175,5 +168,4 @@ let TimeControl = (function() {
     return {
         show: init
     }
-
 })();
