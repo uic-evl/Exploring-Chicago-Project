@@ -2,15 +2,15 @@
 	"Transits": [
 			{
 				"id": 1,
-                "name": "60",
-				"type": "Bus",
-				"iconUrl": "imgs/transits/bus.png",
+                "name": "pink",
+				"type": "Train",
+				"iconUrl": "imgs/transits/Train.png",
                 "iconSize": [60, 60],
-				"stops":[{"lat": 41.884289988942, "lon": -87.623636841381},
-						  {"lat": 41.876974562066, "lon": -87.639575600624}],
+				"stops":[{"lat": 41.883233, "lon": -87.626205},
+						  {"lat": 41.878730, "lon": -87.633721}],
 				"dir": "Eastbound",
-				"frequency": 10,
-				"travelTime": 15
+				"frequency": 12,
+				"travelTime": 16
 			},
 			{
 				"id": 2,
@@ -25,7 +25,6 @@
 				"dir": "Southbound",
 				"frequency": 7,
 				"travelTime": 20
-				
 			},
 			{
 				"id": 3,

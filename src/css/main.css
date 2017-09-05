@@ -27,7 +27,7 @@ body {
   z-index: 0;
   position: absolute;
   height: 20%;
-  width: 67%;
+  width: 66.81%;
   bottom:0;
   left: 0;
 }
@@ -37,7 +37,7 @@ body {
   z-index: 2;
   position: absolute;
   bottom: 16.3%;
-  left: 0;
+  left: 0.5%;
   float: right;
   padding: 15px;
   border: 1px solid black;
@@ -160,4 +160,19 @@ body {
   z-index:100;
 }
 
+#infobar {
+  font-size: 30px;
+  z-index:  2;
+  position: relative;
+  top: 0;
+  width:100%;
+  height: 3%;
+  background: #000;
+  
+}
+
+#infobarTitle {
+  margin-left: 1%;
+  margin-right: 25%
+}
 

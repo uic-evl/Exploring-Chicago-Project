@@ -20,9 +20,9 @@ let Animation = (function() {
             let pathPoints = getPath(proj, latlngs1, latlngs2, midpointLatLng);
 
             let path = drawPath(sel, pathPoints, color);
-
-            let badge = drawBadge(sel, pathPoints, transit, color);
             
+            let badge =  drawBadge(sel, pathPoints, transit, color);
+
             let pathOptions = {sel: sel, path: path, pathPoints: pathPoints, color: color}    
 
             drawTransits(transit, pathOptions);       
@@ -35,9 +35,11 @@ let Animation = (function() {
 
     let drawTransits = function(transit, pathOptions) {
         let transitCircle;
+
         _.times(transit.frequency, function(index) {
             timers.push(setTimeout(function(){
                 transitCircle = drawTransitCircle(pathOptions.sel, pathOptions.pathPoints, pathOptions.color, transit);
+                
                 transitionAnim(transitCircle, pathOptions, transit, index);
                 if(index == transit.frequency-1)
                     drawTransits(transit, pathOptions)
@@ -90,8 +92,11 @@ let Animation = (function() {
 
         let badge =  sel.selectAll(".point")
                 .data([midpointXY])
-                .enter().append("circle")
-                .attr("r", 15)
+                .enter().append("rect")
+                .attr("x", -20)
+                .attr("y", -10)
+                .attr("width", 40)
+                .attr("height", 20)
                 .attr("class", "transitBadge")
                 .attr("fill", color)
                 .attr("transform", function(d) { return "translate(" + d + ")"; });
@@ -104,12 +109,13 @@ let Animation = (function() {
                 .attr("font-size", "12px")
                 .attr("font-weight", "bold")
                 .attr("fill", "white")
+                .attr("class", "transitBadge")
                 .attr("transform", function(d) {
                     if(transit.name.length == 2) 
-                        d[0] -= 6;
+                        d[0] -= 7;
             
                     else if(transit.name.length == 3) 
-                        d[0] -= 9;
+                        d[0] -= 10;
 
                     else if(transit.name.length == 4)
                         d[0] -= 12;
@@ -120,6 +126,8 @@ let Animation = (function() {
 
                     return "translate(" + d + ")";
                  });
+
+        return badge;
     }
 
     let drawTransitCircle = function(sel, pathPoints, color, transit) {

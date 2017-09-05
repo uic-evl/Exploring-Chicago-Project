@@ -7,7 +7,8 @@ let Transit = (function() {
     bus: "#676a6b",
     blue: "#3182bd",
     red: "#de2d26",
-    orange: "#feb24c"
+    orange: "#feb24c",
+    pink: '#e78ac3'
   };
 
   let busIcon = L.icon({

@@ -10,7 +10,7 @@
                 "coordinates":[41.898770, -87.622917],
 				"hours":{"start_time": "09:00", "end_time" : "22:00"},
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/ free "],
-				"cta": ["146", "147"],
+				"cta": ["146"],
 				"stops": [{"lat": 41.894834296652, "lon": -87.624126076698}]
 			},
 			{
@@ -34,7 +34,7 @@
 				"description":["Adult/ Youth/ Children - $19/ $19/  free "],
 				"hours": {"start_time": "10:30", "end_time":"17:00"},
 				"price": ["free"],
-				"cta": ["147"]
+				"cta": []
 			},
 			{
 				"id": "5",
@@ -46,7 +46,7 @@
 				"description":["Adult/ Children - $12.00/ $8.00  free "],
 				"hours": {"start_time": "09:30", "end_time": "18:00"},
 				"price": ["free"],
-				"cta": ["146", "147"],
+				"cta": ["146"],
 				"stops": [{"lat": 41.866161246066, "lon": -87.60786652565}]
 			},
 			{
@@ -59,7 +59,7 @@
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"09:00", "end_time": "18:00"},
 				"price": ["free"],
-				"cta": ["146", "147"],
+				"cta": ["146"],
 				"stops": [{"lat": 41.866085342666, "lon": -87.612978816032}]
 			},
 			{
@@ -71,7 +71,7 @@
                 "coordinates":[41.866261, -87.616981],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"09:00", "end_time":"17:00"},
-				"cta": ["146", "147"],
+				"cta": ["146"],
 				"stops": [{"lat": 41.864782986081, "lon": -87.615827322006}]
 			},
 			{
@@ -84,8 +84,8 @@
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
 				"hours": {"start_time":"10:00", "end_time":"20:00"},
 				"price": ["free"],
-				"cta": ["60"],
-				"stops": [{"lat": 41.876974562066, "lon": -87.639575600624}]
+				"cta": ["pink"],
+				"stops": [{"lat": 	41.878730, "lon":-87.633721}]
 			},
 			{
 				"id": "9",

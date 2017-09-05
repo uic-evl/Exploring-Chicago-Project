@@ -9,6 +9,7 @@ let Attractions = (function() {
 
   let init = function(map, time=undefined, day=undefined) {
     cleanUpAttractions(map);
+  
     transitList = new Set();
     transitStopFilterList = new Set();
     if(!time)
@@ -20,6 +21,8 @@ let Attractions = (function() {
       currentDay = moment().format("dddd").toLowerCase();
     else
       currentDay = day;
+
+    populateInfoBar(time);
     
     $.ajax({
       type: "GET",
@@ -56,6 +59,7 @@ let Attractions = (function() {
     });
     sidebarAttractions.clear();
     $('#listings').empty();
+    $('#infobar').empty();
   }
 
   let getTransitList = function() {
@@ -143,6 +147,25 @@ let Attractions = (function() {
   let isOpenYearRound = function(attraction) {
     return !attraction.hasOwnProperty("days");
   };
+
+  let populateInfoBar = function(time) {
+    let timeToDisplay;
+
+    if(time)
+      timeToDisplay = time;
+    else 
+      timeToDisplay = currentTime;
+
+    const infoBar = document.getElementById("infobar");
+    const infoBarTitle =  document.createElement("span");
+    infoBarTitle.id = "infobarTitle";
+    const infoBarTime = document.createElement("span");
+
+    infoBarTitle.innerHTML = "Cloud Gate";
+    infoBarTime.innerHTML = moment(timeToDisplay, "h:mm a").format("h:mm a");
+    infoBar.appendChild(infoBarTitle);
+    infoBar.appendChild(infoBarTime);
+  }
 
   let populateSidebar = function(attraction, index) {
     if(!(_.includes(Array.from(sidebarAttractions),attraction.id)))

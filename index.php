@@ -48,6 +48,8 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
     </head>
 
     <body>
+        <div id ="infobar">
+        </div>
         <div id ="overviewMapContainer">
              <!--<p>Overview</p>-->
             
