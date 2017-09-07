@@ -34,7 +34,7 @@ let App = (function() {
     return detailedMap;
   }
 
-  let update = function(time=undefined, day=undefined) {
+  let update = function(time=undefined, day=undefined, isTimelapse=false) {
     let map = getMap();
     let detailedMap = getDetailedMap();
     
@@ -48,7 +48,7 @@ let App = (function() {
       detailedMap
     );
 
-    Transit.update(Kiosks.getKioskID, map, Stops.transits());
+    Transit.update(Kiosks.getKioskID, map, Stops.transits(), isTimelapse);
 
     // let updateTransit = setInterval( function()
     // {

@@ -162,7 +162,7 @@ let Attractions = (function() {
     const infoBarTime = document.createElement("span");
 
     infoBarTitle.innerHTML = "Cloud Gate";
-    infoBarTime.innerHTML = moment(timeToDisplay, "h:mm a").format("h:mm a");
+    infoBarTime.innerHTML = moment().format("MM/DD/YYYY dddd") + " " + moment(timeToDisplay, "h:mm a").format("h:mm a");
     infoBar.appendChild(infoBarTitle);
     infoBar.appendChild(infoBarTime);
   }

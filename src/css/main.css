@@ -105,6 +105,15 @@ body {
   color: black;
 }
 
+
+#timelapse {
+  width: 7%;
+  margin-left: 14%;
+  position: fixed;
+  bottom: 200px;
+  color: black;
+}
+
 .sidebarImg {
   width: 100%;
 }
@@ -181,6 +190,6 @@ body {
 
 #infobarTitle {
   margin-left: 1%;
-  margin-right: 25%
+  margin-right: 15%
 }
 

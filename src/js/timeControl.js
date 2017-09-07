@@ -3,10 +3,12 @@ let TimeControl = (function() {
     let timeInHours;
     let timeInMinutes;
     let currentDay;
+    let isTimelapse;
 
     let init = function(App) {
         
        initToggleButton();
+       initTimelapseButton();
        initDayPicker();
        initTimeSlider();
        initHourButton();
@@ -31,7 +33,38 @@ let TimeControl = (function() {
                  toggleButton.value = "Control Panel Show";
             
             toggleControlPanel();
+        });
 
+    }
+
+
+    let initTimelapseButton = function() {
+        isTimelapse = false;
+
+        let timelapse = document.getElementById('timelapse');
+
+        let timelapseButton = document.createElement("input");
+
+        timelapseButton.type = "button";
+        timelapseButton.id = "timelapseButton"
+        timelapseButton.value = "Timelapse";
+        timelapse.appendChild(timelapseButton);
+
+        $('input[type=button][id=timelapseButton]').on('click', function() {
+           let tempTimeInMinutes = timeInMinutes;
+           let timeplapseLoop;
+           isTimelapse = true;
+           timeplapseLoop = setInterval(function() {
+            $('#nextHourButton').trigger('click');
+            if(timeInMinutes >= 1440)
+            {
+                clearInterval(timeplapseLoop);
+                timeInMinutes = tempTimeInMinutes;
+                isTimelapse = false;
+                updateSlider();
+            }
+                
+           }, 2000);          
         });
 
     }
@@ -39,6 +72,7 @@ let TimeControl = (function() {
     let toggleControlPanel = function() {
 
         $('#daycontrol').toggle();
+        $('#timelapse').toggle();
         $('#timecontrol').toggle();
         $('#nexthourcontrol').toggle();
     }
@@ -106,7 +140,7 @@ let TimeControl = (function() {
 
         $('input[type=radio][name=daycontrol]').on('change', function() {
             currentDay = $(this).val();
-            App.update(timeInHours, currentDay); 
+            App.update(timeInHours, currentDay, isTimelapse); 
           
         });
     };
@@ -141,7 +175,7 @@ let TimeControl = (function() {
             timeInMinutes = values;
             timeInHours = convertValuesToTime(values);
             timeInHours = timeInHours[0];
-            App.update(timeInHours, currentDay);
+            App.update(timeInHours, currentDay, isTimelapse);
         });
     };
 
@@ -194,7 +228,7 @@ let TimeControl = (function() {
         slider.noUiSlider.set(timeInMinutes)
         timeInHours = convertValuesToTime(timeInMinutes);
         timeInHours = timeInHours[0];
-        App.update(timeInHours, currentDay); 
+        App.update(timeInHours, currentDay, isTimelapse); 
     }
 
     return {

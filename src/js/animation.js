@@ -5,9 +5,8 @@ let Animation = (function() {
 
     };
 
-    let drawCurveLine = function(map, startCoordinates, endCoordinates, color, transit) {
-
-       
+    let drawCurveLine = function(map, startCoordinates, endCoordinates, color, transit, isTimelapse) {
+        
         let latlngs1 = [startCoordinates.lat, startCoordinates.lon];
         let latlngs2 = [endCoordinates.lat, endCoordinates.lon];
         let midpointLatLng = getMidPointLatLng(latlngs1, latlngs2);
@@ -25,7 +24,8 @@ let Animation = (function() {
 
             let pathOptions = {sel: sel, path: path, pathPoints: pathPoints, color: color}    
 
-            drawTransits(transit, pathOptions);       
+            if(!isTimelapse)
+                drawTransits(transit, pathOptions);       
         });
 
         curvedPath.addTo(map);
