@@ -22,15 +22,15 @@ let TimeControl = (function() {
 
         toggleButton.type = "button";
         toggleButton.id = "controlPanelToggleButton"
-        toggleButton.value = "Control Panel Show";
+        toggleButton.value = "Show Control Panel";
         controlPanel.appendChild(toggleButton);
 
         $('input[type=button][id=controlPanelToggleButton]').on('click', function() {
             isSelected = !isSelected;
             if(isSelected)
-                toggleButton.value = "Control Panel Hide";
+                toggleButton.value = "Hide Control Panel";
             else  
-                 toggleButton.value = "Control Panel Show";
+                 toggleButton.value = "Show Control Panel";
             
             toggleControlPanel();
         });
@@ -64,7 +64,7 @@ let TimeControl = (function() {
                 updateSlider();
             }
                 
-           }, 2000);          
+           }, 1500);          
         });
 
     }
