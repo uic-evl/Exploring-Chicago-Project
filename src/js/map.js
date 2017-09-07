@@ -34,7 +34,7 @@ let Map = (function() {
       fill: false,
       stroke: true,
       color: "#756bb1",
-      weight: 8
+      weight: 10
     });
 
     if (attributes.isDetailedView) {
@@ -51,6 +51,13 @@ let Map = (function() {
         color: "#756bb1",
         weight: 1
       }).addTo(mainMap);
+
+          plotWalkingDistance(
+      map,
+      attributes.latlng,
+      attributes.walkingDistance,
+      attributes.walkingDistanceLineOffset
+    );
     }
 
     map.zoomControl.remove();
@@ -59,12 +66,7 @@ let Map = (function() {
     map.doubleClickZoom.disable();
     map.scrollWheelZoom.disable();
 
-    plotWalkingDistance(
-      map,
-      attributes.latlng,
-      attributes.walkingDistance,
-      attributes.walkingDistanceLineOffset
-    );
+
     walkingDistanceLine.addTo(map);
 
     L.tileLayer(tileURL, {
@@ -112,6 +114,19 @@ let Map = (function() {
     });
 
     line.addTo(map);
+    console.log(line);
+
+    let textOverlay = L.d3SvgOverlay(function(sel,proj){ 
+      sel.append("text")
+        .text("10 min Walk")
+        .attr("font-size", "12px")
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .attr("class", "walkLengthText")
+        .attr("transform", function() { return "translate("+(proj.latLngToLayerPoint(startPoint).x +50) + ","+(proj.latLngToLayerPoint(startPoint).y-5)+")"; });
+    });
+
+     textOverlay.addTo(map);
   };
 
   let toDegrees = function(angle) {
