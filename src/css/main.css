@@ -97,6 +97,14 @@ body {
   color: black;
 }
 
+#controlpanel {
+  width: 7%;
+  margin-left: 10%;
+  position: fixed;
+  bottom: 308px;
+  color: black;
+}
+
 .sidebarImg {
   width: 100%;
 }

@@ -6,10 +6,42 @@ let TimeControl = (function() {
 
     let init = function(App) {
         
+       initToggleButton();
        initDayPicker();
        initTimeSlider();
        initHourButton();
+       toggleControlPanel();
     };
+
+    let initToggleButton = function() {
+        let controlPanel = document.getElementById('controlpanel');
+        let isSelected = false;
+        let toggleButton = document.createElement("input");
+
+        toggleButton.type = "button";
+        toggleButton.id = "controlPanelToggleButton"
+        toggleButton.value = "Control Panel Show";
+        controlPanel.appendChild(toggleButton);
+
+        $('input[type=button][id=controlPanelToggleButton]').on('click', function() {
+            isSelected = !isSelected;
+            if(isSelected)
+                toggleButton.value = "Control Panel Hide";
+            else  
+                 toggleButton.value = "Control Panel Show";
+            
+            toggleControlPanel();
+
+        });
+
+    }
+
+    let toggleControlPanel = function() {
+
+        $('#daycontrol').toggle();
+        $('#timecontrol').toggle();
+        $('#nexthourcontrol').toggle();
+    }
 
     let initHourButton = function() {
         
