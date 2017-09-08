@@ -54,13 +54,17 @@ let TimeControl = (function() {
            let tempTimeInMinutes = timeInMinutes;
            let timeplapseLoop;
            isTimelapse = true;
+           $('#detailedMapContainer').hide();
            timeplapseLoop = setInterval(function() {
             $('#nextHourButton').trigger('click');
+            $('body').css("background-color","#2b8cbe");
             if(timeInMinutes >= 1440)
             {
                 clearInterval(timeplapseLoop);
                 timeInMinutes = tempTimeInMinutes;
                 isTimelapse = false;
+                $('#detailedMapContainer').show();
+                $('body').css("background-color","#404040");
                 updateSlider();
             }
                 
