@@ -75,7 +75,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
 
         <div id="scripts">
             <script src='src/js/map.js'></script>
-            <<script src="src/js/animation.js"></script>
+            <script src="src/js/animation.js"></script>
             <script src='src/js/attractions.js'></script>
             <script src='src/js/transits.js'></script>
             <script src='src/js/kiosks.js'></script>

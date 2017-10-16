@@ -37,7 +37,6 @@ let TimeControl = (function() {
 
     }
 
-
     let initTimelapseButton = function() {
         isTimelapse = false;
 
@@ -70,7 +69,6 @@ let TimeControl = (function() {
                 
            }, 1500);          
         });
-
     }
 
     let toggleControlPanel = function() {
