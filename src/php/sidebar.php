@@ -76,7 +76,8 @@ function updateKiosk() {
     }
     $jsonData = json_encode($tempArray);
     file_put_contents('../../data/results.json', $jsonData);
-    file_put_contents('../../imgs/kiosks/'.$id.'.png', base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $image)));
+    if($image!="")
+        file_put_contents('../../imgs/kiosks/'.$id.'.png', base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $image)));
 
     echo json_encode($id);
 }

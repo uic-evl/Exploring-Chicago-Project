@@ -52,7 +52,6 @@ let Attractions = (function() {
     });
   };
 
-
   let cleanUpAttractions = function(map) {
     _.forEach(markers, function(d,i) {
       map.removeLayer(d);

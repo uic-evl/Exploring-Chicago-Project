@@ -26,7 +26,9 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         <script src="src/plugins/js/leaflet.migrationLayer.js"></script>
         <script src="src/plugins/js/leaflet.curve.js"></script>
         <script src="src/plugins/js/nouislider.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
         <script src="src/plugins/js/wNumb.js"></script>
+ 
         <!--<script src="src/plugins/js/leaflet-routing-machine.js"></script>-->
 
       
@@ -41,6 +43,7 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
                crossorigin=""/>
 
         <link rel="stylesheet" href="src/plugins/css/L.Icon.Pulse.css" />  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         <!--<link rel="stylesheet" href="src/plugins/css/leaflet-routing-machine.css" />      -->
         <link rel="stylesheet" href="src/plugins/css/nouislider.min.css" />
         <link href='src/css/control.css' rel='stylesheet' />
