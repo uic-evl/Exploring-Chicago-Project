@@ -39,7 +39,7 @@ let App = (function() {
     let detailedMap = getDetailedMap();
     
     // Hoposn.show(map);
-    Attractions.update(map, time, day);
+    Attractions.update(map, time, day, isTimelapse);
     Stops.update(
       Kiosks.getKioskID,
       Attractions.transitList(),

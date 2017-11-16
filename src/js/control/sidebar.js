@@ -26,6 +26,8 @@ let Sidebar = (function() {
     let anchorPolylineMarkerList = [];
     let fixedAttracionUrl = "imgs/kiosks/circle.ico"
     let fixedAttracionPoint;
+    let attractionImageData;
+    let attractionEndLat, attractionEndLon;
 
     uniqueNumber.previous = 0;
   
@@ -34,13 +36,18 @@ let Sidebar = (function() {
 // Initializing Map
     let init = function(controlMap) {
         map = controlMap;
+        mainContainer = document.getElementById('startOptionsContainer');
+        initControlNavBar();
         initUI();
+       
     }
 
 
 // Initializing and loading data from result.json
     let initUI = function() {
-        mainContainer = document.getElementById('startOptionsContainer');
+      
+        clearSidebar();
+        clearMap();
         let addKioskName = "New Kiosk";
         let addKioskId ="new";
         let addKioskIconUrl = "imgs/kiosks/add.png";
@@ -51,9 +58,9 @@ let Sidebar = (function() {
         mainContainer.appendChild(container);
 
         row = document.createElement("div");
+        row.id= "mainRow";
         row.className = "row text-center text-lg-left";
         container.appendChild(row);
-
 
         addIcon(addKioskName,addKioskId, addKioskIconUrl, addKioskIconSize);
         
@@ -63,10 +70,12 @@ let Sidebar = (function() {
                 console.log(data);
                 _.forEach(data, function(d, i) {
                     addIcon(d.name, i, d.iconUrl, d.iconSize);
+                    mainKioskPoint = L.icon({iconUrl: d.iconUrl, iconSize: [30,30] });
+                    kioskMainMarker = new L.marker([ d.lat,  d.lon], { draggable: true, icon: mainKioskPoint }).addTo(map);
+                    attractionMarkerList.push(kioskMainMarker);
                 });
             }
-                
-
+            
             $(".kioskIconDiv").hover(function(){
                 $(this).css("opacity", 1.0);
             }, function(){
@@ -90,6 +99,41 @@ let Sidebar = (function() {
                     
                     
             })
+        });
+    }
+
+
+    let initControlNavBar = function() {
+        mainMenuBar = document.createElement("div");
+        mainMenuBar.className = "menuBar";
+        mainContainer.appendChild(mainMenuBar);
+
+        mainNavTextKiosk = document.createElement('a');
+        mainNavTextKiosk.className = "menuNavLinks";
+        mainNavTextKiosk.id = "addMainKioskNav";
+        mainNavTextKiosk.href="#";
+        mainNavTextKiosk.innerHTML = "Add Kiosk";
+        mainMenuBar.appendChild(mainNavTextKiosk);
+
+        mainNavTextAttraction = document.createElement('a');
+        mainNavTextAttraction.className = "menuNavLinks";
+        mainNavTextAttraction.id = "addMainAttractionNav";
+        mainNavTextAttraction.href="#";
+        mainNavTextAttraction.innerHTML = "Add Attraction";
+        mainMenuBar.appendChild(mainNavTextAttraction);
+
+        $("#addMainKioskNav").css("color","#ffeda0");
+
+        $('#addMainKioskNav').on('click', function() {
+            clearAllNavHighlight();
+            $("#addMainKioskNav").css("color","#ffeda0");
+            initUI();
+        });
+
+        $('#addMainAttractionNav').on('click', function() {
+            clearAllNavHighlight();
+            $('#addMainAttractionNav').css('color', '#ffeda0');
+            addNewAttractions();
         });
     }
 
@@ -128,8 +172,6 @@ let Sidebar = (function() {
         kioskName.placeholder = "Kiosk Name";
         sidebarForms.appendChild(kioskName);
 
-
-
         kioskLat = document.createElement("input");
         kioskLat.type = "text";
         kioskLat.id = "kioskLat"
@@ -159,7 +201,7 @@ let Sidebar = (function() {
 
 
         $("#kioskImgUpload").change(function(){
-            getBase64($("#kioskImgUpload")[0].files[0]);
+            getBase64($("#kioskImgUpload")[0].files[0], 'kiosk');
             readURL(this,'kiosk');
         });
 
@@ -232,14 +274,10 @@ let Sidebar = (function() {
                             $("#kioskFormStatus").fadeOut( 3000, "linear");;
                         }
                     });
-               }
-               
-                
+               }     
             }
 
         });
-
-        
     }
 
     let addKioskDetails = function() {
@@ -249,7 +287,7 @@ let Sidebar = (function() {
             map.on('click', function(e){
                 kioskLat.value = 'Lat: ' + e.latlng.lat;
                 kioskLon.value = 'Lon: ' + e.latlng.lng;
-                L.marker(e.latlng, { draggable: true, icon: fixedKioskPoint }).addTo(map).on("move", function(d) {
+                kioskMarker = L.marker(e.latlng, { draggable: true, icon: fixedKioskPoint }).addTo(map).on("move", function(d) {
                     kioskLat.value = 'Lat: ' + d.latlng.lat;
                     kioskLon.value = 'Lon: ' + d.latlng.lng;
                 });
@@ -361,10 +399,6 @@ let Sidebar = (function() {
         attractionLon.readOnly = true;
         sidebarForms.appendChild(attractionLon);
 
-        attractionFormStatus = document.createElement("p")
-        attractionFormStatus.id = "attractionFormStatus";
-        sidebarForms.appendChild(kioskFormStatus);
-
         attractionTypeTitle = document.createElement("h3")
         attractionTypeTitle.id = "attractionTypeTitle";
         attractionTypeTitle.innerHTML = "Attraction Type";
@@ -379,10 +413,10 @@ let Sidebar = (function() {
         attractionTypePOIRadio.type = "radio";
         attractionTypePOIRadio.name ="attractionType";
         attractionTypePOIRadio.value = "poi";
+        attractionTypePOIRadio.checked= true;
         attractionTypePOILabel.className ="radio-inline";
         attractionTypePOILabel.innerHTML ="Point of Interest";
         attractionTypePOIContainer.appendChild(attractionTypePOIRadio);
-
 
         attractionTypeEventContainer = document.createElement('div');
         attractionTypeEventContainer.className = "radio-inline";
@@ -424,6 +458,8 @@ let Sidebar = (function() {
         attractionDaysAllDayCheckBox = document.createElement('input');
         attractionDaysAllDayCheckBox.type = "checkbox";
         attractionDaysAllDayCheckBox.value = "everyday";
+        attractionDaysAllDayCheckBox.name ="attractionDay";
+        attractionDaysAllDayCheckBox.checked= true;
         attractionDaysAllDayLabel.className ="checkbox-inline";
         attractionDaysAllDayLabel.innerHTML ="Everyday";
         attractionDaysAllDayContainer.appendChild(attractionDaysAllDayCheckBox);
@@ -438,6 +474,7 @@ let Sidebar = (function() {
         attractionDaysMondayCheckBox = document.createElement('input');
         attractionDaysMondayCheckBox.type = "checkbox";
         attractionDaysMondayCheckBox.value = "monday";
+        attractionDaysMondayCheckBox.name ="attractionDay";
         attractionDaysMondayContainer.appendChild(attractionDaysMondayCheckBox);
 
         attractionDaysTuesdayContainer = document.createElement('div');
@@ -450,6 +487,7 @@ let Sidebar = (function() {
         attractionDaysTuesdayCheckBox = document.createElement('input');
         attractionDaysTuesdayCheckBox.type = "checkbox";
         attractionDaysTuesdayCheckBox.value = "tuesday";
+        attractionDaysTuesdayCheckBox.name ="attractionDay";
         attractionDaysTuesdayContainer.appendChild(attractionDaysTuesdayCheckBox);
 
         attractionDaysWednesdayContainer = document.createElement('div');
@@ -462,6 +500,7 @@ let Sidebar = (function() {
         attractionDaysWednesdayCheckBox = document.createElement('input');
         attractionDaysWednesdayCheckBox.type = "checkbox";
         attractionDaysWednesdayCheckBox.value = "wednesday";
+        attractionDaysWednesdayCheckBox.name ="attractionDay";
         attractionDaysWednesdayContainer.appendChild(attractionDaysWednesdayCheckBox);
 
         attractionDaysThursdayContainer = document.createElement('div');
@@ -474,6 +513,7 @@ let Sidebar = (function() {
         attractionDaysThursdayCheckBox = document.createElement('input');
         attractionDaysThursdayCheckBox.type = "checkbox";
         attractionDaysThursdayCheckBox.value = "thrusday";
+        attractionDaysThursdayCheckBox.name ="attractionDay";
         attractionDaysThursdayContainer.appendChild(attractionDaysThursdayCheckBox);
 
         attractionDaysFridayContainer = document.createElement('div');
@@ -486,6 +526,7 @@ let Sidebar = (function() {
         attractionDaysFridayCheckBox = document.createElement('input');
         attractionDaysFridayCheckBox.type = "checkbox";
         attractionDaysFridayCheckBox.value = "friday";
+        attractionDaysFridayCheckBox.name ="attractionDay";
         attractionDaysFridayContainer.appendChild(attractionDaysFridayCheckBox);
 
         attractionDaysSaturdayContainer = document.createElement('div');
@@ -498,6 +539,7 @@ let Sidebar = (function() {
         attractionDaysSaturdayCheckBox = document.createElement('input');
         attractionDaysSaturdayCheckBox.type = "checkbox";
         attractionDaysSaturdayCheckBox.value = "saturday";
+        attractionDaysSaturdayCheckBox.name ="attractionDay";
         attractionDaysSaturdayContainer.appendChild(attractionDaysSaturdayCheckBox);
 
         attractionDaysSundayContainer = document.createElement('div');
@@ -510,6 +552,7 @@ let Sidebar = (function() {
         attractionDaysSundayCheckBox = document.createElement('input');
         attractionDaysSundayCheckBox.type = "checkbox";
         attractionDaysSundayCheckBox.value = "sunday";
+        attractionDaysSundayCheckBox.name ="attractionDay";
         attractionDaysSundayContainer.appendChild(attractionDaysSundayCheckBox);
 
         attractionDayContainer = document.createElement("div")
@@ -524,16 +567,19 @@ let Sidebar = (function() {
         attractionStartDateInput = document.createElement("input");
         attractionStartDateInput.type = "text";
         attractionStartDateInput.id = "attractionStartTimeInput";
-        attractionStartDateInput.className = "timepicker datetime";
+        attractionStartDateInput.className = "datetime";
         attractionStartDateInput.placeholder ="Start Date";
         attractionDayContainer.append(attractionStartDateInput);
 
         attractionEndDateInput = document.createElement("input");
         attractionEndDateInput.type = "text";
         attractionEndDateInput.id = "attractionEndDateInput";
-        attractionEndDateInput.className = "timepicker datetime";
+        attractionEndDateInput.className = "datetime";
         attractionEndDateInput.placeholder ="End Date";
         attractionDayContainer.append(attractionEndDateInput);
+
+        $('#attractionStartTimeInput').datepicker();
+        $('#attractionEndDateInput').datepicker();
 
         attractionHoursContainer = document.createElement("div")
         attractionHoursContainer.id = "attractionHoursContainer";
@@ -601,15 +647,25 @@ let Sidebar = (function() {
         attractionFormStatus = document.createElement("p")
         attractionFormStatus.id = "attractionFormStatus";
         sidebarForms.appendChild(attractionFormStatus);
-
     }
 
     let addNewAttractions = function() {
+        clearSidebar();
         clearMap();
+
+        row = document.createElement("div");
+        row.id= "mainRow";
+        row.className = "row text-center text-lg-left";
+        container.appendChild(row);
         
+        populateAttractions();
+       
         initAddNewAttractionMapControl();
         clearAllNavHighlight();
-        $('#addAttractionNav').css('color', '#ffeda0');
+        $('#addMainAttractionNav').css('color', '#ffeda0');
+
+
+       
 
         let fixedAttracionUrl = "imgs/kiosks/circle.ico"
         fixedAttracionPoint = L.icon({iconUrl: fixedAttracionUrl, iconSize: [10,10] });
@@ -617,7 +673,6 @@ let Sidebar = (function() {
         map.on('click', function(e){
             
             if(!isSaved){
-
                 clearSidebar();
                 initAddNewAttractionUI();
                 attractionLat.value = 'Lat: ' + e.latlng.lat;
@@ -644,6 +699,9 @@ let Sidebar = (function() {
                         
                     endLat  = d.latlng.lat;
                     endLng  = d.latlng.lng;
+
+                    attractionEndLat = endLat;
+                    attractionEndLon = endLng;
 
                     if(anchor)
                         map.removeLayer(anchor)
@@ -698,7 +756,7 @@ let Sidebar = (function() {
 
 
                 $("#attractionImgUpload").change(function(){
-                    getBase64($("#attractionImgUpload")[0].files[0]);
+                    getBase64($("#attractionImgUpload")[0].files[0], 'attraction');
                     readURL(this,'attraction', attractionIcon);
                 });
 
@@ -722,11 +780,88 @@ let Sidebar = (function() {
             }
 
             $('#attractionSubmitButton').on("click", function() {
-                    console.log('name' - $('#attractionName').val());
-                    console.log('name' - $('#attractionName').val());
-                   isSaved = false;
+
+                if($("#attractionName").val()=="" || $('#attractionDecription').val()=="" || !attractionImageData)
+                {
+                    $("#attractionFormStatus").show();
+                    $("#attractionFormStatus").css("color","#fec44f");
+                    attractionFormStatus.innerHTML ="Incomplete Form.";
+                    $("#attractionFormStatus").fadeOut( 3000, "linear");
+                   
+                }   
+                else {
+
+                    let attractionDay = [];
+                    let attractionType = $('[name="attractionType"]').val();
+                    $('input[name="attractionDay"]:checked').each(function() {
+                        attractionDay.push(this.value);
+                    });
+            
+                    $.ajax({
+                        url: "src/php/sidebar.php",
+                        type: "post",
+                        dataType: "json",
+            
+                        data: {
+                            action: 'addAttraction',
+                            id: ID(),
+                            name: $('#attractionName').val(),
+                            lat: $('#attractionLat').val(),
+                            lon: $('#attractionLon').val(),
+                            endLat: attractionEndLat,
+                            endLon: attractionEndLon,
+                            type: attractionType,
+                            day: attractionDay,
+                            startDate: $('#attractionStartDateInput').val(),
+                            endDate: $('#attractionEndDateInput').val(),
+                            startTime: $('#attractionStartTimeInput').val(),
+                            endTime: $('#attractionEndTimeInput').val(),
+                            description:$('#attractionDecription').val(),
+                            image: attractionImageData
+                        },
+                        success: function(d) {
+                            console.log(d);
+                            $('#attractionFormStatus').show();
+                            $('#attractionFormStatus').css("color","#fec44f");
+                            attractionFormStatus.innerHTML ="Saved!";
+                            $('#attractionFormStatus').fadeOut( 3000, "linear");
+                            addNewAttractions();
+                        }
+                    });
+
+                     isSaved = false;
+                }
+                  
             });
         });
+    }
+
+    let populateAttractions = function() {
+
+        let filePath = 'data/attractions/AttractionList.json';
+
+        let addKioskName = "New Attraction";
+        let addKioskId ="new";
+        let addKioskIconUrl = "imgs/kiosks/add.png";
+        let addKioskIconSize = [200, 200];
+
+        addIcon(addKioskName, addKioskId, addKioskIconUrl, addKioskIconSize);
+
+        if(fileExists(filePath)) {
+            d3.json(filePath, function(data) {
+                _.forEach(data, function(d,i) {
+                    console.log(d);
+                     addIcon(d.name, i, d.iconUrl, d.iconSize);
+                     mainAttracionPoint = L.icon({iconUrl: d.iconUrl, iconSize: [30,30] });
+                     attractionMainMarker = new L.marker([ d.lat,  d.lon], { draggable: true, icon: mainAttracionPoint }).addTo(map)
+                     attractionMarkerList.push(attractionMainMarker);
+                });
+            });
+        }
+        else {
+            console.log("don't exist");
+        }
+       
     }
 
     let initAddNewAttractionMapControl = function() {
@@ -767,7 +902,19 @@ let Sidebar = (function() {
 
     }
 
+    let clearPerKioskView = function() {
+        clearMap();
+        clearSidebar();
+        if(kioskMarker)
+        {
+            map.removeLayer(kioskMarker);
+            kioskMarker=null;
+        }  
+    }
+
     let clearSidebar = function() {
+        if($('.container'))
+            $('.container').empty();
         $('#sidebarForms').empty();
     }
  
@@ -809,6 +956,13 @@ let Sidebar = (function() {
         navTextSimulation.innerHTML = "Simulation";
         menuBar.appendChild(navTextSimulation);
 
+        navTextHome = document.createElement('a');
+        navTextHome.className = "menuNavLinks";
+        navTextHome.id = "linkToMainView";
+        navTextHome.href="#";
+        navTextHome.innerHTML = "Home";
+        menuBar.appendChild(navTextHome);
+
         $('#addKioskNav').on('click', function() {
             if(!kioskID)
                 addKioskDetails();
@@ -833,6 +987,12 @@ let Sidebar = (function() {
         $('#addAttractionNav').on('click', function() {
             addNewAttractions();
         });
+
+        $('#linkToMainView').click(function() {
+            clearPerKioskView();
+            $('.menuBar').remove();
+            init(map);
+        });
     }
 
 // Other helper functions
@@ -853,15 +1013,15 @@ let Sidebar = (function() {
         return uniqueNumber();
     };
 
-    function readURL(input, orgin, icon) {
+    function readURL(input, origin, icon) {
         if (input.files && input.files[0]) {
            
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                if(orgin=="kiosk")
+                if(origin=="kiosk")
                     $('#kioskImg').attr('src', e.target.result);
-                else if(orgin=="attraction") {
+                else if(origin=="attraction") {
                    $('#attractionImg').attr('src', e.target.result);
                    let newIcon = L.icon({iconUrl: e.target.result, iconSize: [100/2, 103/2]});
                    icon.setIcon(newIcon);
@@ -873,16 +1033,34 @@ let Sidebar = (function() {
         }
     }
 
-    function getBase64(file) {
+    function getBase64(file, origin) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
-            kioskImageData = reader.result;
+            if(origin=="kiosk")
+                kioskImageData = reader.result;
+            else if(origin=="attraction") {
+                attractionImageData = reader.result;
+            }
             // console.log(reader.result);
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);
         };
+    }
+
+    function fileExists(url)
+    {
+        var http = new XMLHttpRequest();
+        try{
+            http.open('HEAD', url, false);
+        }
+        catch(err) {
+            console.log(err);
+        }
+       
+        http.send();
+        return http.status!=404;
     }
 
     return {

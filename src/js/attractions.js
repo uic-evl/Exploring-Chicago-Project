@@ -6,12 +6,14 @@ let Attractions = (function() {
   let currentDay;
   let markers = new Array();
   let sidebarAttractions = new Set();
+  let futureAttractions = [];
 
-  let init = function(map, time=undefined, day=undefined) {
+  let init = function(map, time=undefined, day=undefined, isTimeLapse) {
     cleanUpAttractions(map);
   
     transitList = new Set();
     transitStopFilterList = new Set();
+    futureAttractions = [];
     if(!time)
       currentTime = moment().format('H:mm');
     else
@@ -48,9 +50,32 @@ let Attractions = (function() {
           marker.valueOf()._icon.style.border = 'green'
           populateSidebar(attraction, i);
         });
+        console.log(isTimeLapse);
+        if(!isTimeLapse)
+        showFutureAttractions(futureAttractions, map);
       }
     });
   };
+
+  let showFutureAttractions = function(futureAttractions, map) {
+    let timer = setInterval(function() {
+
+      let attraction = _.sample(futureAttractions);
+
+      let marker = L.marker(attraction.coordinates, {
+            icon: new L.DivIcon({
+               className: 'futureAttractions',
+               html: '<div id="futureAttractionIcons"><img width='+attraction.iconSize[0]/2+' height='+attraction.iconSize[1]/2+' src="'+attraction.iconUrl+'"/> <p> '+attraction.hours.start_time+'</p></div>'
+                      
+            }),
+            zIndexOffset: 100
+      });
+
+      marker.addTo(map);
+      setTimeout(function(){ map.removeLayer(marker); }, 8 * 1000);
+      
+    }, 10 * 1000);
+  }
 
   let cleanUpAttractions = function(map) {
     _.forEach(markers, function(d,i) {
@@ -84,7 +109,12 @@ let Attractions = (function() {
       if (isOpenYearRound(d) || isOpenToday(d)) {
         if (isOpenNow(d)) return d;
         else if (d.hasOwnProperty("stops")) transitStopFilterList.add(d.stops);
-      } else if (d.hasOwnProperty("stops")) transitStopFilterList.add(d.stops);
+
+        if(isOpenAfter(d)) {
+          futureAttractions.push(d);
+        }
+      } 
+      else if (d.hasOwnProperty("stops")) transitStopFilterList.add(d.stops);
     });
 
     cleanFilterStopList(attractions);
@@ -122,12 +152,24 @@ let Attractions = (function() {
       return attraction;
   };
 
+  let isOpenAfter = function(attraction) {
+    if(isOpenAfterThisHour(attraction))
+      return attraction;
+  }
+
   let isOpenAtThisHour = function(attraction) {
     return (
       timeToSeconds(attraction.hours.start_time) <=
         timeToSeconds(currentTime) &&
       timeToSeconds(attraction.hours.end_time) >
         timeToSeconds(currentTime)
+    );
+  };
+
+  let isOpenAfterThisHour = function(attraction) {
+    return (
+      timeToSeconds(attraction.hours.start_time) >=
+        timeToSeconds(currentTime) 
     );
   };
 

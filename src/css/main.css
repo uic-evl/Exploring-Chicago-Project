@@ -193,3 +193,36 @@ body {
   margin-right: 15%
 }
 
+#futureAttractionIcons img {
+  opacity: 0.75;
+}
+
+#futureAttractionIcons p{
+
+  border-radius: 10px;
+  width: 60px;
+  height: 1px;
+  background-color: #e7298a;
+  opacity: 0.75;
+  stroke:none;
+  margin-left: -5px;
+  padding-top: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.futureAttractions{
+ 
+    -webkit-animation: fadeinout 20s linear forwards;
+    animation: fadeinout 8s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  25%,50%,75% { opacity: 1; }
+}

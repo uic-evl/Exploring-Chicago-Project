@@ -151,13 +151,43 @@
 			},
 			{
 				"id": "14",
-				"name": "Museum of Science and Industry",
-				"type": "offmap",
-				"iconUrl": "imgs/attractions/scienceandindustry.png",
-				"iconSize": [106.6, 66.6],
-				"coordinates": [41.832992, -87.618055],
+				"name": "Concert",
+				"type": "event",
+				"iconUrl": "imgs/attractions/concert.png",
+				"iconSize": [100, 103],
+				"coordinates": [41.882361, -87.621578],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
-				"hours": {"start_time":"17:30", "end_time":"18:00"}
+				"hours": {"start_time":"17:30", "end_time":"18:30"}
+			},
+			{
+				"id": "15",
+				"name": "Concert",
+				"type": "event",
+				"iconUrl": "imgs/attractions/CSO.png",
+				"iconSize": [100, 103],
+				"coordinates": [41.878894, -87.625076],
+				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
+				"hours": {"start_time":"19:00", "end_time":"21:30"}
+			},
+			{
+				"id": "16",
+				"name": "Farmers Market",
+				"type": "event",
+				"iconUrl": "imgs/attractions/Market.png",
+				"iconSize": [100, 103],
+				"coordinates": [41.914959, -87.631363],
+				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
+				"hours": {"start_time":"18:00", "end_time":"19:00"}
+			},
+			{
+				"id": "17",
+				"name": "Theatre",
+				"type": "event",
+				"iconUrl": "imgs/attractions/drama.png",
+				"iconSize": [100, 103],
+				"coordinates": [41.880869, -87.628487],
+				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
+				"hours": {"start_time":"18:00", "end_time":"19:00"}
 			}
 	
 		]
