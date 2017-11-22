@@ -23,7 +23,8 @@ let Stops = (function() {
 
     return new stopIconWithOptions({
       iconUrl: iconUrl,
-      iconSize: [15.12, 18.36]
+      iconSize: [15.12, 18.36],
+      className: 'fadeTimelapse'
     });
   };
 
@@ -103,7 +104,7 @@ let Stops = (function() {
             .bindPopup("lat:" + stop.lat + "," + stop.lon);
           if (detailedMap)
             {
-              marker =  L.marker([stop.lat, stop.lon], { icon: getDetailedStopIcon(transit.type, transit.name) })
+              marker =  L.marker([stop.lat, stop.lon], { icon: getDetailedStopIcon(transit.type, transit.name)});
               stopMarkersForDetailedMap.push(marker)
               marker.addTo(detailedMap).bindPopup("lat:" + stop.lat + "," + stop.lon);
             }

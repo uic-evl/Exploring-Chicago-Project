@@ -7,10 +7,10 @@ let Attractions = (function() {
   let markers = new Array();
   let sidebarAttractions = new Set();
   let futureAttractions = [];
+  let currentAttractionList;
 
-  let init = function(map, time=undefined, day=undefined, isTimeLapse) {
+  let init = function(map, time=undefined, day=undefined, isTimeLapse, attractionList) {
     cleanUpAttractions(map);
-  
     transitList = new Set();
     transitStopFilterList = new Set();
     futureAttractions = [];
@@ -42,19 +42,25 @@ let Attractions = (function() {
           });
 
           let marker = L.marker(attraction.coordinates, {
-            icon: attractionIcon,
-            zIndexOffset: 10
+                icon: new L.DivIcon({
+                  className: 'fadeTimelapse',
+                  html: '<div id="nowAttractionIcons"><img width='+attraction.iconSize[0]/2+' height='+attraction.iconSize[1]/2+' src="'+attraction.iconUrl+'"/></div>'
+                }),
+                zIndexOffset: 100
           });
           markers.push(marker);
           marker.addTo(map);
           marker.valueOf()._icon.style.border = 'green'
           populateSidebar(attraction, i);
         });
-        console.log(isTimeLapse);
-        if(!isTimeLapse)
-        showFutureAttractions(futureAttractions, map);
+
+        currentAttractionList = attractions;
+        // if(!isTimeLapse)
+        // showFutureAttractions(futureAttractions, map);
       }
     });
+
+    return currentAttractionList;
   };
 
   let showFutureAttractions = function(futureAttractions, map) {
@@ -79,6 +85,7 @@ let Attractions = (function() {
 
   let cleanUpAttractions = function(map) {
     _.forEach(markers, function(d,i) {
+      console.log(d);
       map.removeLayer(d);
     });
     sidebarAttractions.clear();

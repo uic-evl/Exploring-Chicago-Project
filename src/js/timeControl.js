@@ -67,7 +67,7 @@ let TimeControl = (function() {
                 updateSlider();
             }
                 
-           }, 1500);          
+           }, 5000);          
         });
     }
 

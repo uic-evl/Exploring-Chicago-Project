@@ -17,7 +17,7 @@
 				"id": "3",
                 "name": "Lincoln Park Zoo",
 				"type": "poi",
-				"iconUrl": "imgs/attractions/lincoln_park.png",
+				"iconUrl": "imgs/attractions/Zoo-15.png",
                 "iconSize": [100, 103],
                 "coordinates":[41.921092, -87.633991],
 				"description":["Adult/ Youth/ Children - free "],
@@ -157,7 +157,7 @@
 				"iconSize": [100, 103],
 				"coordinates": [41.882361, -87.621578],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
-				"hours": {"start_time":"17:30", "end_time":"18:30"}
+				"hours": {"start_time":"24:30", "end_time":"18:30"}
 			},
 			{
 				"id": "15",
@@ -167,7 +167,7 @@
 				"iconSize": [100, 103],
 				"coordinates": [41.878894, -87.625076],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
-				"hours": {"start_time":"19:00", "end_time":"21:30"}
+				"hours": {"start_time":"24:00", "end_time":"21:30"}
 			},
 			{
 				"id": "16",
@@ -177,7 +177,7 @@
 				"iconSize": [100, 103],
 				"coordinates": [41.914959, -87.631363],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
-				"hours": {"start_time":"18:00", "end_time":"19:00"}
+				"hours": {"start_time":"24:00", "end_time":"19:00"}
 			},
 			{
 				"id": "17",
@@ -187,7 +187,7 @@
 				"iconSize": [100, 103],
 				"coordinates": [41.880869, -87.628487],
 				"description":["Adult/ Youth/ Children - $20.50/ $13.50/  free "],
-				"hours": {"start_time":"18:00", "end_time":"19:00"}
+				"hours": {"start_time":"24:00", "end_time":"19:00"}
 			}
 	
 		]

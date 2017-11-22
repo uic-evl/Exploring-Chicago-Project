@@ -19,6 +19,8 @@ let App = (function() {
 
   let map;
   let detailedMap;
+  let attractionList;
+  
 
   let init = function() {
      map = Map.show(mainMapAttribute);
@@ -38,8 +40,9 @@ let App = (function() {
     let map = getMap();
     let detailedMap = getDetailedMap();
     
-    // Hoposn.show(map);
-    Attractions.update(map, time, day, isTimelapse);
+    
+    attractionList = Attractions.update(map, time, day, isTimelapse, attractionList);
+    
     Stops.update(
       Kiosks.getKioskID,
       Attractions.transitList(),

@@ -67,7 +67,6 @@ let Sidebar = (function() {
         d3.json('data/results.json', function(data) {
             if(data)
             {
-                console.log(data);
                 _.forEach(data, function(d, i) {
                     addIcon(d.name, i, d.iconUrl, d.iconSize);
                     mainKioskPoint = L.icon({iconUrl: d.iconUrl, iconSize: [30,30] });
@@ -238,7 +237,7 @@ let Sidebar = (function() {
                         },
                         success: function(id) {
                             kioskID = id;
-                            console.log(kioskID);
+                         
                             $("#kioskFormStatus").show();
                             $("#kioskFormStatus").css("color","#fec44f");
                             kioskFormStatus.innerHTML ="Saved!";
@@ -266,7 +265,7 @@ let Sidebar = (function() {
                         success: function(id) {
                             kioskID = id;
                             kioskName = $("#kioskName").val();
-                            console.log(kioskID);
+                       
                             
                             $("#kioskFormStatus").show();
                             $("#kioskFormStatus").css("color","#fec44f");
@@ -300,7 +299,7 @@ let Sidebar = (function() {
 
     let loadKioskDetails = function(data, i) {
         initAddKioskUI();
-        console.log(data[i]);
+    
         kioskIndex = i;
         kioskID = data[i].id;
         kioskName = data[i].name;
@@ -329,7 +328,7 @@ let Sidebar = (function() {
         map.setView(new L.LatLng(data[i].mapCenterLat, data[i].mapCenterLon), data[i].mapZoom);
     }
 
-    let addIcon = function(name, id, iconUrl, iconSize) {
+    let addIcon = function(name, id, iconUrl, iconSize, showOnMap) {
         col = document.createElement("div");
         col.id = id;
         col.className = "col-lg-3 col-md-4 col-xs-6 kioskIconDiv";
@@ -341,7 +340,10 @@ let Sidebar = (function() {
         col.appendChild(icon);
 
         iconImage= document.createElement("img");
-        iconImage.className = "img-fluid kiosk-img-thumbnail";
+        if(showOnMap)
+            iconImage.className = "img-fluid kiosk-img-thumbnail mainAttractionIcon";
+        else
+            iconImage.className = "img-fluid kiosk-img-thumbnail attractionIcon";
         iconImage.src = iconUrl;
         iconImage.width = iconSize[0];
         iconImage.height = iconSize[1];
@@ -749,25 +751,28 @@ let Sidebar = (function() {
                 
                 });
 
-                attractionIcon.on('click', function(d){
-                    console.log(d.target._leaflet_id);
-                });
                 attractionMarkerList.push(attractionIcon);
 
 
                 $("#attractionImgUpload").change(function(){
-                    getBase64($("#attractionImgUpload")[0].files[0], 'attraction');
+                    getBase64($("#attractionImgUpload")
+                    [0].files[0], 'attraction');
                     readURL(this,'attraction', attractionIcon);
                 });
 
                 isSaved = true;
 
                 $('#attractionDeleteButton').on("click", function() {
-                   map.removeLayer(attractionIcon);
-                   map.removeLayer(polyline);
-                   map.removeLayer(anchor);
+                    if(attractionIcon)
+                        map.removeLayer(attractionIcon);
+                    if(polyline)
+                        map.removeLayer(polyline);
+                    if(anchor)
+                        map.removeLayer(anchor);
                    clearSidebar();
                    isSaved = false;
+
+                   addNewAttractions();
                 });
 
             } 
@@ -820,7 +825,7 @@ let Sidebar = (function() {
                             image: attractionImageData
                         },
                         success: function(d) {
-                            console.log(d);
+                
                             $('#attractionFormStatus').show();
                             $('#attractionFormStatus').css("color","#fec44f");
                             attractionFormStatus.innerHTML ="Saved!";
@@ -836,7 +841,23 @@ let Sidebar = (function() {
         });
     }
 
-    let populateAttractions = function() {
+    let addNewAttractionsToKioskList = function() {
+
+        clearPerKioskView();
+        
+        container = document.createElement("div");
+        container.className = "container";
+        mainContainer.appendChild(container);
+
+        row = document.createElement("div");
+        row.id= "mainRow";
+        row.className = "row text-center text-lg-left";
+        container.appendChild(row);
+        
+        populateAttractions(showOnMap=false);
+    }
+
+    let populateAttractions = function(showOnMap=true) {
 
         let filePath = 'data/attractions/AttractionList.json';
 
@@ -845,16 +866,18 @@ let Sidebar = (function() {
         let addKioskIconUrl = "imgs/kiosks/add.png";
         let addKioskIconSize = [200, 200];
 
-        addIcon(addKioskName, addKioskId, addKioskIconUrl, addKioskIconSize);
+        addIcon(addKioskName, addKioskId, addKioskIconUrl, addKioskIconSize, showOnMap);
 
         if(fileExists(filePath)) {
             d3.json(filePath, function(data) {
                 _.forEach(data, function(d,i) {
-                    console.log(d);
-                     addIcon(d.name, i, d.iconUrl, d.iconSize);
-                     mainAttracionPoint = L.icon({iconUrl: d.iconUrl, iconSize: [30,30] });
-                     attractionMainMarker = new L.marker([ d.lat,  d.lon], { draggable: true, icon: mainAttracionPoint }).addTo(map)
-                     attractionMarkerList.push(attractionMainMarker);
+                     addIcon(d.name, i, d.iconUrl, d.iconSize, showOnMap);
+                     if(showOnMap)
+                     {
+                        mainAttracionPoint = L.icon({iconUrl: d.iconUrl, iconSize: [30,30] });
+                        attractionMainMarker = new L.marker([ d.lat,  d.lon], { draggable: true, icon: mainAttracionPoint }).addTo(map)
+                        attractionMarkerList.push(attractionMainMarker);
+                     }
                 });
             });
         }
@@ -964,6 +987,9 @@ let Sidebar = (function() {
         menuBar.appendChild(navTextHome);
 
         $('#addKioskNav').on('click', function() {
+            clearSidebar();
+            clearAllNavHighlight();
+            $("#addKioskNav").css("color","#ffeda0");
             if(!kioskID)
                 addKioskDetails();
             else
@@ -985,7 +1011,9 @@ let Sidebar = (function() {
         });
 
         $('#addAttractionNav').on('click', function() {
-            addNewAttractions();
+            clearAllNavHighlight();
+            $("#addAttractionNav").css("color","#ffeda0");
+            addNewAttractionsToKioskList();
         });
 
         $('#linkToMainView').click(function() {

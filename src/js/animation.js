@@ -79,7 +79,7 @@ let Animation = (function() {
     let drawPath = function(sel, pathPoints, color) {
         return sel.append("path")
                 .data([pathPoints])
-                .attr("class", "transitPath")
+                .attr("class", "transitPath fadeTimelapse")
                 .attr("stroke", color)
                 .attr("d", d3.svg.line()
                 .tension(0)
@@ -133,7 +133,7 @@ let Animation = (function() {
     let drawTransitCircle = function(sel, pathPoints, color, transit) {
             return sel.append("circle")
                 .attr("r", 6)
-                .attr("class", "transitCircle")
+                .attr("class", "transitCircle fadeTimelapse")
                 .attr("transform", "translate(" + pathPoints[0] + ")")
                 .attr("fill", color);
     };
