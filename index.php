@@ -80,7 +80,6 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
             <script src='src/js/transits.js'></script>
             <script src='src/js/kiosks.js'></script>
             <script src='src/js/stops.js'></script>
-            <!--<script src='src/js/hopon.js'></script>-->
             <script src='src/js/timeControl.js'></script>
             <script src='src/js/controller.js'></script>
         </div>
