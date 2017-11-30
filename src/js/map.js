@@ -67,7 +67,7 @@ let Map = (function() {
     map.scrollWheelZoom.disable();
 
 
-    walkingDistanceLine.addTo(map);
+    // walkingDistanceLine.addTo(map);
 
     L.tileLayer(tileURL, {
       id: mapID
