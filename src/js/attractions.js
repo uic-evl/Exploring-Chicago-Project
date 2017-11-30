@@ -250,7 +250,7 @@ let Attractions = (function() {
 
     infoBarTitle.innerHTML = "Cloud Gate";
     infoBarTime.innerHTML = moment().format("MM/DD/YYYY dddd") + " " + moment(timeToDisplay, "h:mm a").format("h:mm a");
-     infoBar.appendChild(infoBarTime);
+    infoBar.appendChild(infoBarTime);
     infoBar.appendChild(infoBarTitle);
    
   }

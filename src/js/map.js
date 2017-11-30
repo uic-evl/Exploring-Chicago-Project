@@ -4,7 +4,7 @@ let Map = (function() {
   const mapID = "mapbox.light";
 
   let tileURL =
-    "https://api.mapbox.com/styles/v1/mthoma52/cjamxcbf8e0t62rpan88oos3s/tiles/256/{z}/{x}/{y}?access_token=" +
+    "https://api.mapbox.com/styles/v1/mthoma52/cjan2687oe7302rmngmz4shb4/tiles/256/{z}/{x}/{y}?access_token=" +
     accessToken;
 
   let init = function(attributes, mainMap = undefined) {
