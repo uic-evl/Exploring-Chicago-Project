@@ -5,10 +5,10 @@ let Transit = (function() {
   
   const transitColors = {
     bus: "#676a6b",
-    blue: "#3182bd",
+    blue: "#1c75bc",
     red: "#de2d26",
     orange: "#feb24c",
-    pink: '#e78ac3'
+    pink: '#ed499a'
   };
 
   let busIcon = L.icon({

@@ -303,8 +303,7 @@ let Attractions = (function() {
             " - " +
             moment(attraction.hours.end_time, "HH:mm").format("h a") +
             "<br>";
-        else
-          hours.innerHTML = "Open All Hours";
+
 
         const description = listing2.appendChild(document.createElement("span"));
         description.className = "description";

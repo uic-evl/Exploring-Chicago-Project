@@ -33,7 +33,7 @@ let Map = (function() {
     let border = L.rectangle(map.getBounds()).setStyle({
       fill: false,
       stroke: true,
-      color: "#756bb1",
+      color: "#58595b",
       weight: 10
     });
 
