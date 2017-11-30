@@ -48,7 +48,7 @@ let Map = (function() {
       L.rectangle(bounds, {
         fill: false,
         stroke: true,
-        color: "#756bb1",
+        color: "#58595b",
         weight: 1
       }).addTo(mainMap);
 
