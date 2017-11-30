@@ -39,7 +39,7 @@
 				"travelTime": 25
 			},
 			{
-				"id": 3,
+				"id": 4,
                 "name": "22",
 				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
@@ -51,7 +51,7 @@
 				"travelTime": 30
 			},
 			{
-				"id": 4,
+				"id": 5,
                 "name": "124",
 				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
@@ -63,7 +63,7 @@
 				"travelTime": 18 
 			},
 			{ 
-				"id": 5,
+				"id": 6,
                 "name": "blue",
 				"type": "Train",
 				"iconUrl": "imgs/transits/bus.png",

@@ -41,20 +41,36 @@ let Stops = (function() {
     });
   };
 
+
+  let isTransitInTheList = function(transitList, transitItem) {
+    return _.includes(transitList, transitItem);
+  }
+
   let init = function(
     kioskID,
     transitList,
     transitStopFilterList,
     map,
-    detailedMap = undefined
+    detailedMap = undefined,
+    prevTransitList
   ) {
-    cleanStopsOnMap(map,stopMarkers);
-    cleanStopsOnMap(detailedMap, stopMarkersForDetailedMap);
+
+    if(prevTransitList)
+    {
+      prevStopIds = _.map(prevTransitList, function(d,i) {
+        return d.id
+      }); 
+      console.log(prevStopIds);
+        cleanStopsOnMap(map,stopMarkers, prevStopIds);
+    }
+    // cleanStopsOnMap(detailedMap, stopMarkersForDetailedMap);
 
     transitList = Array.from(transitList);
 
     filterStops(transitList, transitStopFilterList);
     drawStops(transits, map, detailedMap);
+
+    return transits;
   };
 
   let getTransit = function() {
@@ -85,9 +101,12 @@ let Stops = (function() {
     });
   };
 
-  let cleanStopsOnMap = function(map, stops) {
+  let cleanStopsOnMap = function(map, stops, prevStopIds) {
     _.forEach(stops, function(d,i) {
-      map.removeLayer(d);
+      if(!isTransitInTheList(prevStopIds, d.transitID))
+      {
+        map.removeLayer(d.marker);
+      }
     });
 
   }
@@ -99,13 +118,13 @@ let Stops = (function() {
         _.forEach(transit.stops, function(stop, i) {
           let pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: "blue" });
           marker = L.marker([stop.lat, stop.lon], { icon: getStopIcon(transit.type) })
-          stopMarkers.push(marker)
+          stopMarkers.push({'transitID': transit.id,'marker': marker});
           marker.addTo(map)
             .bindPopup("lat:" + stop.lat + "," + stop.lon);
           if (detailedMap)
             {
               marker =  L.marker([stop.lat, stop.lon], { icon: getDetailedStopIcon(transit.type, transit.name)});
-              stopMarkersForDetailedMap.push(marker)
+              stopMarkersForDetailedMap.push({'transit': transit,'marker': marker})
               marker.addTo(detailedMap).bindPopup("lat:" + stop.lat + "," + stop.lon);
             }
           

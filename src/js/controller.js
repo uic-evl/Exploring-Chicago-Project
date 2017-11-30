@@ -20,6 +20,7 @@ let App = (function() {
   let map;
   let detailedMap;
   let attractionList;
+  let transitList;
   
 
   let init = function() {
@@ -43,13 +44,7 @@ let App = (function() {
     
     attractionList = Attractions.update(map, time, day, isTimelapse, attractionList);
     
-    Stops.update(
-      Kiosks.getKioskID,
-      Attractions.transitList(),
-      Attractions.transitStopFilterList(),
-      map,
-      detailedMap
-    );
+    transitList = Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap, transitList);
 
     Transit.update(Kiosks.getKioskID, map, Stops.transits(), isTimelapse);
 

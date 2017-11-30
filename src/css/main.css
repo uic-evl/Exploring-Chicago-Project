@@ -58,6 +58,7 @@ body {
 }
 
 #listing .icon{
+  margin-top: 5px;
   display:inline-block;
 }
 
@@ -127,8 +128,8 @@ body {
 
 .listings .item {
   display: block;
-  border-bottom: 1px solid #eee;
-  padding: 10px;
+
+  padding: 20px;
   text-decoration: none;
 }
 
@@ -150,7 +151,7 @@ body {
 .listings .description {
   display: block;
   color:#eee;
-  font-size: 10px;
+  font-size: 15px;
 }
 
 .listings .item .title small { font-weight: 400; }
@@ -178,19 +179,30 @@ body {
 }
 
 #infobar {
-  font-size: 30px;
+
+  font-size: 15px;
   z-index:  2;
   position: relative;
   top: 0;
   width:100%;
   height: 3%;
-  background: #000;
+  background: #404040;
+  
   
 }
 
 #infobarTitle {
-  margin-left: 1%;
-  margin-right: 15%
+    position: absolute;
+    top: 10px;
+    font-size: 30px;
+    margin-left: 40%;
+    margin-right: 15%;
+    font-weight: bold;
+}
+
+#infobarTime {
+    position: absolute;
+    top: 10px;
 }
 
 #futureAttractionIcons img {

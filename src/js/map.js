@@ -4,7 +4,7 @@ let Map = (function() {
   const mapID = "mapbox.light";
 
   let tileURL =
-    "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=" +
+    "https://api.mapbox.com/styles/v1/mthoma52/cjamtvjeldybp2spbxploodwp/tiles/256/{z}/{x}/{y}?access_token=" +
     accessToken;
 
   let init = function(attributes, mainMap = undefined) {
@@ -42,7 +42,7 @@ let Map = (function() {
       border.addTo(map);
 
       tileURL =
-        "https://api.mapbox.com/styles/v1/mthoma52/cj5vig5oa08tl2rk54pmlxjbs/tiles/256/{z}/{x}/{y}?access_token=" +
+        "https://api.mapbox.com/styles/v1/mthoma52/cjamtvjeldybp2spbxploodwp/tiles/256/{z}/{x}/{y}?access_token=" +
         accessToken;
 
       L.rectangle(bounds, {
