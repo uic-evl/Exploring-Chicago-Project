@@ -56,7 +56,6 @@ let TimeControl = (function() {
            $('#detailedMapContainer').hide();
            timeplapseLoop = setInterval(function() {
             $('#nextHourButton').trigger('click');
-            $('body').css("background-color","#2b8cbe");
             if(timeInMinutes >= 1440)
             {
                 clearInterval(timeplapseLoop);
