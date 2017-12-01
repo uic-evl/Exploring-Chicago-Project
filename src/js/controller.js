@@ -25,8 +25,8 @@ let App = (function() {
 
   let init = function() {
      map = Map.show(mainMapAttribute);
-    //  detailedMap = Map.show(detailedMapAttribute, map);
-    //  Kiosks.showPosition(map, detailedMap);
+     detailedMap = Map.show(detailedMapAttribute, map);
+     Kiosks.showPosition(map, detailedMap);
   };
 
   let getMap = function() {
@@ -39,14 +39,14 @@ let App = (function() {
 
   let update = function(time=undefined, day=undefined, isTimelapse=false) {
     let map = getMap();
-    // let detailedMap = getDetailedMap();
+    let detailedMap = getDetailedMap();
     
     
-    // attractionList = Attractions.update(map, time, day, isTimelapse, attractionList);
+    attractionList = Attractions.update(map, time, day, isTimelapse, attractionList);
     
-    // transitList = Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap, transitList);
+    transitList = Stops.update(Kiosks.getKioskID, Attractions.transitList(), Attractions.transitStopFilterList(), map, detailedMap, transitList);
 
-    // Transit.update(Kiosks.getKioskID, map, Stops.transits(), isTimelapse);
+    Transit.update(Kiosks.getKioskID, map, Stops.transits(), isTimelapse);
 
     // let updateTransit = setInterval( function()
     // {

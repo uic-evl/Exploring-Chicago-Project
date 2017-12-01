@@ -23,7 +23,6 @@ let Attractions = (function() {
     else
       currentDay = day;
 
-    populateInfoBar(time);
     
     $.ajax({
       type: "GET",
@@ -62,6 +61,7 @@ let Attractions = (function() {
 
         // deleteMarkerFromTheMap(deleteMarkerList);
         currentAttractionList = attractions;
+        populateInfoBar(time);
         // if(!isTimeLapse)
         // showFutureAttractions(futureAttractions, map);
       }
@@ -246,13 +246,12 @@ let Attractions = (function() {
     const infoBarTitle =  document.createElement("span");
     infoBarTitle.id = "infobarTitle";
     const infoBarTime = document.createElement("span");
-     infoBarTime.id = "infobarTime";
+    infoBarTime.id = "infobarTime";
 
     infoBarTitle.innerHTML = "Cloud Gate";
     infoBarTime.innerHTML = moment().format("MM/DD/YYYY dddd") + " " + moment(timeToDisplay, "h:mm a").format("h:mm a");
     infoBar.appendChild(infoBarTime);
     infoBar.appendChild(infoBarTitle);
-   
   }
 
   let populateSidebar = function(attraction, index) {
