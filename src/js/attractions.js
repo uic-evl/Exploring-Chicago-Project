@@ -285,6 +285,14 @@ let Attractions = (function() {
         icon.dataPosition = index;
         icon.src = attraction.iconUrl;
 
+        const uberIcon = listing1.appendChild(document.createElement("img"));
+        uberIcon.className = "uberIcon";
+        uberIcon.src = 'imgs/transits/uber.png';
+
+        const uberTimeText= listing1.appendChild(document.createElement("p"));
+        uberTimeText.className = "uberTimeText";
+        uberTimeText.innerHTML = "15 min";
+
         const listing2 = listing.appendChild(document.createElement("div"));
         listing2.className = "sub-item";
 

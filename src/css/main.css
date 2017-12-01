@@ -69,6 +69,21 @@ body {
   display:inline-block;
 }
 
+.uberIcon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  left: 15px;
+  top: -12px;
+}
+
+.uberTimeText {
+ font-size: 14px;
+ position: absolute;
+ margin-left: 44px;
+ margin-top: -38px;;
+}
+
 .sub-item {
   margin-left: 12%;
   overflow-wrap: break-word;
