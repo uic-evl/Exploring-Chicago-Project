@@ -1,6 +1,7 @@
 let Animation = (function() {
   
     let timers = [];
+    let badge;
     let init = function() {
 
     };
@@ -20,7 +21,7 @@ let Animation = (function() {
 
             let path = drawPath(sel, pathPoints, color);
             
-            let badge =  drawBadge(sel, pathPoints, transit, color);
+            badge = drawBadge(sel, pathPoints, transit, color);
 
             let pathOptions = {sel: sel, path: path, pathPoints: pathPoints, color: color}    
 
@@ -39,6 +40,7 @@ let Animation = (function() {
         _.times(transit.frequency, function(index) {
             timers.push(setTimeout(function(){
                 transitCircle = drawTransitCircle(pathOptions.sel, pathOptions.pathPoints, pathOptions.color, transit);
+               
                 
                 transitionAnim(transitCircle, pathOptions, transit, index);
                 if(index == transit.frequency-1)
@@ -87,7 +89,7 @@ let Animation = (function() {
     }
 
     let drawBadge = function(sel, pathPoints, transit, color) {
-        
+        console.log(transit);        
         let midpointXY = pathPoints[1];
 
         let badge =  sel.selectAll(".point")
@@ -96,10 +98,30 @@ let Animation = (function() {
                 .attr("x", -20)
                 .attr("y", -10)
                 .attr("width", 40)
-                .attr("height", 20)
+                .attr("height", 40)
                 .attr("class", "transitBadge")
                 .attr("fill", color)
                 .attr("transform", function(d) { return "translate(" + d + ")"; });
+
+                 sel.selectAll(".point")
+                .data([midpointXY])
+                .enter()
+                .append("image")
+                .attr('href', function(){
+                    if(transit.type == "Train")
+                        return 'imgs/transits/train.png';
+                    else if(transit.type == "Bus")
+                        return 'imgs/transits/bus.png';
+                })
+                .attr("class", "transitBadge")
+                .attr("width", "20px")
+                .attr("height", "20px")
+                .attr("transform", function(d) {
+                    d[0] -= 10;
+                    d[1] -= 5;
+
+                    return "translate(" + d + ")";
+                 });
 
                 sel.selectAll(".point")
                 .data([midpointXY])
@@ -112,17 +134,17 @@ let Animation = (function() {
                 .attr("class", "transitBadge")
                 .attr("transform", function(d) {
                     if(transit.name.length == 2) 
-                        d[0] -= 7;
+                        d[0] += 3;
             
                     else if(transit.name.length == 3) 
-                        d[0] -= 10;
+                        d[0] -= 1;
 
                     else if(transit.name.length == 4)
-                        d[0] -= 12;
+                        d[0] -= 3;
                     else
                         d[0] -= 3
 
-                    d[1] +=4;
+                    d[1] +=32;
 
                     return "translate(" + d + ")";
                  });

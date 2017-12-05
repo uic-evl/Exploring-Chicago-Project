@@ -95,6 +95,15 @@ body {
   float: left;
 }
 
+.sub-item-border {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #262262;
+    width: 285px;
+    position: relative;
+    left: 25px;
+}
+
 #timecontrol {
   width: 30%;
   margin-left: 2%;

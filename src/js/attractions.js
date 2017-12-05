@@ -319,6 +319,9 @@ let Attractions = (function() {
         const uberTimeText= listing2.appendChild(document.createElement("p"));
         uberTimeText.className = "uberTimeText";
         uberTimeText.innerHTML = "15 min";
+
+        const border = listing.appendChild(document.createElement("div"));
+        border.className = "sub-item-border";
       }
     // }  
 
