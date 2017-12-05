@@ -5,8 +5,8 @@
 
 
 body {
-  background: #404040;
-  color: #f8f8f8;
+  background: #fff;
+  color: #000;
   font: 500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif;
   margin: 0;
   padding: 0;
@@ -70,19 +70,15 @@ body {
 }
 
 .uberIcon {
+  float: left;
   width: 30px;
   height: 30px;
-  position: relative;
-  left: 15px;
-  top: -12px;
 }
 
 .uberTimeText {
+ padding-top: 4px;
  font-size: 14px;
- position: absolute;
- margin-left: 44px;
- margin-top: -38px;
- color: #a7a9ac;
+ color: #000;
 }
 
 .sub-item {
@@ -167,13 +163,13 @@ body {
 
 .listings .item .title {
   display: block;
-  color:#eee;
+  color:#000;
   font-weight: 700;
 }
 
 .listings .description {
   display: block;
-  color:#eee;
+  color:#000;
   font-size: 15px;
 }
 

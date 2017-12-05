@@ -48,8 +48,8 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
     </head>
 
     <body>
-        <div id ="infobar">
-        </div>
+        <!--<div id ="infobar">
+        </div>-->
         <div id ="overviewMapContainer">
              <!--<p>Overview</p>-->
             
@@ -62,9 +62,9 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
         </div>
 
         <div id='sidebar'>
-            <div class='heading'>
+            <!--<div class='heading'>
                 <h1>Top Attractions</h1>
-            </div>
+            </div>-->
             <div id='listings' class='listings'></div>
             <div class="sliders" id="controlpanel"></div>
             <div class="sliders" id="timelapse"></div>

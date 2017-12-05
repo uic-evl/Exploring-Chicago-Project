@@ -242,16 +242,16 @@ let Attractions = (function() {
     else 
       timeToDisplay = currentTime;
 
-    const infoBar = document.getElementById("infobar");
-    const infoBarTitle =  document.createElement("span");
-    infoBarTitle.id = "infobarTitle";
-    const infoBarTime = document.createElement("span");
-    infoBarTime.id = "infobarTime";
+    // const infoBar = document.getElementById("infobar");
+    // const infoBarTitle =  document.createElement("span");
+    // infoBarTitle.id = "infobarTitle";
+    // const infoBarTime = document.createElement("span");
+    // infoBarTime.id = "infobarTime";
 
-    infoBarTitle.innerHTML = "Cloud Gate";
-    infoBarTime.innerHTML = moment().format("MM/DD/YYYY dddd") + " " + moment(timeToDisplay, "h:mm a").format("h:mm a");
-    infoBar.appendChild(infoBarTime);
-    infoBar.appendChild(infoBarTitle);
+    // infoBarTitle.innerHTML = "Cloud Gate";
+    // infoBarTime.innerHTML = moment().format("MM/DD/YYYY dddd") + " " + moment(timeToDisplay, "h:mm a").format("h:mm a");
+    // infoBar.appendChild(infoBarTime);
+    // infoBar.appendChild(infoBarTitle);
   }
 
   let populateSidebar = function(attraction, index) {
@@ -285,13 +285,7 @@ let Attractions = (function() {
         icon.dataPosition = index;
         icon.src = attraction.iconUrl;
 
-        const uberIcon = listing1.appendChild(document.createElement("img"));
-        uberIcon.className = "uberIcon";
-        uberIcon.src = 'imgs/transits/uber.png';
-
-        const uberTimeText= listing1.appendChild(document.createElement("p"));
-        uberTimeText.className = "uberTimeText";
-        uberTimeText.innerHTML = "15 min";
+      
 
         const listing2 = listing.appendChild(document.createElement("div"));
         listing2.className = "sub-item";
@@ -312,11 +306,19 @@ let Attractions = (function() {
             "<br>";
 
 
-        const description = listing2.appendChild(document.createElement("span"));
-        description.className = "description";
-        description.dataPosition = index;
-        if (attraction.hasOwnProperty("description"))
-          description.innerHTML = attraction.description;
+        // const description = listing2.appendChild(document.createElement("span"));
+        // description.className = "description";
+        // description.dataPosition = index;
+        // if (attraction.hasOwnProperty("description"))
+        //   description.innerHTML = attraction.description;
+
+        const uberIcon = listing2.appendChild(document.createElement("img"));
+        uberIcon.className = "uberIcon";
+        uberIcon.src = 'imgs/transits/uber.png';
+
+        const uberTimeText= listing2.appendChild(document.createElement("p"));
+        uberTimeText.className = "uberTimeText";
+        uberTimeText.innerHTML = "15 min";
       }
     // }  
 

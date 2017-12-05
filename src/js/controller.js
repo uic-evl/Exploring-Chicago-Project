@@ -2,7 +2,7 @@ let App = (function() {
   const mainMapAttribute = {
     id: "overviewMap",
     latlng: [41.883435, -87.623354],
-    zoom: 13.5,
+    zoom: 14.25,
     isDetailedView: false,
     walkingDistance: 650,
     walkingDistanceLineOffset: -10

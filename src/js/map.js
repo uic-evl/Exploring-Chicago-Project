@@ -4,7 +4,7 @@ let Map = (function() {
   const mapID = "mapbox.light";
 
   let tileURL =
-    "https://api.mapbox.com/styles/v1/mthoma52/cjan3whfcda1q2rlox2w2kzkk/tiles/256/{z}/{x}/{y}?access_token=" +
+    "https://api.mapbox.com/styles/v1/mthoma52/cjatxzuveioap2rmtxm7ykhmf/tiles/256/{z}/{x}/{y}?access_token=" +
     accessToken;
 
   let init = function(attributes, mainMap = undefined) {
@@ -12,7 +12,8 @@ let Map = (function() {
 
     let map = L.map(attributes.id, {
       closePopupOnClick: false,
-      attributionControl: false
+      attributionControl: false,
+      zoomSnap:0.25,
     }).setView(attributes.latlng, attributes.zoom);
 
     let bounds = [
@@ -20,21 +21,21 @@ let Map = (function() {
       [map.getBounds()._northEast.lat, map.getBounds()._northEast.lng]
     ];
 
-    let walkingDistanceLine = L.circle(
-      attributes.latlng,
-      attributes.walkingDistance
-    ).setStyle({
-      fill: true,
-      fillColor: "#de2d26",
-      fillOpacity: 0.1,
-      stroke: false
-    });
+    // let walkingDistanceLine = L.circle(
+    //   attributes.latlng,
+    //   attributes.walkingDistance
+    // ).setStyle({
+    //   fill: true,
+    //   fillColor: "#de2d26",
+    //   fillOpacity: 0.1,
+    //   stroke: false
+    // });
 
     let border = L.rectangle(map.getBounds()).setStyle({
       fill: false,
       stroke: true,
       color: "#58595b",
-      weight: 20
+      weight: 5
     });
 
     if (attributes.isDetailedView) {
@@ -52,12 +53,12 @@ let Map = (function() {
         weight: 1
       }).addTo(mainMap);
 
-          plotWalkingDistance(
-      map,
-      attributes.latlng,
-      attributes.walkingDistance,
-      attributes.walkingDistanceLineOffset
-    );
+    //       plotWalkingDistance(
+    //   map,
+    //   attributes.latlng,
+    //   attributes.walkingDistance,
+    //   attributes.walkingDistanceLineOffset
+    // );
     }
 
     map.zoomControl.remove();
@@ -67,7 +68,7 @@ let Map = (function() {
     map.scrollWheelZoom.disable();
 
 
-    walkingDistanceLine.addTo(map);
+    // walkingDistanceLine.addTo(map);
 
     L.tileLayer(tileURL, {
       id: mapID
@@ -114,7 +115,6 @@ let Map = (function() {
     });
 
     line.addTo(map);
-    console.log(line);
 
     let textOverlay = L.d3SvgOverlay(function(sel,proj){ 
       sel.append("text")
