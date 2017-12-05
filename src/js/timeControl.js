@@ -62,7 +62,7 @@ let TimeControl = (function() {
                 timeInMinutes = tempTimeInMinutes;
                 isTimelapse = false;
                 $('#detailedMapContainer').show();
-                $('body').css("background-color","#404040");
+                $('body').css("background-color","#fff");
                 updateSlider();
             }
                 
