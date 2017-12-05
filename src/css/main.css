@@ -97,8 +97,9 @@ body {
 
 .sub-item-border {
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: #262262;
+    border-radius: 200px;
     width: 285px;
     position: relative;
     left: 25px;
