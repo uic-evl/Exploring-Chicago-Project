@@ -294,6 +294,8 @@ let Attractions = (function() {
         title.className = "title";
         title.dataPosition = index;
         title.innerHTML = attraction.name;
+        if(attraction.price)
+          title.innerHTML+= '<span class="attraction_price">'+attraction.price+'</span>';
 
         const hours = listing2.appendChild(document.createElement("span"));
         hours.className = "hours";
@@ -319,6 +321,22 @@ let Attractions = (function() {
         const uberTimeText= listing2.appendChild(document.createElement("p"));
         uberTimeText.className = "uberTimeText";
         uberTimeText.innerHTML = "15 min";
+
+        const transitIcon = listing2.appendChild(document.createElement("img"));
+        transitIcon.className = "uberIcon";
+        transitIcon.src = 'imgs/transits/walk.png';
+
+        const transitTimeText= listing2.appendChild(document.createElement("p"));
+        transitTimeText.className = "uberTimeText";
+        transitTimeText.innerHTML = "15 min";
+
+        const walkIcon = listing2.appendChild(document.createElement("img"));
+        walkIcon.className = "uberIcon";
+        walkIcon.src = 'imgs/transits/transit.png';
+
+        const walkTimeText= listing2.appendChild(document.createElement("p"));
+        walkTimeText.className = "uberTimeText";
+        walkTimeText.innerHTML = "15 min";
 
         const border = listing.appendChild(document.createElement("div"));
         border.className = "sub-item-border";

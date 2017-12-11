@@ -39,8 +39,9 @@ let Animation = (function() {
 
         _.times(transit.frequency, function(index) {
             timers.push(setTimeout(function(){
+                
                 transitCircle = drawTransitCircle(pathOptions.sel, pathOptions.pathPoints, pathOptions.color, transit);
-               
+                
                 
                 transitionAnim(transitCircle, pathOptions, transit, index);
                 if(index == transit.frequency-1)
@@ -89,9 +90,9 @@ let Animation = (function() {
     }
 
     let drawBadge = function(sel, pathPoints, transit, color) {
-        console.log(transit);        
+            
         let midpointXY = pathPoints[1];
-
+       
         let badge =  sel.selectAll(".point")
                 .data([midpointXY])
                 .enter().append("rect")
@@ -122,7 +123,7 @@ let Animation = (function() {
 
                     return "translate(" + d + ")";
                  });
-
+                
                 sel.selectAll(".point")
                 .data([midpointXY])
                 .enter()
@@ -140,9 +141,9 @@ let Animation = (function() {
                         d[0] -= 1;
 
                     else if(transit.name.length == 4)
-                        d[0] -= 3;
+                        d[0] -= 4;
                     else
-                        d[0] -= 3
+                        d[0] -= 4;
 
                     d[1] +=32;
 
