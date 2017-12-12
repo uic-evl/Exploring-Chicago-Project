@@ -315,8 +315,9 @@ body {
   padding-bottom: 31%;
   position: absolute;
   left: 145px;
-  bottom: 10px;
+  bottom: 85px;
   width: 20em;
+  border: 2px solid black;
 }
 
 .clock.simple:after {
