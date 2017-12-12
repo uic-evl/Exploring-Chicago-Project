@@ -27,6 +27,7 @@ let App = (function() {
      map = Map.show(mainMapAttribute);
      detailedMap = Map.show(detailedMapAttribute, map);
      Kiosks.showPosition(map, detailedMap);
+     $('.clock').hide();
   };
 
   let getMap = function() {

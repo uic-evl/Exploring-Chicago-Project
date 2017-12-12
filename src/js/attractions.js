@@ -298,7 +298,7 @@ let Attractions = (function() {
           title.innerHTML+= '<span class="attraction_price">'+attraction.price+'</span>';
 
         const hours = listing2.appendChild(document.createElement("span"));
-        hours.className = "hours";
+        hours.className = "openHours";
         hours.dataPosition = index;
         if (attraction.hasOwnProperty("hours"))
           hours.innerHTML =

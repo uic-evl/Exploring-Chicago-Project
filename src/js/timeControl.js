@@ -54,6 +54,8 @@ let TimeControl = (function() {
            let timeplapseLoop;
            isTimelapse = true;
            $('#detailedMapContainer').hide();
+           $('.clock').show();
+           initLocalClock(moment().format("HH:mm"));
            timeplapseLoop = setInterval(function() {
             $('#nextHourButton').trigger('click');
             if(timeInMinutes >= 1440)
@@ -62,6 +64,7 @@ let TimeControl = (function() {
                 timeInMinutes = tempTimeInMinutes;
                 isTimelapse = false;
                 $('#detailedMapContainer').show();
+                $('.clock').hide();
                 $('body').css("background-color","#fff");
                 updateSlider();
             }
@@ -225,11 +228,100 @@ let TimeControl = (function() {
     }
 
     let updateSlider = function() {
-         let slider = document.getElementById('timecontrol');
+        let slider = document.getElementById('timecontrol');
         slider.noUiSlider.set(timeInMinutes)
         timeInHours = convertValuesToTime(timeInMinutes);
         timeInHours = timeInHours[0];
+        initLocalClock(moment(timeInHours,'HH:mm').format("HH:mm"), true);
         App.update(timeInHours, currentDay, isTimelapse); 
+    }
+
+    let initLocalClock = function(time, update=false) {
+        // Get the local time using JS
+        var a = time.split(':');
+        var seconds = a[2];
+        if(!update)
+            var minutes = a[1];
+        else
+            var minutes = "00";
+        var hours = a[0];
+
+        console.log(hours, minutes);
+
+        // Create an object with each hand and it's angle in degrees
+        var hands = [
+            {
+            hand: 'hours',
+            angle: (hours * 30) + (minutes / 2)
+            },
+            {
+            hand: 'minutes',
+            angle: (minutes * 6)
+            },
+            {
+            hand: 'seconds',
+            angle: (seconds * 6)
+            }
+        ];
+        // Loop through each of these hands to set their angle
+        for (var j = 0; j < hands.length; j++) {
+            var elements = document.querySelectorAll('.' + hands[j].hand);
+            for (var k = 0; k < elements.length; k++) {
+                elements[k].style.webkitTransform = 'rotateZ('+ hands[j].angle +'deg)';
+                elements[k].style.transform = 'rotateZ('+ hands[j].angle +'deg)';
+                // If this is a minute hand, note the seconds position (to calculate minute position later)
+                if (hands[j].hand === 'minutes') {
+                elements[k].parentNode.setAttribute('data-second-angle', hands[j + 1].angle);
+                }
+            }
+        }
+    }
+
+    let setUpMinuteHands = function() {
+        // Find out how far into the minute we are
+        var containers = document.querySelectorAll('.minutes-container');
+        var secondAngle = containers[0].getAttribute("data-second-angle");
+        if (secondAngle > 0) {
+            // Set a timeout until the end of the current minute, to move the hand
+            var delay = (((360 - secondAngle) / 6) + 0.1) * 1000;
+            setTimeout(function() {
+            moveMinuteHands(containers);
+            }, delay);
+        }
+    }
+
+    let moveMinuteHands = function() {
+        for (var i = 0; i < containers.length; i++) {
+            containers[i].style.webkitTransform = 'rotateZ(6deg)';
+            containers[i].style.transform = 'rotateZ(6deg)';
+        }
+        // Then continue with a 60 second interval
+        setInterval(function() {
+            for (var i = 0; i < containers.length; i++) {
+            if (containers[i].angle === undefined) {
+                containers[i].angle = 12;
+            } else {
+                containers[i].angle += 6;
+            }
+            containers[i].style.webkitTransform = 'rotateZ('+ containers[i].angle +'deg)';
+            containers[i].style.transform = 'rotateZ('+ containers[i].angle +'deg)';
+            }
+        }, 60000);
+    }
+
+    let moveSecondHands = function() {
+        var containers = document.querySelectorAll('.seconds-container');
+        setInterval(function() {
+            for (var i = 0; i < containers.length; i++) {
+            if (containers[i].angle === undefined) {
+                containers[i].angle = 6;
+            } else {
+                containers[i].angle += 6;
+            }
+            containers[i].style.webkitTransform = 'rotateZ('+ containers[i].angle +'deg)';
+            containers[i].style.transform = 'rotateZ('+ containers[i].angle +'deg)';
+            }
+        }, 1000);
     }
 
     return {

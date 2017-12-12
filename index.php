@@ -55,7 +55,19 @@ header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
             
              <div id='overviewMap'></div>
         </div>
-        
+
+        <article class="clock">
+            <div class="hours-container">
+                <div class="hours"></div>
+            </div>
+            <div class="minutes-container">
+                <div class="minutes"></div>
+            </div>
+            <div class="seconds-container">
+                <div class="seconds"></div>
+            </div>
+        </article>
+                
         <div id ="detailedMapContainer">
             <!--<p id="localview">Detailed View</p>-->
             <div id='detailedMap'></div>
