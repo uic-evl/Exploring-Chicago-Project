@@ -57,9 +57,10 @@ let Stops = (function() {
 
     if(prevTransitList)
     {
-      prevStopIds = _.map(prevTransitList, function(d,i) {
-        return d.id
-      }); 
+      // prevStopIds = _.map(prevTransitList, function(d,i) {
+      //   return d.id
+      // }); 
+      prevStopIds = [];
       console.log(prevStopIds);
         cleanStopsOnMap(map,stopMarkers, prevStopIds);
     }
@@ -87,10 +88,13 @@ let Stops = (function() {
         transits = [];
         _.forEach(transitCollection.Transits, function(data, i) {
           if (_.includes(transitList, data.name)) {
-            _.forEach(data.stops, function(stop, j) {   
+            _.forEach(data.stops, function(stop, j) {
               _.forEach(transitStopFilterList, function(d, k) {
                 if (stop != undefined && stop.lat === d.lat && stop.lon === d.lon)
+                { 
                     data.stops.splice(j, 1);
+                }
+                    
               });
             });
 

@@ -10,7 +10,7 @@
                 "coordinates":[41.898770, -87.622917],
 				"hours":{"start_time": "09:00", "end_time" : "22:00"},
 				"description":["Adult | Youth | Children"],
-				"cta": ["146"],
+				"cta": ["146 N"],
 				"stops": [{"lat": 41.894834296652, "lon": -87.624126076698}],
 				"price": ["$$"]
 			},
@@ -48,7 +48,7 @@
 				"description":["Adult | Youth | Children "],
 				"hours": {"start_time": "09:30", "end_time": "18:00"},
 				"price": ["$$"],
-				"cta": ["146"],
+				"cta": ["146 S"],
 				"stops": [{"lat": 41.866161246066, "lon": -87.60786652565}]
 			},
 			{
@@ -61,7 +61,7 @@
 				"description":["Adult | Youth | Children "],
 				"hours": {"start_time":"09:00", "end_time": "18:00"},
 				"price": ["$$"],
-				"cta": ["146"],
+				"cta": ["146 S"],
 				"stops": [{"lat": 41.866085342666, "lon": -87.612978816032}]
 			},
 			{
@@ -73,7 +73,7 @@
                 "coordinates":[41.867150, -87.619368],
 				"description":["Adult | Youth | Children"],
 				"hours": {"start_time":"09:00", "end_time":"17:00"},
-				"cta": ["146"],
+				"cta": ["146 S"],
 				"stops": [{"lat": 41.864782986081, "lon": -87.615827322006}],
 				"price": ["$$"]
 			},
@@ -152,7 +152,8 @@
 				"coordinates": [41.927761, -87.646959],
 				"description":[" "],
 				"cta":["blue"],
-				"stops": [{"lat": 41.927761, "lon": -87.646959}]
+				"stops": [{"lat": 41.927761, "lon": -87.646959}],
+				"hours": {"start_time":"24:00", "end_time":"19:00"}
 			},
 			{
 				"id": "14",
@@ -193,6 +194,18 @@
 				"coordinates": [41.880869, -87.628487],
 				"description":["$$$ Adult | Youth | Children"],
 				"hours": {"start_time":"24:00", "end_time":"19:00"}
+			},
+			{
+				"id": "18",
+				"name": "Wicker Park",
+				"type": "offmap",
+				"iconUrl": "imgs/attractions/wicker_park.png",
+				"iconSize": [100, 103],
+				"coordinates": [41.909633, -87.642703],
+				"description":["$$$ Adult | Youth | Children"],
+				"hours": {"start_time":"19:00", "end_time":"24:00"},
+				"cta":["blue"],
+				"stops": [{"lat": 41.909633, "lon": -87.642703}]
 			}
 	
 		]

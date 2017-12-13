@@ -14,7 +14,7 @@
 			},
 			{
 				"id": 2,
-                "name": "146",
+                "name": "146 S",
 				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
@@ -28,7 +28,7 @@
 			},
 			{
 				"id": 3,
-                "name": "146",
+                "name": "146 N",
 				"type": "Bus",
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
@@ -69,7 +69,7 @@
 				"iconUrl": "imgs/transits/bus.png",
                 "iconSize": [60, 60],
 				"stops":[{"lat":41.883374, "lon": -87.629757},
-						{"lat": 41.927761, "lon": -87.646959}],
+						{"lat":41.909633, "lon": -87.642703}],
 				"frequency": 5,
 				"travelTime": 60
 			}
