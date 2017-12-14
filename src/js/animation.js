@@ -62,7 +62,7 @@ let Animation = (function() {
                 badgeText = badgeContainter.badgeText;
                
 
-            },5000);
+            },500);
             
         });
 
