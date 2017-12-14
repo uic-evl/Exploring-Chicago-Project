@@ -1,7 +1,18 @@
 let Animation = (function() {
+
+    window.requestAnimationFrame = window.requestAnimationFrame
+        || window.mozRequestAnimationFrame
+        || window.webkitRequestAnimationFrame
+        || window.msRequestAnimationFrame
+        || function(f){return setTimeout(f, 1000/60)} // simulate calling code 60 
+ 
+    window.cancelAnimationFrame = window.cancelAnimationFrame
+        || window.mozCancelAnimationFrame
+        || function(requestID){clearTimeout(requestID)} //fall back
   
     let timers = [];
-    let badge;
+  
+
     let init = function() {
 
     };
@@ -11,37 +22,63 @@ let Animation = (function() {
         let latlngs1 = [startCoordinates.lat, startCoordinates.lon];
         let latlngs2 = [endCoordinates.lat, endCoordinates.lon];
         let midpointLatLng = getMidPointLatLng(latlngs1, latlngs2);
-
-
+      
+       
         let curvedPath = L.d3SvgOverlay(function(sel,proj){ 
+
+            let badgeContainter;
+            let badgeRect;
+            let badgeIcon;
+            let badgeText;
+            let badgeMidpoint;
 
             let animList = [];
 
             let pathPoints = getPath(proj, latlngs1, latlngs2, midpointLatLng);
 
             let path = drawPath(sel, pathPoints, color);
+
+            badgeMidpoint = pathPoints[1];
             
-            badge = drawBadge(sel, pathPoints, transit, color);
+            badgeContainter = drawBadge(sel, pathPoints, transit, color, badgeMidpoint);
+            badgeRect = badgeContainter.badgeRect;
+            badgeIcon = badgeContainter.badgeIcon;
+            badgeText = badgeContainter.badgeText;
+            
 
             let pathOptions = {sel: sel, path: path, pathPoints: pathPoints, color: color}    
 
             if(!isTimelapse)
-                drawTransits(transit, pathOptions);       
+                drawTransits(transit, pathOptions);  
+        
+            setInterval(function() {
+                $(badgeRect[0]).remove();
+                $(badgeIcon[0]).remove();
+                $(badgeText[0]).remove();
+         
+                badgeContainter = drawBadge(sel, pathPoints, transit, color, badgeMidpoint);
+                badgeRect = badgeContainter.badgeRect;
+                badgeIcon = badgeContainter.badgeIcon;
+                badgeText = badgeContainter.badgeText;
+               
+
+            },5000);
+            
         });
 
         curvedPath.addTo(map);
 
     };
 
-
     let drawTransits = function(transit, pathOptions) {
         let transitCircle;
+
 
         _.times(transit.frequency, function(index) {
             timers.push(setTimeout(function(){
                 
                 transitCircle = drawTransitCircle(pathOptions.sel, pathOptions.pathPoints, pathOptions.color, transit);
-                
+              
                 
                 transitionAnim(transitCircle, pathOptions, transit, index);
                 if(index == transit.frequency-1)
@@ -50,7 +87,6 @@ let Animation = (function() {
         });
             
     }
-    
 
     let getMidPointLatLng = function(latlngs1, latlngs2) {
 
@@ -89,11 +125,13 @@ let Animation = (function() {
                 .interpolate("cardinal"));
     }
 
-    let drawBadge = function(sel, pathPoints, transit, color) {
-            
-        let midpointXY = pathPoints[1];
-       
-        let badge =  sel.selectAll(".point")
+    let drawBadge = function(sel, pathPoints, transit, color, midpoint) {
+        let midpointXY;
+        let t = [];
+
+        midpointXY = midpoint;
+
+        badgeRect =  sel.selectAll(".point")
                 .data([midpointXY])
                 .enter().append("rect")
                 .attr("x", -20)
@@ -104,7 +142,7 @@ let Animation = (function() {
                 .attr("fill", color)
                 .attr("transform", function(d) { return "translate(" + d + ")"; });
 
-                 sel.selectAll(".point")
+        badgeIcon = sel.selectAll(".point")
                 .data([midpointXY])
                 .enter()
                 .append("image")
@@ -118,13 +156,13 @@ let Animation = (function() {
                 .attr("width", "20px")
                 .attr("height", "20px")
                 .attr("transform", function(d) {
-                    d[0] -= 10;
-                    d[1] -= 5;
+                    t[0] = d[0] - 10;
+                    t[1] = d[1] - 5;
 
-                    return "translate(" + d + ")";
+                    return "translate(" + t + ")";
                  });
                 
-                sel.selectAll(".point")
+        badgeText = sel.selectAll(".point")
                 .data([midpointXY])
                 .enter()
                 .append("text")
@@ -135,22 +173,22 @@ let Animation = (function() {
                 .attr("class", "transitBadge")
                 .attr("transform", function(d) {
                     if(transit.name.length == 2) 
-                        d[0] += 3;
+                        t[0] = d[0] - 7;
             
                     else if(transit.name.length == 3) 
-                        d[0] -= 1;
+                        t[0] = d[0] - 10;
 
                     else if(transit.name.length == 4)
-                        d[0] -= 4;
+                        t[0] = d[0] - 12;
                     else
-                        d[0] -= 4;
+                        t[0] = d[0] - 14;
 
-                    d[1] +=32;
+                    t[1] = d[1] + 26;
 
-                    return "translate(" + d + ")";
+                    return "translate(" + t + ")";
                  });
-
-        return badge;
+    
+            return {badgeRect:badgeRect, badgeIcon: badgeIcon, badgeText: badgeText};
     }
 
     let drawTransitCircle = function(sel, pathPoints, color, transit) {
@@ -192,7 +230,6 @@ let Animation = (function() {
         });
         
     };
-
 
     return {
         init: init,

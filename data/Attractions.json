@@ -109,7 +109,7 @@
 				"type": "event",
 				"iconUrl": "imgs/attractions/fireworks2.png",
                 "iconSize": [100, 103],
-                "coordinates":[41.891884, -87.598823],
+                "coordinates":[41.894789, -87.600485],
 				"description":["Adult | Youth | Children "],
 				"hours": {"start_time":"22:00", "end_time":"23:00"},
 				"days": ["wednesday", "saturday"],
