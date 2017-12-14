@@ -11,6 +11,7 @@ let Animation = (function() {
         || function(requestID){clearTimeout(requestID)} //fall back
   
     let timers = [];
+    let badgeIntervals = [];
   
 
     let init = function() {
@@ -51,7 +52,7 @@ let Animation = (function() {
             if(!isTimelapse)
                 drawTransits(transit, pathOptions);  
         
-            setInterval(function() {
+            badgeIntervals.push(setInterval(function() {
                 $(badgeRect[0]).remove();
                 $(badgeIcon[0]).remove();
                 $(badgeText[0]).remove();
@@ -62,7 +63,7 @@ let Animation = (function() {
                 badgeText = badgeContainter.badgeText;
                
 
-            },500);
+            },500));
             
         });
 
@@ -227,6 +228,9 @@ let Animation = (function() {
         $('.transitCircle').remove();
         _.forEach(timers, function(d,i) {
             clearTimeout(d);
+        });
+        _.forEach(badgeIntervals, function(d,i) {
+            clearInterval(d);
         });
         
     };
