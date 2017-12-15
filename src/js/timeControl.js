@@ -246,8 +246,6 @@ let TimeControl = (function() {
             var minutes = "00";
         var hours = a[0];
 
-        console.log(hours, minutes);
-
         // Create an object with each hand and it's angle in degrees
         var hands = [
             {
