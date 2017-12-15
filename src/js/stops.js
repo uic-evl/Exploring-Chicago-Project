@@ -23,8 +23,7 @@ let Stops = (function() {
 
     return new stopIconWithOptions({
       iconUrl: iconUrl,
-      iconSize: [15.12, 18.36],
-      className: 'fadeTimelapse'
+      iconSize: [15.12, 18.36]
     });
   };
 
