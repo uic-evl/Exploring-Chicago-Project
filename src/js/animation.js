@@ -67,6 +67,7 @@ let Animation = (function() {
             
         });
 
+        
         curvedPath.addTo(map);
 
     };
@@ -119,7 +120,7 @@ let Animation = (function() {
     let drawPath = function(sel, pathPoints, color) {
         return sel.append("path")
                 .data([pathPoints])
-                .attr("class", "transitPath fadeTimelapse")
+                .attr("class", "transitPath")
                 .attr("stroke", color)
                 .attr("d", d3.svg.line()
                 .tension(0)
